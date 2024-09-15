@@ -16,16 +16,22 @@
     };
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager }: {
-    # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#MacBook-Pro
-    darwinConfigurations."MacBook-Pro" =
-      nix-darwin.lib.darwinSystem {
+  outputs =
+    inputs@{
+      self,
+      nix-darwin,
+      nixpkgs,
+      home-manager,
+    }:
+    {
+      # Build darwin flake using:
+      # $ darwin-rebuild build --flake .#MacBook-Pro
+      darwinConfigurations."MacBook-Pro" = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [ ./configuration.nix ];
       };
 
-    # Expose the package set, including overlays, for convenience.
-    darwinPackages = self.darwinConfigurations."MacBook-Pro".pkgs;
-  };
+      # Expose the package set, including overlays, for convenience.
+      darwinPackages = self.darwinConfigurations."MacBook-Pro".pkgs;
+    };
 }
