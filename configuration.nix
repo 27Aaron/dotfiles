@@ -6,13 +6,8 @@
 }:
 
 {
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
-  environment.systemPackages = with pkgs; [
-    neovim
-    git
-    just
-    nixfmt-rfc-style
+  imports = [
+    ./modules/apps.nix
   ];
 
   # Auto upgrade nix package and the daemon service.
