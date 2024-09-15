@@ -27,6 +27,8 @@
       Bob = 1630034110;
       # Xcode = 497799835;
       Enpass = 732710998;
+      Wechat = 836500024;
+      WechatWork = 1189898970;
     };
 
     taps = [
@@ -51,10 +53,8 @@
       "termius"
       "google-chrome"
       "karabiner-elements"
-      "microsoft-remote-desktop"
+      # "microsoft-remote-desktop"
       "telegram"
-      "wechat"
-      "wechatwork"
       "qspace-pro"
       "surge"
       "font-lxgw-wenkai"
