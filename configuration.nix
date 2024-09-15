@@ -7,6 +7,7 @@
     neovim
     git
     just
+    nixfmt-rfc-style
   ];
 
   # Auto upgrade nix package and the daemon service.
