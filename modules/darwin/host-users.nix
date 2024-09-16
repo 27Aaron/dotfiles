@@ -1,4 +1,4 @@
-{ hostname, username, ... }:
+{ ... }:
 let
   username = "aaron";
   hostname = "MacBook-Pro";
