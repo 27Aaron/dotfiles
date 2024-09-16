@@ -7,10 +7,10 @@
 
 {
   imports = [
-    ./modules/apps.nix
-    ./modules/system.nix
-    ./modules/nix-core.nix
-    ./modules/host-users.nix
+    ./modules/darwin/apps.nix
+    ./modules/darwin/system.nix
+    ./modules/darwin/nix-core.nix
+    ./modules/darwin/host-users.nix
   ];
 
   # Used for backwards compatibility, please read the changelog before changing.
