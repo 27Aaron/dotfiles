@@ -46,6 +46,7 @@
 
     # `brew install --cask`
     casks = [
+      "intellij-idea"
       "battery"
       "macs-fan-control"
       "raycast"
