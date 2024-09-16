@@ -37,7 +37,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.aaron = import ./home;
+              home-manager.users.aaron = import ./home/darwin;
             }
           ];
         };
