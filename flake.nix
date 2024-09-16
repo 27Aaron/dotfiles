@@ -31,6 +31,14 @@
           system = "aarch64-darwin";
           modules = [
             ./hosts/MacBook-Pro
+
+            # home manager
+            home-manager.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.aaron = import ./home;
+            }
           ];
         };
       };
