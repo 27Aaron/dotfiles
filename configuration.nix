@@ -10,6 +10,7 @@
     ./modules/apps.nix
     ./modules/system.nix
     ./modules/nix-core.nix
+    ./modules/host-users.nix
   ];
 
   # Used for backwards compatibility, please read the changelog before changing.
