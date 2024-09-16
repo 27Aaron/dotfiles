@@ -8,6 +8,7 @@
 {
   imports = [
     ./modules/apps.nix
+    ./modules/system.nix
     ./modules/nix-core.nix
   ];
 
