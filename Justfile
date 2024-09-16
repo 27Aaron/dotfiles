@@ -1,4 +1,4 @@
-updata:
+update:
     nix flake update
 
 darwin:
