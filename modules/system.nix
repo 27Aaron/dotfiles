@@ -132,4 +132,7 @@
 
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh.enable = true;
+
+  # Set your time zone.
+  time.timeZone = "Asia/Singapore";
 }
