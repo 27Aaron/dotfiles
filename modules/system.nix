@@ -126,6 +126,10 @@
       };
     };
   };
+
   # Add ability to used TouchID for sudo authentication
   security.pam.enableSudoTouchIdAuth = true;
+
+  # Create /etc/zshrc that loads the nix-darwin environment.
+  programs.zsh.enable = true;
 }
