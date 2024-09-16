@@ -26,9 +26,13 @@
     {
       # Build darwin flake using:
       # $ darwin-rebuild build --flake .#MacBook-Pro
-      darwinConfigurations."MacBook-Pro" = nix-darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        modules = [ ./configuration.nix ];
+      darwinConfigurations = {
+        MacBook-Pro = nix-darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          modules = [
+            ./hosts/MacBook-Pro
+          ];
+        };
       };
 
       # Expose the package set, including overlays, for convenience.
