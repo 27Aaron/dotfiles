@@ -6,7 +6,7 @@
 {
   home.packages = with pkgs; [
     # Misc
-
+    neofetch
     gnupg
     gnumake
 
