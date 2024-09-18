@@ -41,9 +41,22 @@
             }
           ];
         };
+
+        Elaina = nix-darwin.lib.darwinSystem {
+          system = "x86_64-darwin";
+          modules = [
+            ./hosts/Elaina
+
+            # home manager
+            home-manager.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.aaron = import ./home/darwin;
+            }
+          ];
+        };
       };
 
-      # Expose the package set, including overlays, for convenience.
-      darwinPackages = self.darwinConfigurations."MacBook-Pro".pkgs;
     };
 }
