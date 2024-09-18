@@ -7,6 +7,7 @@
 
 {
   imports = [
+    ./host-users.nix
     ../../modules/darwin
   ];
 
