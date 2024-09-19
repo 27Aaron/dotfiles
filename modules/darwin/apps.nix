@@ -60,6 +60,7 @@
       "monitorcontrol"
       "zulu@8"
       "zulu@17"
+      "stats"
     ];
   };
 }
