@@ -45,14 +45,14 @@
     # `brew install --cask`
     casks = [
       "intellij-idea"
-      "battery"
+      # "battery"
       "macs-fan-control"
       "raycast"
       "visual-studio-code"
       "termius"
       "google-chrome"
       "karabiner-elements"
-      # "microsoft-remote-desktop"
+      "microsoft-remote-desktop"
       "telegram"
       "qspace-pro"
       "surge"
