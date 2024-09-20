@@ -12,13 +12,7 @@ after-login-command = []
 # You can use it to add commands that run after AeroSpace startup.
 # 'after-startup-command' is run after 'after-login-command'
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = [
-  # Highlight focused windows with colored borders
-  # 
-  # JankyBorders has a built-in detection of already running process,
-  # so it won't be run twice on AeroSpace restart
-  'exec-and-forget borders active_color=0xffe67e80 inactive_color=0xff282828 width=5.0',
-]
+after-startup-command = []
 
 # Start AeroSpace at login
 start-at-login = false

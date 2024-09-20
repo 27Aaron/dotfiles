@@ -42,7 +42,7 @@
       "curl"
       "deeplx"
       "node"
-      "borders"
+      "sketchybar"
     ];
 
     # `brew install --cask`
