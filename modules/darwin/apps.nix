@@ -65,6 +65,7 @@
       "stats"
       "aerospace"
       "font-hack-nerd-font"
+      "jordanbaird-ice"
     ];
   };
 }
