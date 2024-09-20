@@ -41,6 +41,7 @@
       "curl"
       "deeplx"
       "node"
+      "rust"
     ];
 
     # `brew install --cask`
