@@ -32,6 +32,7 @@
 
     taps = [
       "owo-network/brew"
+      "nikitabobko/tap"
     ];
 
     # `brew install`
@@ -61,6 +62,7 @@
       "zulu@8"
       "zulu@17"
       "stats"
+      "aerospace"
     ];
   };
 }
