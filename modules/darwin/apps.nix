@@ -65,6 +65,7 @@
       "zulu@17"
       "stats"
       "aerospace"
+      "font-hack-nerd-font"
     ];
   };
 }
