@@ -33,6 +33,7 @@
     taps = [
       "owo-network/brew"
       "nikitabobko/tap"
+      "FelixKratz/formulae"
     ];
 
     # `brew install`
@@ -41,6 +42,7 @@
       "curl"
       "deeplx"
       "node"
+      "borders"
     ];
 
     # `brew install --cask`
