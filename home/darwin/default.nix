@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./aerospace
     ../base/gui
     ../base/core
   ];
