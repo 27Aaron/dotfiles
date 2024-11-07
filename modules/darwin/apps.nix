@@ -42,6 +42,7 @@
       "deeplx"
       "node"
       "rust"
+      "tree"
     ];
 
     # `brew install --cask`
