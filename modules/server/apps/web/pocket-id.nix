@@ -45,16 +45,6 @@ in
       };
     };
 
-    services.caddy.virtualHosts = lib.mkIf (cfg.domain != null) {
-      "${cfg.domain}" = {
-        extraConfig = ''
-          reverse_proxy localhost:${config.portStr'.pocket-id} {
-            import cloudflare_headers
-          }
-        '';
-      };
-    };
-
     services.postgresql = {
       ensureDatabases = [ user ];
       ensureUsers = [
@@ -63,6 +53,16 @@ in
           ensureDBOwnership = true;
         }
       ];
+    };
+
+    services.caddy.virtualHosts = lib.mkIf (cfg.domain != null) {
+      "${cfg.domain}" = {
+        extraConfig = ''
+          reverse_proxy localhost:${config.portStr'.pocket-id} {
+            import cloudflare_headers
+          }
+        '';
+      };
     };
 
     # Create data directory and ensure it exists

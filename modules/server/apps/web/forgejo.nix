@@ -145,10 +145,10 @@ in
       '';
     };
 
+    networking.firewall.allowedTCPPorts = [ config.port'.forgejo-ssh ];
+
     preservation'.os.directories = [
       "/var/lib/forgejo"
     ];
-
-    networking.firewall.allowedTCPPorts = [ config.port'.forgejo-ssh ];
   };
 }

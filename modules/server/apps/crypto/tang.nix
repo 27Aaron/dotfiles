@@ -20,10 +20,10 @@ in
       ];
     };
 
+    networking.firewall.allowedTCPPorts = [ config.port'.tang ];
+
     preservation'.os.directories = [
       "/var/lib/private/tang"
     ];
-
-    networking.firewall.allowedTCPPorts = [ config.port'.tang ];
   };
 }
