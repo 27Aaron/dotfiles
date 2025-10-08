@@ -1,4 +1,8 @@
-{ lib, config, inputs, ... }:
+{
+  lib,
+  inputs,
+  ...
+}:
 let
   portsCfg = import "${inputs.my-secrets}/network/ports.nix" { inherit lib; };
 in
