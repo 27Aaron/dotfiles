@@ -3,11 +3,13 @@
   ...
 }:
 {
+  # Networking
   systemd.network.enable = true;
   networking.useDHCP = false;
   networking.useNetworkd = true;
   networking.resolvconf.enable = false;
 
+  # DNS
   services.resolved.settings.Resolve = {
     LLMNR = false;
     MulticastDNS = false;
@@ -20,6 +22,7 @@
     options edns0 trust-ad
   '';
 
+  # Network interfaces
   systemd.network.networks."10-eth0" = {
     DHCP = "yes";
     matchConfig.Name = "eth0";
