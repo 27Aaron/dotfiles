@@ -59,23 +59,17 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    sops.secrets = {
-      "cloudflare/email" = {
+    sops.secrets =
+      let
         sopsFile = "${inputs.my-secrets}/services/sing-box.yaml";
+      in
+      {
+        "cloudflare/email" = { inherit sopsFile; };
+        "cloudflare/api_token" = { inherit sopsFile; };
+        "proxy/uuid" = { inherit sopsFile; };
+        "proxy/password" = { inherit sopsFile; };
+        "proxy/private_key" = { inherit sopsFile; };
       };
-      "cloudflare/api_token" = {
-        sopsFile = "${inputs.my-secrets}/services/sing-box.yaml";
-      };
-      "proxy/uuid" = {
-        sopsFile = "${inputs.my-secrets}/services/sing-box.yaml";
-      };
-      "proxy/password" = {
-        sopsFile = "${inputs.my-secrets}/services/sing-box.yaml";
-      };
-      "proxy/private_key" = {
-        sopsFile = "${inputs.my-secrets}/services/sing-box.yaml";
-      };
-    };
 
     services.sing-box = {
       enable = true;
