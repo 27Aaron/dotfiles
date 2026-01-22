@@ -82,8 +82,9 @@ in
         ];
         extraOptions = [
           "--network=host"
-          "--stdin-open=true"
-          "--tty=true"
+          "--memory=512m"
+          "-i"
+          "-t"
         ];
         autoStart = true;
       };
