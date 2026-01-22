@@ -3,72 +3,72 @@
   ...
 }:
 {
-  hm' = {
-    home.packages = with pkgs; [
-      # === 压缩工具 ===
-      zip
-      xz
-      zstd
-      unzipNLS
-      p7zip
+  hm'.home.packages = with pkgs; [
+    # Archive tools
+    p7zip      # 7z compression
+    unzipNLS   # unzip with NLS support
+    xz         # XZ compression
+    zip        # ZIP compression
+    zstd       # Zstandard compression
 
-      # === 文件查找与导航 ===
-      fd # 更快的 find 替代品
-      fzf # 命令行模糊查找
+    # CLI tools
+    fd         # Faster find alternative
+    fzf        # Command-line fuzzy finder
 
-      # === 开发工具 ===
-      just # 命令运行器
-      lazygit # Git TUI
-      alejandra # Nix 格式化
+    # Development tools
+    alejandra  # Nix formatter
+    just       # Command runner
+    lazygit    # Git TUI
 
-      # === 磁盘与文件分析 ===
-      duf # 磁盘使用（彩色直观）
-      ncdu # 磁盘占用（交互式清理）
-      dust # du 替代品（更直观）
+    # Disk & file analysis
+    duf        # Disk usage (colorful & intuitive)
+    dust       # du alternative (more intuitive)
+    ncdu       # Disk usage (interactive cleanup)
 
-      # === 监控工具 ===
-      bottom # 进程监控（跨平台）
-      gping # 图形化 ping
+    # Monitoring tools
+    bottom     # Process monitor (cross-platform)
+    btop       # Resource monitor (htop++)
+    fastfetch  # System info fetcher
+    gping      # Graphical ping
+    htop       # Process monitor
+    iotop      # I/O monitor
+    nload      # Network load monitor
+    sysstat    # System performance tools
+    tailspin   # tail -f enhanced
 
-      # === 文本处理 ===
-      jq # JSON 处理
-      gawk # awk
-      gnused # sed
-      gnugrep # grep
-    ];
-  };
+    # Network tools
+    ipcalc     # IP calculator
+    iperf3     # Network performance tester
+    mtr        # traceroute + ping combo
+    nmap       # Port scanner
+    socat      # Multipurpose data relay
+    tcpdump    # Packet capture
+
+    # Text processing
+    gawk       # awk
+    gnugrep    # grep
+    gnused     # sed
+    jq         # JSON processor
+
+    # Utils
+    lsof       # List open files
+    psmisc     # Process utilities (pstree, killall...)
+    which      # Locate a command
+  ];
 
   environment.systemPackages = with pkgs; [
-    # === 基础工具 ===
-    git
-    git-lfs
-    lsof
-    which
-    psmisc
-    rsync
-    openssl
+    # Basics
+    git        # Version control
+    git-lfs    # Git large file storage
+    curl       # Data transfer tool
+    wget       # Network downloader
+    openssl    # SSL/TLS toolkit
+    rsync      # File synchronization
 
-    # === 系统监控 ===
-    btop # 资源监控（htop 升级版）
-    htop # 进程监控
-    iotop # I/O 监控
-    nload # 网络负载监控
-    iftop # 网络带宽监控
-    strace # 系统调用跟踪
-    sysstat # 系统性能工具集
-    tailspin # tail -f 升级版
-    bpftrace # eBPF 跟踪工具
-    fastfetch # 系统信息获取
-
-    # === 网络工具 ===
-    mtr # traceroute + ping 组合
-    curl
-    wget
-    nmap # 端口扫描
-    socat # 多用途数据转发器
-    ipcalc # IP 计算器
-    iperf3 # 网络性能测试
-    tcpdump # 数据包捕获
-    dnsutils # DNS 工具（dig, nslookup）
+    # System-level diagnostics
+    bpftrace   # eBPF tracer
+    dnsutils   # DNS tools (dig, nslookup)
+    iftop      # Network bandwidth monitor
+    strace     # System call tracer
   ];
 }
