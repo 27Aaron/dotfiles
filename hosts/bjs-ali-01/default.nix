@@ -5,7 +5,7 @@
   ];
 
   # Alibaba Beijing 2C-2G-40G
-  
+
   # Security
   services'.openssh.enable = true;
   security'.firewall.enable = true;
@@ -16,6 +16,10 @@
   # Services
   services'.dae.enable = true;
   services'.tang.enable = true;
-  services'.snell-server.enable = true;
+  services'.redis.enable = true;
+  services'.podman.enable = true;
   services'.postgresql.enable = true;
+  services'.snell-server.enable = true;
+
+  containers'.moviepilot.enable = true;
 }
