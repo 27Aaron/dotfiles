@@ -1,4 +1,8 @@
-{ lib, pkgs, ... }:
+{
+  lib,
+  pkgs,
+  ...
+}:
 {
   boot'.grub.enable = true;
   boot'.initrd-ssh.enable = true;
