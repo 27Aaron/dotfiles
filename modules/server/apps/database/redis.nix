@@ -74,7 +74,7 @@ in
     networking.firewall.allowedTCPPorts = [ cfg.port ];
 
     systemd.tmpfiles.rules = [
-      "d /var/lib/redis-${cfg.name} 0700 valkey valkey -"
+      "d /var/lib/redis-${cfg.name} 0700 redis-${cfg.name} redis-${cfg.name} -"
     ];
 
     preservation'.os.directories = [
