@@ -62,11 +62,20 @@ in
         slowLogLogSlowerThan = 10000;
         slowLogMaxLen = 128;
         settings = {
-          enable-module-command = "local";
+          # Persistence
           dbfilename = "dump.rdb";
-          maxmemory = "256mb";
           appendfilename = "appendonly.aof";
           appenddirname = "appendonlydir";
+
+          # Continue accepting writes when RDB snapshot fails
+          stop-writes-on-bgsave-error = "no";
+
+          # Memory management
+          maxmemory = "256mb";
+          maxmemory-policy = "allkeys-lru";
+
+          # Modules
+          enable-module-command = "local";
         };
       };
     };
