@@ -57,7 +57,8 @@ in
       SUPERUSER=${config.sops.placeholder."moviepilot/user"}
       SUPERUSER_PASSWORD=${config.sops.placeholder."moviepilot/password"}
       DB_TYPE=postgresql
-      DB_POSTGRESQL_HOST=/var/run/postgresql
+      DB_POSTGRESQL_HOST=localhost
+      DB_POSTGRESQL_PORT=5432
       DB_POSTGRESQL_DATABASE=moviepilot
       DB_POSTGRESQL_USERNAME=moviepilot
       CACHE_BACKEND_TYPE=redis
