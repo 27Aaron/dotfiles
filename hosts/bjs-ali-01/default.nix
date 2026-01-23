@@ -21,5 +21,6 @@
   services'.postgresql.enable = true;
   services'.snell-server.enable = true;
 
+containers'.emby.enable = true;
   containers'.moviepilot.enable = true;
 }
