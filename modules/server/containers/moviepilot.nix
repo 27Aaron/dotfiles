@@ -62,7 +62,7 @@ in
       DB_POSTGRESQL_DATABASE=moviepilot
       DB_POSTGRESQL_USERNAME=moviepilot
       CACHE_BACKEND_TYPE=redis
-      CACHE_BACKEND_URL=redis://${
+      CACHE_BACKEND_URL=redis://:${
         config.sops.placeholder."redis_password"
       }@localhost:${config.portStr'.redis}
     '';
