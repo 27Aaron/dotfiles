@@ -21,10 +21,6 @@ in
         hostname = "medialinker";
         serviceName = "medialinker";
         image = "thsrite/medialinker:latest";
-        environment = {
-          SERVER = "emby";
-          NGINX_PORT = "8096";
-        };
         volumes = [
           "/var/lib/medialinker:/opt"
         ];
@@ -36,7 +32,7 @@ in
     };
 
     networking.firewall.allowedTCPPorts = [
-      8096
+      8091
     ];
 
     preservation'.os.directories = [
