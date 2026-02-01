@@ -34,6 +34,7 @@
     packages = with pkgs; [
       git
       tree
+      just
       fastfetch
     ];
   };
