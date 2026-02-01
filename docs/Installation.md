@@ -5,23 +5,37 @@
 ### 1. Create a Disko Configuration
 
 Create a `disko.nix` file with your desired partition layout. Below is an example configuration that uses:
-- **tmpfs** for the root filesystem
+
+- **tmpfs** for the root filesystem (`/`)
 - **LUKS** for disk encryption
-- **Btrfs** for the encrypted volume
+- **Btrfs** for the encrypted volume (`/persistent`, `/nix`, `/tmp`)
 
 ```nix
 # disko.nix
 {
   disko.devices = {
+    nodev = {
+      "/" = {
+        fsType = "tmpfs";
+        mountOptions = [
+          "relatime"
+          "nosuid"
+          "nodev"
+          "size=2G"
+          "mode=755"
+        ];
+      };
+    };
     disk = {
       nvme = {
         type = "disk";
-        device = "/dev/nvme0n1";        # Change to your disk
+        device = "/dev/nvme0n1"; # Change to your disk
         content = {
           type = "gpt";
           partitions = {
             esp = {
-              size = "2G";                 # Change to your ESP partition size
+              priority = 0;
+              size = "2G"; # Change to your ESP partition size
               type = "EF00";
               content = {
                 type = "filesystem";
@@ -33,7 +47,16 @@ Create a `disko.nix` file with your desired partition layout. Below is an exampl
                 mountpoint = "/boot";
               };
             };
+            encryptedSwap = {
+              priority = 1;
+              size = "65537M"; # Change to your swap partition size
+              content = {
+                type = "swap";
+                randomEncryption = true;
+              };
+            };
             crypted = {
+              priority = 2;
               size = "100%";
               content = {
                 type = "luks";
@@ -90,27 +113,8 @@ Create a `disko.nix` file with your desired partition layout. Below is an exampl
                 };
               };
             };
-            encryptedSwap = {
-              size = "65537M";              # Change to your swap partition size
-              content = {
-                type = "swap";
-                randomEncryption = true;
-              };
-            };
           };
         };
-      };
-    };
-    nodev = {
-      "/" = {
-        fsType = "tmpfs";
-        mountOptions = [
-          "relatime"
-          "nosuid"
-          "nodev"
-          "size=2G"
-          "mode=755"
-        ];
       };
     };
   };
@@ -125,6 +129,11 @@ Run the following command to partition your disk according to the configuration:
 nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko ./disko.nix
 ```
 
+This will:
+- Create ESP partition (`/boot`)
+- Create encrypted swap partition
+- Create LUKS-encrypted Btrfs volume with subvolumes
+
 ### 3. Generate NixOS Configuration
 
 Generate the initial NixOS configuration files (the `--no-filesystems` flag prevents disko's partitioning from being overwritten):
@@ -132,4 +141,3 @@ Generate the initial NixOS configuration files (the `--no-filesystems` flag prev
 ```bash
 nixos-generate-config --no-filesystems --root /mnt
 ```
-
