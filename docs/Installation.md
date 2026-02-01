@@ -141,3 +141,11 @@ Generate the initial NixOS configuration files (the `--no-filesystems` flag prev
 ```bash
 nixos-generate-config --no-filesystems --root /mnt
 ```
+
+### 4. Install NixOS
+
+Replace `hosts` with your actual hostname:
+
+```bash
+nixos-install --root /mnt --flake .#hosts --no-root-password --show-trace --verbose
+```

@@ -6,12 +6,15 @@
 
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
+
+    preservation.url = "github:nix-community/preservation";
   };
 
   outputs =
     inputs@{
       nixpkgs,
       disko,
+      preservation,
       ...
     }:
     {
@@ -21,6 +24,7 @@
           modules = [
             ./hosts/elaina/default.nix
             disko.nixosModules.disko
+            preservation.nixosModules.default
           ];
         };
       };
