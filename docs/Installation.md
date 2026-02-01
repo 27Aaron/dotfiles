@@ -142,7 +142,25 @@ Generate the initial NixOS configuration files (the `--no-filesystems` flag prev
 nixos-generate-config --no-filesystems --root /mnt
 ```
 
-### 4. Install NixOS
+### 4. Configure NixOS
+
+You need to set up the configuration files in `/mnt/etc/nixos`. You can reference the [elaina](https://github.com/27Aaron/dotfiles/tree/v0.0.1/hosts/elaina) configuration:
+
+```bash
+# Move your disko.nix to the target directory
+mv disko.nix /mnt/etc/nixos/
+
+# Edit the configuration files
+vim /mnt/etc/nixos/configuration.nix
+vim /mnt/etc/nixos/hardware-configuration.nix
+```
+
+Key points:
+- Add `./disko.nix` to `imports` in `configuration.nix`
+- Enable `boot.initrd.systemd.enable = true` if using preservation module
+- Adjust hostname, users, and other settings to your needs
+
+### 5. Install NixOS
 
 Replace `hosts` with your actual hostname:
 
