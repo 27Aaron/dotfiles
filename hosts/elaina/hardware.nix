@@ -11,6 +11,7 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
+  hardware'.disko-luks.enable = true;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
