@@ -1,7 +1,6 @@
 {
   imports = [
     ./hardware.nix
-    ./preservation.nix
   ];
 
   services.xserver.enable = true;
