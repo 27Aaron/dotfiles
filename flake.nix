@@ -7,26 +7,27 @@
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
     preservation.url = "github:nix-community/preservation";
   };
 
   outputs =
     inputs@{
+      self,
       nixpkgs,
-      disko,
-      preservation,
       ...
     }:
+    let
+      inherit (nixpkgs) lib;
+      forEachSystem = lib.genAttrs lib.systems.flakeExposed;
+    in
     {
-      nixosConfigurations = {
-        elaina = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            ./hosts/elaina/default.nix
-            disko.nixosModules.disko
-            preservation.nixosModules.default
-          ];
-        };
-      };
+      nixosModules = import ./modules { inherit lib; };
+      nixosConfigurations = import ./hosts { inherit self inputs lib; };
+
+      # nix code formatter
+      formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
     };
 }

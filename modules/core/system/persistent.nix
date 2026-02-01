@@ -1,4 +1,25 @@
 {
+  lib,
+  config,
+  inputs,
+  ...
+}:
+let
+  user = config.core'.userName;
+in
+{
+  imports = [
+    inputs.preservation.nixosModules.default
+
+    (lib.mkAliasOptionModule [ "preservation'" "os" ] [ "preservation" "preserveAt" "/persistent" ])
+    (lib.mkAliasOptionModule
+      [ "preservation'" "user" ]
+      [ "preservation" "preserveAt" "/persistent" "users" user ]
+    )
+  ];
+
+  boot.tmp.cleanOnBoot = true;
+
   preservation = {
     enable = true;
     preserveAt."/persistent" = {
@@ -21,6 +42,12 @@
           directory = "/var/lib/private";
           mode = "0700";
         }
+        {
+          directory = "/etc/nixos/nix-config";
+          mode = "0700";
+          user = user;
+          group = "users";
+        }
       ];
       files = [
         # auto-generated machine ID
@@ -30,7 +57,7 @@
         }
       ];
 
-      users.aaron = {
+      users.${user} = {
         directories = [
           # XDG Directories
           "Downloads"
@@ -38,7 +65,6 @@
           "Pictures"
           "Documents"
           "Videos"
-          "nix-config"
         ];
       };
     };
