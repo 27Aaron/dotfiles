@@ -1,6 +1,5 @@
 ## Disk Partitioning
-Partitioning using Disko
-
+Write Disko configuration
 ```nix
 # disko.nix
 {
@@ -107,4 +106,9 @@ Partitioning using Disko
     };
   };
 }
+```
+
+Partitioning using Disko
+```nix
+nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko ./disko.nix
 ```
