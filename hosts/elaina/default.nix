@@ -19,4 +19,8 @@
     lutris
     protonplus
   ];
+
+  services'.vnstat.enable = true;
+  services'.openssh.enable = true;
+  security'.firewall.enable = true;
 }
