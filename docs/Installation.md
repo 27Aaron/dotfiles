@@ -1,5 +1,14 @@
+# Installation Guide
+
 ## Disk Partitioning
-Write Disko configuration
+
+### 1. Create a Disko Configuration
+
+Create a `disko.nix` file with your desired partition layout. Below is an example configuration that uses:
+- **tmpfs** for the root filesystem
+- **LUKS** for disk encryption
+- **Btrfs** for the encrypted volume
+
 ```nix
 # disko.nix
 {
@@ -7,12 +16,12 @@ Write Disko configuration
     disk = {
       nvme = {
         type = "disk";
-        device = "/dev/nvme0n1"; # <- Change to your disk
+        device = "/dev/nvme0n1";        # Change to your disk
         content = {
           type = "gpt";
           partitions = {
             esp = {
-              size = "2G"; # <- Change to your ESP partition size
+              size = "2G";                 # Change to your ESP partition size
               type = "EF00";
               content = {
                 type = "filesystem";
@@ -82,7 +91,7 @@ Write Disko configuration
               };
             };
             encryptedSwap = {
-              size = "65537M"; # <- Change to your swap partition size
+              size = "65537M";              # Change to your swap partition size
               content = {
                 type = "swap";
                 randomEncryption = true;
@@ -108,7 +117,19 @@ Write Disko configuration
 }
 ```
 
-Partitioning using Disko
-```nix
+### 2. Apply the Partition Layout
+
+Run the following command to partition your disk according to the configuration:
+
+```bash
 nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko ./disko.nix
 ```
+
+### 3. Generate NixOS Configuration
+
+Generate the initial NixOS configuration files (the `--no-filesystems` flag prevents disko's partitioning from being overwritten):
+
+```bash
+nixos-generate-config --no-filesystems --root /mnt
+```
+
