@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   imports = [
     ./hardware.nix
@@ -13,4 +14,9 @@
   };
 
   networking.networkmanager.enable = true;
+
+  hm'.home.packages = with pkgs; [
+    lutris
+    protonplus
+  ];
 }
