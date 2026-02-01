@@ -24,6 +24,8 @@
     "usb_storage"
     "sd_mod"
   ];
+
+  boot.initrd.systemd.enable = true;
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
