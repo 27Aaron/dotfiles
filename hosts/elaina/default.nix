@@ -18,6 +18,10 @@
   hm'.home.packages = with pkgs; [
     lutris
     protonplus
+
+    firefox
+    zed-editor
+    neovim
   ];
 
   services'.vnstat.enable = true;
