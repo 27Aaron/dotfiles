@@ -4,6 +4,8 @@
     ./hardware.nix
   ];
 
+  applications'.zed.enable = true;
+
   services.xserver.enable = true;
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
@@ -18,7 +20,6 @@
   hm' = {
     home.packages = with pkgs; [
       firefox
-      zed-editor
       neovim
       nvtopPackages.amd
     ];
@@ -26,9 +27,7 @@
 
   preservation' = {
     user.directories = [
-      ".config/zed"
       ".cache/mozila"
-      ".local/share/zed"
     ];
   };
 

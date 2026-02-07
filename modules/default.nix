@@ -23,6 +23,6 @@ let
 in
 {
   default = {
-    imports = (listModules ./core);
+    imports = (listModules ./core) ++ (listModules ./desktop);
   };
 }
