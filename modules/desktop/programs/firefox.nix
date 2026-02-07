@@ -1,0 +1,24 @@
+{
+  lib,
+  config,
+  ...
+}:
+let
+  cfg = config.programs'.firefox;
+in
+{
+  options.programs'.firefox = {
+    enable = lib.mkEnableOption "firefox browser";
+  };
+
+  config = lib.mkIf cfg.enable {
+    programs.firefox = {
+      enable = true;
+    };
+
+    preservation'.user.directories = [
+      ".cache/mozilla"
+      ".config/mozilla"
+    ];
+  };
+}

@@ -4,7 +4,8 @@
     ./hardware.nix
   ];
 
-  applications'.zed.enable = true;
+  programs'.zed.enable = true;
+  programs'.firefox.enable = true;
 
   services.xserver.enable = true;
   services.displayManager.sddm.enable = true;
@@ -19,15 +20,8 @@
 
   hm' = {
     home.packages = with pkgs; [
-      firefox
       neovim
       nvtopPackages.amd
-    ];
-  };
-
-  preservation' = {
-    user.directories = [
-      ".cache/mozila"
     ];
   };
 

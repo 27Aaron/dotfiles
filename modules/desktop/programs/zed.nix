@@ -4,11 +4,11 @@
   ...
 }:
 let
-  cfg = config.applications'.zed;
+  cfg = config.programs'.zed;
 in
 {
-  options.applications'.zed = {
-    enable = lib.mkEnableOption "Zed editor";
+  options.programs'.zed = {
+    enable = lib.mkEnableOption "zed editor";
   };
 
   config = lib.mkIf cfg.enable {
