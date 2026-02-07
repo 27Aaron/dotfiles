@@ -18,6 +18,13 @@ in
       example = "/dev/nvme0n1";
       description = "Disk device path";
     };
+
+    swapSize = lib.mkOption {
+      type = lib.types.str;
+      default = "8192M";
+      example = "16384M";
+      description = "Swap partition size";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -62,7 +69,7 @@ in
               };
               encryptedSwap = {
                 priority = 1;
-                size = "65537M";
+                size = cfg.swapSize;
                 content = {
                   type = "swap";
                   randomEncryption = true;

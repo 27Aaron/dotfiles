@@ -12,6 +12,8 @@
   ];
 
   hardware'.disko-luks.enable = true;
+  hardware'.disko-luks.swapSize = "65537M";
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
