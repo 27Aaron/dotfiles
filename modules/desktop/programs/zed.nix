@@ -12,9 +12,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    programs.zed-editor = {
-      enable = true;
-    };
+    hm'.programs.zed-editor.enable = true;
 
     preservation'.user.directories = [
       ".cache/zed"
