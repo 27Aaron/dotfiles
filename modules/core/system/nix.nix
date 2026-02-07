@@ -1,12 +1,8 @@
 {
   lib,
   pkgs,
-  config,
   ...
 }:
-let
-  user = config.core'.userName;
-in
 {
   environment.systemPackages = with pkgs; [
     comma
@@ -66,7 +62,7 @@ in
 
   hm'.programs.nh = {
     enable = true;
-    flake = "/home/${user}/nix-config";
+    flake = "/etc/nixos/nix-config";
     clean = {
       enable = true;
       extraArgs = "--keep 5";
