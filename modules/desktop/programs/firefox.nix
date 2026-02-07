@@ -12,9 +12,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    programs.firefox = {
-      enable = true;
-    };
+    hm'.programs.firefox.enable = true;
 
     preservation'.user.directories = [
       ".cache/mozilla"
