@@ -5,6 +5,7 @@
   ];
 
   programs'.zed.enable = true;
+  programs'.steam.enable = true;
   programs'.firefox.enable = true;
 
   services.xserver.enable = true;
