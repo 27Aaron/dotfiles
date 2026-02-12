@@ -1,7 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   imports = [
     ./hardware.nix
+    inputs.jovian.nixosModules.jovian
   ];
 
   services.displayManager.gdm.enable = true;
