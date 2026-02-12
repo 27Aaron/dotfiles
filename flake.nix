@@ -11,6 +11,8 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     preservation.url = "github:nix-community/preservation";
+
+    jovian.url = "github:Jovian-Experiments/Jovian-NixOS";
   };
 
   outputs =
