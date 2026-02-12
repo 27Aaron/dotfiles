@@ -28,8 +28,17 @@ in
         "x-gdu.hide"
       ];
       directories = [
+        "/etc/NetworkManager/system-connections"
+
         "/var/log"
         "/var/lib/systemd"
+        "/var/lib/NetworkManager"
+        {
+          directory = "/etc/nixos/nix-config";
+          mode = "0700";
+          user = user;
+          group = "users";
+        }
         {
           directory = "/var/lib/nixos";
           inInitrd = true;
@@ -41,12 +50,6 @@ in
         {
           directory = "/var/lib/private";
           mode = "0700";
-        }
-        {
-          directory = "/etc/nixos/nix-config";
-          mode = "0700";
-          user = user;
-          group = "users";
         }
       ];
       files = [
