@@ -48,6 +48,9 @@
       ".cache/ProtonPlus"
       ".cache/mozila"
       ".config/zed"
+
+      ".steam"
+      ".local/share/Steam"
     ];
   };
 
