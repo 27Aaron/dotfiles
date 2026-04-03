@@ -1,6 +1,12 @@
 {
   hm'.programs.fish = {
     enable = true;
+    shellInit = ''
+      # Nix
+      if test -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish'
+        source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish'
+      end
+    '';
     interactiveShellInit = ''
       # Disable the greeting message.
       set fish_greeting
