@@ -1,37 +1,33 @@
 {pkgs, ...}: {
   hm' = {
     home.packages = with pkgs; [
-      # 开发与编辑
       gh
-      just
       git-lfs
+      just
       lazygit
+      mise
       neovim
+      uv
 
-      # 查找与导航
       fd
       fzf
 
-      # 文本与数据处理
-      jq
       gawk
       gnused
       gnugrep
+      jq
 
-      # 网络与下载
       curl
       wget
 
-      # 磁盘与分析
+      dust
       duf
       ncdu
-      dust
 
-      # 监控与诊断
       btop
+      fastfetch
       nmap
       socat
-      fastfetch
     ];
   };
 }
