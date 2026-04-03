@@ -8,11 +8,7 @@
 #    https://github.com/yannbertrand/macos-defaults
 #
 ###################################################################################
-{
-  config,
-  pkgs,
-  ...
-}: {
+{config, ...}: {
   # Set your time zone.
   time.timeZone = config.core'.timeZone;
 
