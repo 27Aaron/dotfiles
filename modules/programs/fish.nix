@@ -5,12 +5,12 @@
       # Disable the greeting message.
       set fish_greeting
 
-      # Load Starship.
-      starship init fish | source
-
       # Add uv and uvx shell completions
-      uv generate-shell-completion fish | source
-      uvx --generate-shell-completion fish | source
+      if command -q uv
+         uv generate-shell-completion fish | source    end
+      if command -q uvx
+         uvx --generate-shell-completion fish | source
+      end
     '';
   };
 }
