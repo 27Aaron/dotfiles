@@ -19,8 +19,6 @@
 
     # `brew install`
     brews = [
-      "uv"
-      "mise"
       "mole"
     ];
 
