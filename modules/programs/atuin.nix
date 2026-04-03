@@ -3,7 +3,6 @@
     atuin = {
       enable = true;
       enableFishIntegration = true;
-      daemon.enable = true;
       settings = {
         sync_frequency = 0;
         inline_height = 30;
