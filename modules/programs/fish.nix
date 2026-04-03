@@ -23,6 +23,10 @@
         uvx --generate-shell-completion fish | source
       end
 
+      if command -q openclaw
+        openclaw completion --shell fish | source
+      end
+
       # Add mise shell completions
       mise activate fish | source
     '';
