@@ -7,9 +7,11 @@
 
       # Add uv and uvx shell completions
       if command -q uv
-         uv generate-shell-completion fish | source    end
+        uv generate-shell-completion fish | source
+      end
+
       if command -q uvx
-         uvx --generate-shell-completion fish | source
+        uvx --generate-shell-completion fish | source
       end
     '';
   };
