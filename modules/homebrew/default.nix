@@ -80,6 +80,7 @@
       "telegram"
 
       # System Utility
+      "cc-switch"
       "input-source-pro"
       "karabiner-elements"
       "macs-fan-control"
