@@ -4,6 +4,7 @@
     shellInit = ''
       # Add Nix user profile to PATH
       fish_add_path --prepend --global /etc/profiles/per-user/$USER/bin
+      fish_add_path --append --global ~/.local/bin
 
       # Nix daemon
       if test -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish'
