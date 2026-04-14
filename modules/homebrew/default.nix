@@ -81,6 +81,8 @@
       "macs-fan-control"
       "monitorcontrol"
       "qspace-pro"
+      "raycast"
+      "qspace-pro"
       "stats"
     ];
   };
