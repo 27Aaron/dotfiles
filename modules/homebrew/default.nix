@@ -33,6 +33,7 @@
       "fd"
       "fzf"
       "jq"
+      "ripgrep"
       "wget"
 
       # Disk & Cleanup
@@ -44,6 +45,9 @@
       # System Monitor
       "btop"
       "fastfetch"
+
+      # Media
+      "ffmpeg"
 
       # Network
       "nmap"
@@ -82,7 +86,6 @@
       "monitorcontrol"
       "qspace-pro"
       "raycast"
-      "qspace-pro"
       "stats"
     ];
   };
