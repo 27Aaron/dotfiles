@@ -47,6 +47,7 @@ in {
       users.${cfg.userName} = {
         home.stateVersion = cfg.stateVersion;
         home.homeDirectory = lib.mkForce "/Users/${cfg.userName}";
+        programs.man.enable = false;
       };
     };
   };
