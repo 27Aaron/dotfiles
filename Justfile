@@ -1,6 +1,6 @@
-[macos]
 hostname := `hostname -s`
 
+[macos]
 switch:
     @sudo darwin-rebuild --flake .# switch
 
