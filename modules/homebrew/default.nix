@@ -19,37 +19,68 @@
 
     # `brew install`
     brews = [
+      # Development
+      "gh"
+      "git"
+      "git-lfs"
+      "just"
+      "lazygit"
+      "mise"
+      "neovim"
+      "uv"
+
+      # File & Search
+      "fd"
+      "fzf"
+      "jq"
+      "wget"
+
+      # Disk & Cleanup
+      "duf"
+      "dust"
       "mole"
+      "ncdu"
+
+      # System Monitor
+      "btop"
+      "fastfetch"
+
+      # Network
+      "nmap"
+      "socat"
     ];
 
     # `brew install --cask`
     casks = [
-      # Browsers
+      # Browser
       "brave-browser"
       "google-chrome"
 
-      # Development
+      # Editor
       "visual-studio-code"
       "zed"
 
-      # Fonts
+      # Terminal
+      "ghostty"
+      "kitty"
+
+      # Font
       "font-hack-nerd-font"
       "font-jetbrains-mono-nerd-font"
       "font-lxgw-wenkai"
       "font-maple-mono-nf-cn"
       "font-material-icons"
 
-      # Network
+      # IM & Network
       "surge"
       "telegram"
 
-      # System
+      # System Utility
       "input-source-pro"
       "karabiner-elements"
       "macs-fan-control"
       "monitorcontrol"
       "qspace-pro"
-      "squirrel-app"
       "stats"
     ];
   };
