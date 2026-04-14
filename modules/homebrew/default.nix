@@ -27,6 +27,7 @@
       "lazygit"
       "mise"
       "neovim"
+      "rtk"
       "uv"
 
       # File & Search
