@@ -26,6 +26,8 @@
       "gh"
       "just"
       "lazygit"
+      "go"
+      "hugo"
       "mise"
       "neovim"
       "rtk"
