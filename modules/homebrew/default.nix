@@ -1,6 +1,7 @@
 {
   homebrew = {
     enable = true;
+    enableZshIntegration = true;
     enableFishIntegration = true;
 
     onActivation = {
@@ -14,20 +15,19 @@
     # otherwise Apple Store will refuse to install them.
     # For details, see https://github.com/mas-cli/mas
     masApps = {
-      Bob = 1630034110;
+      "Bob" = 1630034110;
     };
 
     # `brew install`
     brews = [
       # Development
-      "gh"
       "git"
       "git-lfs"
+      "gh"
       "just"
       "lazygit"
       "mise"
       "neovim"
-      "rtk"
       "uv"
 
       # File & Search
@@ -62,10 +62,10 @@
       "google-chrome"
 
       # Editor
-      "visual-studio-code"
       "zed"
+      "visual-studio-code"
 
-      # Terminal
+      # Terminal Emulator
       "ghostty"
       "kitty"
 
@@ -76,19 +76,33 @@
       "font-maple-mono-nf-cn"
       "font-material-icons"
 
-      # IM & Network
-      "surge"
+      # Communication
+      "feishu"
       "telegram"
+      "wechat"
 
-      # System Utility
+      # Network Tools
+      "surge"
+
+      # Input & Keyboard
       "cc-switch"
       "input-source-pro"
       "karabiner-elements"
+
+      # Hardware
       "macs-fan-control"
       "monitorcontrol"
+
+      # Productivity
       "qspace-pro"
       "raycast"
+
+      # System Monitor
       "stats"
+
+      # AI Development
+      "codex"
+      "codex-app"
     ];
   };
 }

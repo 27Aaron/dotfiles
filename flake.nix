@@ -26,6 +26,6 @@
     darwinConfigurations = import ./hosts {inherit self inputs lib;};
 
     # nix code formatter
-    formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
+    formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.alejandra);
   };
 }

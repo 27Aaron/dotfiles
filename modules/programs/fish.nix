@@ -1,16 +1,6 @@
 {
   hm'.programs.fish = {
     enable = true;
-    shellInit = ''
-      # Add Nix user profile to PATH
-      fish_add_path --prepend --global /etc/profiles/per-user/$USER/bin
-      fish_add_path --append --global ~/.local/bin
-
-      # Nix daemon
-      if test -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish'
-        source '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish'
-      end
-    '';
     interactiveShellInit = ''
       # Disable the greeting message.
       set fish_greeting
