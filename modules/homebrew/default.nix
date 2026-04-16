@@ -54,7 +54,6 @@
       "ffmpeg"
 
       # Network
-      "killport"
       "nmap"
       "socat"
     ];
@@ -91,6 +90,7 @@
       "obs"
 
       # Network Tools
+      "productdevbook/tap/portkiller"
       "surge"
 
       # Input & Keyboard
