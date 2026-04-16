@@ -4,14 +4,16 @@
   ...
 }: {
   environment.systemPackages = with pkgs; [
+    alejandra
     comma
     deadnix
+    direnv
     nil
     nixd
     nix-index
     nix-output-monitor
-    nix-prefetch-git # get fetchgit hashes
     nix-prefetch-github
+    nix-prefetch-git # get fetchgit hashes
     nix-tree
     nixpkgs-review
     nurl # get fetchgit hashes

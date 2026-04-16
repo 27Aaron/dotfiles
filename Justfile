@@ -1,15 +1,21 @@
 hostname := `hostname -s`
 
-[macos]
-switch:
-    @sudo darwin-rebuild --flake .# switch
+# List all the just commands
+default:
+  @just --list
 
+# Build and activate the nix-darwin configuration
+switch:
+    @sudo darwin-rebuild --flake .#{{hostname}} switch
+
+# Update the flake inputs (nixpkgs, nix-darwin, etc.)
 update:
     @nix flake update
 
-darwin:
-    @sudo -E ./result/sw/bin/darwin-rebuild switch --flake .#{{hostname}}
+# Install nix-darwin on a fresh macOS system
+install:
+    @sudo nix run nix-darwin/master#darwin-rebuild -- switch
 
-darwin-build:
-    @nix build .#darwinConfigurations.{{hostname}}.system \
-    --extra-experimental-features 'nix-command flakes'
+# Format all Nix files in the flake
+fmt:
+    @nix fmt .
