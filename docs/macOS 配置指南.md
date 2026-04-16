@@ -72,21 +72,17 @@ cd ~/dotfiles
 
 ### 修改主机配置
 
-克隆后需要修改两处：
-
-1. **重命名主机目录** — 将 `hosts/MacBook-Pro` 改为你的主机名：
+克隆后执行以下命令，自动获取主机名和用户名：
 
 ```bash
-mv hosts/MacBook-Pro hosts/你的主机名
+# 重命名主机目录
+mv hosts/MacBook-Pro hosts/$(hostname -s)
+
+# 修改用户名
+sed -i '' "s/userName = \"aaron\"/userName = \"$(whoami)\"/" hosts/default.nix
 ```
 
-2. **修改用户名** — 编辑 `hosts/default.nix`，将 `userName` 改为你的用户名：
-
-```nix
-userName = "你的用户名";  # 原为 "aaron"
-```
-
-> 获取主机名：`hostname`
+> 获取主机名：`hostname -s`
 > 获取用户名：`whoami`
 
 ### 迁移前备份（重要）
