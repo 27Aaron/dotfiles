@@ -6,6 +6,7 @@ default:
 
 # Build and activate the nix-darwin configuration
 switch:
+    @git add .
     @sudo darwin-rebuild --flake .#{{hostname}} switch
 
 # Update the flake inputs (nixpkgs, nix-darwin, etc.)
