@@ -2,7 +2,7 @@ hostname := `hostname -s`
 
 # List all the just commands
 default:
-  @just --list
+    @just --list
 
 # Build and activate the nix-darwin configuration
 switch:
