@@ -106,6 +106,9 @@
       # System Monitor
       "stats"
 
+      # Menu Bar
+      "jordanbaird-ice"
+
       # AI Development
       "cc-switch"
       "cherry-studio"
