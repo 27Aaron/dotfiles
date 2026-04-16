@@ -78,9 +78,14 @@
       "font-material-icons"
 
       # Communication
+      "dingtalk"
       "feishu"
+      "tencent-meeting"
       "telegram"
       "wechat"
+
+      # Media
+      "obs"
 
       # Network Tools
       "surge"
