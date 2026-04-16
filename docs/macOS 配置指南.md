@@ -66,7 +66,7 @@ nix --version
 将 dotfiles 仓库克隆到本地：
 
 ```bash
-git clone --branch v0.0.1 https://github.com/27Aaron/dotfiles.git ~/dotfiles
+git clone --branch v0.0.2 https://github.com/27Aaron/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 ```
 
@@ -121,7 +121,7 @@ sudo nix run nix-darwin/master#darwin-rebuild -- switch
 
 **重启终端**使所有配置生效。
 
-### 配置 Fish 为默认 Shell
+### 配置 Fish 为默认 Shell (可选)
 
 home-manager 安装了 fish，但默认 shell 的切换需要手动完成：
 
