@@ -28,6 +28,7 @@
       "lazygit"
       "mise"
       "neovim"
+      "rtk"
       "uv"
 
       # File & Search
@@ -85,7 +86,6 @@
       "surge"
 
       # Input & Keyboard
-      "cc-switch"
       "input-source-pro"
       "karabiner-elements"
 
@@ -101,6 +101,9 @@
       "stats"
 
       # AI Development
+      "cc-switch"
+      "cherry-studio"
+      "claude"
       "codex"
       "codex-app"
     ];
