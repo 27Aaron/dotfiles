@@ -52,6 +52,7 @@
       "ffmpeg"
 
       # Network
+      "killport"
       "nmap"
       "socat"
     ];
@@ -111,6 +112,23 @@
       "claude"
       "codex"
       "codex-app"
+      "lm-studio"
+
+      # Knowledge Base
+      "obsidian"
+
+      # SSH Client
+      "termius"
+
+      # Container
+      "orbstack"
+
+      # Mobile Development
+      "android-platform-tools"
+
+      # Media Player
+      "iina"
+      "neteasemusic"
     ];
   };
 }
