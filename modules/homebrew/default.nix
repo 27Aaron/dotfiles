@@ -64,7 +64,8 @@
       "brave-browser"
       "google-chrome"
 
-      # Editor
+      # Editor & IDE
+      "datagrip"
       "zed"
       "visual-studio-code"
 
