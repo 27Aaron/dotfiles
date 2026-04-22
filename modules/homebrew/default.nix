@@ -31,6 +31,7 @@
       "mise"
       "neovim"
       "rtk"
+      "rust"
       "uv"
 
       # File & Search
