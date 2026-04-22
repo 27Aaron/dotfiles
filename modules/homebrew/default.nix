@@ -132,6 +132,9 @@
       # Mobile Development
       "android-platform-tools"
 
+      # Screenshot
+      "shottr"
+
       # Media Player
       "iina"
       "neteasemusic"
