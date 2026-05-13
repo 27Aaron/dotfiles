@@ -18,6 +18,10 @@
       "Bob" = 1630034110;
     };
 
+    taps = [
+      "oven-sh/bun"
+    ];
+
     # `brew install`
     brews = [
       # Development
@@ -33,6 +37,7 @@
       "rtk"
       "rust"
       "uv"
+      "bun"
 
       # File & Search
       "fd"
