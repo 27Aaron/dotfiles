@@ -71,13 +71,12 @@
       "google-chrome"
 
       # Editor & IDE
-      "datagrip"
+      # "datagrip"
       "zed"
       "visual-studio-code"
 
       # Terminal Emulator
       "ghostty"
-      # "kitty"
 
       # Font
       "font-hack-nerd-font"
@@ -87,9 +86,7 @@
       "font-material-icons"
 
       # Communication
-      # "dingtalk"
       "feishu"
-      # "tencent-meeting"
       "telegram"
       "wechat"
 
@@ -103,28 +100,29 @@
       # Input & Keyboard
       "input-source-pro"
       "karabiner-elements"
+      "squirrel-app"
 
       # Hardware
       # "macs-fan-control"
+      "battery"
       "monitorcontrol"
 
       # Productivity
       "qspace-pro"
       "raycast"
 
+      # Password Manager
+      "bitwarden"
+
       # System Monitor
       "stats"
 
       # Menu Bar
-      "jordanbaird-ice"
+      "jordanbaird-ice@beta"
 
       # AI Development
       "cc-switch"
-      # "cherry-studio"
-      # "claude"
-      "codex"
       "codex-app"
-      # "lm-studio"
 
       # Knowledge Base
       "obsidian"
@@ -134,12 +132,6 @@
 
       # Container
       "orbstack"
-
-      # Mobile Development
-      # "android-platform-tools"
-
-      # Screenshot
-      "shottr"
 
       # Media Player
       "iina"
