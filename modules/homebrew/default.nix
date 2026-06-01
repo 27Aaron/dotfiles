@@ -35,7 +35,7 @@
       "mise"
       "neovim"
       "rtk"
-      "rust"
+      # "rust"
       "uv"
       # "bun"
 
@@ -121,7 +121,7 @@
       # AI Development
       "cc-switch"
       # "cherry-studio"
-      "claude"
+      # "claude"
       "codex"
       "codex-app"
       # "lm-studio"
