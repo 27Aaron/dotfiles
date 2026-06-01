@@ -19,7 +19,7 @@
     };
 
     taps = [
-      "oven-sh/bun"
+      # "oven-sh/bun"
     ];
 
     # `brew install`
@@ -30,14 +30,14 @@
       "gh"
       "just"
       "lazygit"
-      "go"
-      "hugo"
+      # "go"
+      # "hugo"
       "mise"
       "neovim"
       "rtk"
       "rust"
       "uv"
-      "bun"
+      # "bun"
 
       # File & Search
       "fd"
@@ -77,7 +77,7 @@
 
       # Terminal Emulator
       "ghostty"
-      "kitty"
+      # "kitty"
 
       # Font
       "font-hack-nerd-font"
@@ -87,9 +87,9 @@
       "font-material-icons"
 
       # Communication
-      "dingtalk"
+      # "dingtalk"
       "feishu"
-      "tencent-meeting"
+      # "tencent-meeting"
       "telegram"
       "wechat"
 
@@ -120,11 +120,11 @@
 
       # AI Development
       "cc-switch"
-      "cherry-studio"
+      # "cherry-studio"
       "claude"
       "codex"
       "codex-app"
-      "lm-studio"
+      # "lm-studio"
 
       # Knowledge Base
       "obsidian"
@@ -136,7 +136,7 @@
       "orbstack"
 
       # Mobile Development
-      "android-platform-tools"
+      # "android-platform-tools"
 
       # Screenshot
       "shottr"
