@@ -105,7 +105,7 @@
       "karabiner-elements"
 
       # Hardware
-      "macs-fan-control"
+      # "macs-fan-control"
       "monitorcontrol"
 
       # Productivity
