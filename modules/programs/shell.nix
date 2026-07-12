@@ -2,6 +2,7 @@
   hm' = {
     home.shellAliases = {
       cc = "claude --dangerously-skip-permissions";
+      cx = "codex --dangerously-bypass-approvals-and-sandbox";
     };
 
     programs = {
@@ -10,9 +11,6 @@
         interactiveShellInit = ''
           # Disable the greeting message.
           set fish_greeting
-
-          fish_add_path "$HOME/.local/bin"
-          fish_add_path "$HOME/.cargo/bin"
 
           # Add uv and uvx shell completions
           if command -q uv
@@ -44,6 +42,49 @@
           # Add mise shell completions
           eval "$(mise activate zsh)"
         '';
+      };
+
+      atuin = {
+        enable = true;
+        enableFishIntegration = true;
+        enableZshIntegration = true;
+        settings = {
+          sync_frequency = 0;
+          inline_height = 30;
+          history_filter = [
+            ''^ls($|(\s+((-([a-zA-Z0-9]|-)+)|"(\.|[^/])[^"]*"|'(\.|[^/])[^']*'|(\.|[^/\s-])[^\s]*))*\s*$)'' # filter ls command with non-absolute pathes
+            ''^cd($|\s+('[^/][^']*'|"[^/][^"]*"|[^/\s'"][^\s]*))$'' # filter cd command with non-absolute pathes
+            "/nix/store/.*" # command contains /nix/store
+            ''--cookie[=\s]+.+'' # command contains cookie
+          ];
+        };
+      };
+
+      eza = {
+        enable = true;
+        enableFishIntegration = true;
+        enableZshIntegration = true;
+        git = true;
+        icons = "auto";
+      };
+
+      starship = {
+        enable = true;
+        enableFishIntegration = true;
+        enableZshIntegration = true;
+        settings = {
+          add_newline = false;
+          character = {
+            success_symbol = "[›](bold green)";
+            error_symbol = "[✗](bold red)";
+          };
+        };
+      };
+
+      zoxide = {
+        enable = true;
+        enableFishIntegration = true;
+        enableZshIntegration = true;
       };
     };
   };
