@@ -20,7 +20,10 @@
     ...
   }: let
     inherit (nixpkgs) lib;
-    supportedSystems = ["aarch64-darwin"];
+    supportedSystems = [
+      "aarch64-darwin"
+      "x86_64-darwin"
+    ];
     forEachSystem = lib.genAttrs supportedSystems;
   in {
     darwinModules = import ./modules {inherit lib inputs;};
