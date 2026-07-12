@@ -22,7 +22,7 @@
 
   nix = {
     enable = true;
-    package = pkgs.nix;
+    package = pkgs.lixPackageSets.stable.lix;
 
     # remove nix-channel related tools & configs, we use flakes instead.
     channel.enable = false;
