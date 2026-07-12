@@ -7,13 +7,10 @@
     onActivation = {
       autoUpdate = true; # Fetch the newest stable branch of Homebrew's git repo
       upgrade = true; # Upgrade outdated casks, formulae, and App Store apps
-      cleanup = "zap"; # 'zap': uninstalls all formulae(and related files) not listed in the generated Brewfile
+      cleanup = "zap"; # Uninstall unlisted packages and their related files
     };
 
     # Applications to install from Mac App Store using mas.
-    # You need to install all these Apps manually first so that your apple account have records for them.
-    # otherwise Apple Store will refuse to install them.
-    # For details, see https://github.com/mas-cli/mas
     masApps = {
       "Bob" = 1630034110;
     };
@@ -26,17 +23,21 @@
 
     # `brew install --cask`
     casks = [
+      # AI Development
+      "cc-switch"
+      "codex-app"
+
       # Browser
       "brave-browser"
       "google-chrome"
 
-      # Editor
-      # "zed"
-      "visual-studio-code"
+      # Communication
+      "feishu"
+      "telegram"
+      "wechat"
 
-      # Terminal Emulator
-      "ghostty"
-      "kitty"
+      # Editor
+      "visual-studio-code"
 
       # Font
       "font-hack-nerd-font"
@@ -45,59 +46,40 @@
       "font-maple-mono-nf-cn"
       "font-material-icons"
 
-      # Communication
-      # "dingtalk"
-      "feishu"
-      # "tencent-meeting"
-      "telegram"
-      "wechat"
-
-      # Media
-      "obs"
-
-      # Network Tools
-      "surge"
+      # Hardware
+      "monitorcontrol"
 
       # Input & Keyboard
       "input-source-pro"
       "karabiner-elements"
 
-      # Hardware
-      "monitorcontrol"
+      # Knowledge Base
+      "obsidian"
+
+      # Media
+      "iina"
+      "neteasemusic"
+      "obs"
+
+      # Menu Bar
+      "jordanbaird-ice@beta"
+
+      # Network Tools
+      "surge"
 
       # Productivity
       "qspace-pro"
       "raycast"
 
-      # System Monitor
-      "stats"
-
-      # Menu Bar
-      "jordanbaird-ice@beta"
-
-      # AI Development
-      # "cc-switch"
-      # "cherry-studio"
-      # "claude"
-      # "codex"
-      "codex-app"
-      # "lm-studio"
-
-      # Knowledge Base
-      "obsidian"
-
       # SSH Client
       "termius"
 
-      # Container
-      # "orbstack"
+      # System Monitor
+      "stats"
 
-      # Mobile Development
-      # "android-platform-tools"
-
-      # Media Player
-      "iina"
-      "neteasemusic"
+      # Terminal Emulator
+      "ghostty"
+      "kitty"
     ];
   };
 }
