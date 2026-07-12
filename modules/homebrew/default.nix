@@ -25,7 +25,7 @@
     casks = [
       # AI Development
       "cc-switch"
-      "codex-app"
+      "chatgpt"
 
       # Browser
       "brave-browser"
@@ -60,6 +60,7 @@
       "iina"
       "neteasemusic"
       "obs"
+      "plex"
 
       # Menu Bar
       "jordanbaird-ice@beta"
