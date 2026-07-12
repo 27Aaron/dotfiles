@@ -20,8 +20,10 @@
       ];
     };
   };
+  hasDefaultModule = name: builtins.pathExists (./. + "/${name}/default.nix");
+  isHost = name: type: type == "directory" && hasDefaultModule name;
 in
   lib.pipe (builtins.readDir ./.) [
-    (lib.filterAttrs (n: _: n != "default.nix"))
+    (lib.filterAttrs isHost)
     (lib.concatMapAttrs mkDarwinSystem)
   ]

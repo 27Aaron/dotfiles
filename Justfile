@@ -8,10 +8,14 @@ default:
 check:
     @alejandra --check .
     @deadnix --fail .
+    @nix flake check --no-build --all-systems
+    @nix eval --raw .#darwinConfigurations.MacBook-Air.config.system.build.toplevel.drvPath >/dev/null
+    @nix eval --raw .#darwinConfigurations.MacBook-Pro.config.system.build.toplevel.drvPath >/dev/null
 
 # Build and activate the nix-darwin configuration
-switch: check
+switch:
     @git add .
+    @just check
     @sudo darwin-rebuild --flake .#{{hostname}} switch
 
 # Update the flake inputs (nixpkgs, nix-darwin, etc.)

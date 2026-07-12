@@ -20,36 +20,8 @@
 
     # `brew install`
     brews = [
-      # Development
-      "gh"
-      "just"
-      "lazygit"
-      "mise"
-      "uv"
-
-      # File & Search
-      "fd"
-      "fzf"
-      "jq"
-      "ripgrep"
-      "wget"
-
       # Disk & Cleanup
-      "duf"
-      "dust"
       "mole"
-      "ncdu"
-
-      # System Monitor
-      "btop"
-      "fastfetch"
-
-      # Media
-      "ffmpeg"
-
-      # Network
-      "nmap"
-      "socat"
     ];
 
     # `brew install --cask`
