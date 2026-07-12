@@ -7,15 +7,12 @@
     alejandra
     comma
     deadnix
-    direnv
-    nil
     nixd
-    nix-index
     nix-output-monitor
     nix-prefetch-github
     nix-prefetch-git # get fetchgit hashes
     nix-tree
-    nixpkgs-review
+    lixPackageSets.stable.nixpkgs-review
     nurl # get fetchgit hashes
     nvd
   ];

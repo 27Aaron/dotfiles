@@ -21,8 +21,6 @@
     # `brew install`
     brews = [
       # Development
-      "git"
-      "git-lfs"
       "gh"
       "just"
       "lazygit"
