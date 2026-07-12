@@ -12,7 +12,6 @@
     nix-prefetch-github
     nix-prefetch-git # get fetchgit hashes
     nix-tree
-    lixPackageSets.stable.nixpkgs-review
     nurl # get fetchgit hashes
     nvd
   ];
