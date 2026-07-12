@@ -73,7 +73,7 @@
       "stats"
 
       # Menu Bar
-      "jordanbaird-ice"
+      "jordanbaird-ice@beta"
 
       # AI Development
       # "cc-switch"
