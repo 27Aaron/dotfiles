@@ -25,10 +25,10 @@ in {
       default = "Asia/Taipei";
       description = "System timezone";
     };
-    stateVersion = lib.mkOption {
+    homeStateVersion = lib.mkOption {
       type = lib.types.str;
       default = "26.05";
-      description = "NixOS state version";
+      description = "Home Manager state version";
     };
   };
 
@@ -45,7 +45,7 @@ in {
       backupFileExtension = "hm-bak";
 
       users.${cfg.userName} = {
-        home.stateVersion = cfg.stateVersion;
+        home.stateVersion = cfg.homeStateVersion;
         home.homeDirectory = lib.mkForce "/Users/${cfg.userName}";
         programs.man.enable = false;
       };

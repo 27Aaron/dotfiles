@@ -51,5 +51,5 @@
   };
 
   # to install chrome, you need to enable unfree packages
-  nixpkgs.config.allowUnfree = lib.mkForce true;
+  nixpkgs.config.allowUnfree = true;
 }

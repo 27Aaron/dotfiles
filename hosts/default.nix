@@ -7,7 +7,7 @@
   inherit (inputs) nix-darwin;
   mkDarwinSystem = host: _: {
     ${host} = nix-darwin.lib.darwinSystem {
-      specialArgs = {inherit self inputs;};
+      specialArgs = {inherit inputs;};
       modules = [
         {
           core' = {
