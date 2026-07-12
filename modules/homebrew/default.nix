@@ -18,10 +18,6 @@
       "Bob" = 1630034110;
     };
 
-    taps = [
-      # "oven-sh/bun"
-    ];
-
     # `brew install`
     brews = [
       # Development
@@ -30,14 +26,8 @@
       "gh"
       "just"
       "lazygit"
-      # "go"
-      # "hugo"
       "mise"
-      "neovim"
-      "rtk"
-      # "rust"
       "uv"
-      # "bun"
 
       # File & Search
       "fd"
@@ -70,13 +60,13 @@
       "brave-browser"
       "google-chrome"
 
-      # Editor & IDE
-      # "datagrip"
-      "zed"
+      # Editor
+      # "zed"
       "visual-studio-code"
 
       # Terminal Emulator
       "ghostty"
+      "kitty"
 
       # Font
       "font-hack-nerd-font"
@@ -86,7 +76,9 @@
       "font-material-icons"
 
       # Communication
+      # "dingtalk"
       "feishu"
+      # "tencent-meeting"
       "telegram"
       "wechat"
 
@@ -94,35 +86,32 @@
       "obs"
 
       # Network Tools
-      "productdevbook/tap/portkiller"
       "surge"
 
       # Input & Keyboard
       "input-source-pro"
       "karabiner-elements"
-      "squirrel-app"
 
       # Hardware
-      # "macs-fan-control"
-      "battery"
       "monitorcontrol"
 
       # Productivity
       "qspace-pro"
       "raycast"
 
-      # Password Manager
-      "bitwarden"
-
       # System Monitor
       "stats"
 
       # Menu Bar
-      "jordanbaird-ice@beta"
+      "jordanbaird-ice"
 
       # AI Development
-      "cc-switch"
+      # "cc-switch"
+      # "cherry-studio"
+      # "claude"
+      # "codex"
       "codex-app"
+      # "lm-studio"
 
       # Knowledge Base
       "obsidian"
@@ -131,7 +120,10 @@
       "termius"
 
       # Container
-      "orbstack"
+      # "orbstack"
+
+      # Mobile Development
+      # "android-platform-tools"
 
       # Media Player
       "iina"

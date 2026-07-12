@@ -22,7 +22,7 @@ in {
     };
     timeZone = lib.mkOption {
       type = lib.types.str;
-      default = "Asia/Singapore";
+      default = "Asia/Taipei";
       description = "System timezone";
     };
     stateVersion = lib.mkOption {
