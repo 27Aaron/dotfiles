@@ -15,7 +15,7 @@ update:
 
 # Install nix-darwin on a fresh macOS system
 install:
-    @sudo nix run nix-darwin/master#darwin-rebuild -- switch
+    @sudo nix run nix-darwin/master#darwin-rebuild -- switch --flake .#{{hostname}}
 
 # Format all Nix files in the flake
 fmt:

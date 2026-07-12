@@ -111,7 +111,7 @@ brew bundle list --cask --file="~/Desktop/Brewfile"
 nix-darwin 没有独立的安装程序，初始构建需要通过 `nix run` 拉取并执行。**构建完成后，fish 已通过 home-manager 自动配置完毕，无需额外操作**：
 
 ```bash
-sudo nix run nix-darwin/master#darwin-rebuild -- switch
+sudo nix run nix-darwin/master#darwin-rebuild -- switch --flake ".#$(hostname -s)"
 ```
 
 构建过程会自动完成：
@@ -156,7 +156,7 @@ echo $SHELL
 just switch
 
 # 或手动执行 darwin-rebuild
-sudo darwin-rebuild switch
+sudo darwin-rebuild switch --flake ".#$(hostname -s)"
 ```
 
 常用配置路径：
