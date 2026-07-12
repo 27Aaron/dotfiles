@@ -19,6 +19,10 @@ switch:
 update:
     @nix flake update
 
+# Delete generations and collect unreachable store paths older than 7 days
+gc:
+    @sudo nix-collect-garbage --delete-older-than 7d
+
 # Install nix-darwin on a fresh macOS system
 install:
     @sudo nix run nix-darwin/master#darwin-rebuild -- switch --flake .#{{hostname}}
