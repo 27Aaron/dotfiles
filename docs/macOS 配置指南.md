@@ -69,7 +69,7 @@ nix --version
 将 dotfiles 仓库克隆到本地：
 
 ```bash
-git clone --branch v0.0.2 https://github.com/27Aaron/dotfiles.git ~/dotfiles
+git clone --branch main https://github.com/27Aaron/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 ```
 
