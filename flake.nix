@@ -20,7 +20,8 @@
     ...
   }: let
     inherit (nixpkgs) lib;
-    forEachSystem = lib.genAttrs lib.systems.flakeExposed;
+    supportedSystems = ["aarch64-darwin"];
+    forEachSystem = lib.genAttrs supportedSystems;
   in {
     darwinModules = import ./modules {inherit lib inputs;};
     darwinConfigurations = import ./hosts {inherit self inputs lib;};
