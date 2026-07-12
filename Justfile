@@ -4,8 +4,13 @@ hostname := `hostname -s`
 default:
     @just --list
 
+# Check Nix formatting and unused declarations
+check:
+    @alejandra --check .
+    @deadnix --fail .
+
 # Build and activate the nix-darwin configuration
-switch:
+switch: check
     @git add .
     @sudo darwin-rebuild --flake .#{{hostname}} switch
 
