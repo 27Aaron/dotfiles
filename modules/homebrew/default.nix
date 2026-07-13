@@ -13,6 +13,7 @@
     # Applications to install from Mac App Store using mas.
     masApps = {
       "Bob" = 1630034110;
+      "WPS" = 1443749478;
     };
 
     # `brew install`
@@ -26,6 +27,7 @@
       # AI Development
       "cc-switch"
       "chatgpt"
+      "stablyai/orca/orca"
 
       # Browser
       "brave-browser"
@@ -47,7 +49,7 @@
       "font-material-icons"
 
       # Hardware
-      "monitorcontrol"
+      # "monitorcontrol"
 
       # Input & Keyboard
       "input-source-pro"
