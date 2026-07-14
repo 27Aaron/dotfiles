@@ -1,12 +1,12 @@
 # Dotfiles
 
-基于 [nix-darwin](https://github.com/LnL7/nix-darwin) 的 macOS 声明式配置。
+Declarative macOS configuration powered by [nix-darwin](https://github.com/LnL7/nix-darwin).
 
-## 快速开始
+## Getting Started
 
-详细步骤请参考 [macOS 配置指南](docs/macOS%20配置指南.md)。
+See the [macOS Setup Guide](docs/macOS%20配置指南.md) for detailed installation and configuration instructions.
 
-## 参考
+## References
 
 - [macos-defaults](https://github.com/yannbertrand/macos-defaults)
 - [LnL7/nix-darwin](https://github.com/LnL7/nix-darwin)
