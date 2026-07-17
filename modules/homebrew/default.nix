@@ -27,6 +27,7 @@
       # AI Development
       "chatgpt"
       "cc-switch"
+      "steipete/tap/codexbar"
 
       # Browser
       "firefox"
@@ -73,6 +74,9 @@
       # Productivity
       "raycast"
       "qspace-pro"
+
+      # Remote Access
+      "uuremote"
 
       # SSH Client
       "termius"
