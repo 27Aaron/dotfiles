@@ -31,7 +31,7 @@
 
       # Browser
       "firefox"
-      "brave-browser"
+      # "brave-browser"
       "google-chrome"
 
       # Communication
