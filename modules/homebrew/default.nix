@@ -51,6 +51,7 @@
 
       # Hardware
       # "monitorcontrol"
+      "macs-fan-control"
 
       # Input & Keyboard
       "input-source-pro"
