@@ -38,6 +38,7 @@
         _FXShowPosixPathInTitle = true; # 显示Finder标题中的完整路径
         AppleShowAllExtensions = true; # 显示所有文件扩展名
         FXEnableExtensionChangeWarning = false; # 更改文件扩展名时禁用警告
+        NewWindowTarget = "Home"; # 新 Finder 窗口默认显示用户主目录
         QuitMenuItem = true; # 启用退出菜单项
         ShowPathbar = true; # 显示路径栏
         ShowStatusBar = true; # 显示状态栏
