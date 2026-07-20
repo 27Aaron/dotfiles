@@ -1,11 +1,16 @@
 {
-  description = "Aaron's nix-darwin flake";
+  description = "Aaron's Nix configurations";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    disko = {
+      url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -26,11 +31,17 @@
     ...
   }: let
     inherit (nixpkgs) lib;
-    supportedSystems = ["aarch64-darwin"];
+    supportedSystems = [
+      "aarch64-darwin"
+      "x86_64-linux"
+    ];
     forEachSystem = lib.genAttrs supportedSystems;
   in {
     darwinModules.default = import ./modules/darwin;
     darwinConfigurations = import ./hosts/darwin {inherit self inputs lib;};
+
+    nixosModules.default = import ./modules/nixos;
+    nixosConfigurations = import ./hosts/nixos {inherit self inputs lib;};
 
     # nix code formatter
     formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.alejandra);

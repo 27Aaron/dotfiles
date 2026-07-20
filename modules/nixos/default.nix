@@ -1,2 +1,7 @@
-# Reserved for future NixOS modules.
-{...}: {}
+{
+  imports = [
+    ../.
+    ./core
+    ./core/nix.nix
+  ];
+}

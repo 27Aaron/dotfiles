@@ -15,6 +15,11 @@ switch:
     @git add .
     @sudo darwin-rebuild --flake .#{{hostname}} switch
 
+# Build and activate the NixOS configuration
+nixos-switch:
+    @git add .
+    @sudo nixos-rebuild switch --flake .#{{hostname}}
+
 # Update the flake inputs (nixpkgs, nix-darwin, etc.)
 update:
     @nix flake update
