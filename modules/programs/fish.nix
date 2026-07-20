@@ -13,9 +13,6 @@
       if command -q uvx
         uvx --generate-shell-completion fish | source
       end
-
-      # Add mise shell completions
-      mise activate fish | source
     '';
   };
 }

@@ -11,9 +11,6 @@
       if command -v uvx &>/dev/null; then
         eval "$(uvx --generate-shell-completion zsh)"
       fi
-
-      # Add mise shell completions
-      eval "$(mise activate zsh)"
     '';
   };
 }

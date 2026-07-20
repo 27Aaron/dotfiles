@@ -8,7 +8,6 @@
     gh
     just
     lazygit
-    mise
     uv
 
     # File & Search
