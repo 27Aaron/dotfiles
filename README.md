@@ -1,6 +1,6 @@
 # Dotfiles
 
-Declarative macOS and NixOS configuration powered by [nix-darwin](https://github.com/nix-darwin/nix-darwin), [Disko](https://github.com/nix-community/disko), and [Home Manager](https://github.com/nix-community/home-manager).
+Declarative macOS and NixOS configuration powered by [nix-darwin](https://github.com/nix-darwin/nix-darwin), [Disko](https://github.com/nix-community/disko), [Preservation](https://github.com/nix-community/preservation), and [Home Manager](https://github.com/nix-community/home-manager).
 
 ## Layout
 

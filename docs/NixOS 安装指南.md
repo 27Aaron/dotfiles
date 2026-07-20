@@ -237,7 +237,7 @@ sudo reboot
 拔出安装介质。启动时输入 LUKS 密码，然后登录系统。
 
 > [!IMPORTANT]
-> 根文件系统使用 tmpfs，未持久化的数据会在重启后消失。`/persistent` 只是预留子卷，后续还需要配置 Impermanence 或 bind mount。
+> 根文件系统使用 tmpfs，未声明持久化的数据会在重启后消失。所有 NixOS 主机都使用 Preservation 将必要的系统状态和用户目录保存到 `/persistent`，配置位于 `modules/nixos/core/preservation.nix`。
 
 ---
 
@@ -246,3 +246,4 @@ sudo reboot
 - [Disko 项目](https://github.com/nix-community/disko)
 - [Disko Quickstart](https://github.com/nix-community/disko/blob/master/docs/quickstart.md)
 - [Disko 官方示例](https://github.com/nix-community/disko/tree/master/example)
+- [Preservation 项目](https://github.com/nix-community/preservation)
