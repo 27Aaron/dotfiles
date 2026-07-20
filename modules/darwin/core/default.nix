@@ -33,6 +33,9 @@ in {
   };
 
   config = {
+    # Enable alternative shell support in nix-darwin.
+    programs.fish.enable = true;
+
     system.primaryUser = cfg.userName;
 
     networking.hostName = cfg.hostName;

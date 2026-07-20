@@ -1,5 +1,9 @@
-{pkgs, ...}: {
-  hm'.home.packages = with pkgs; [
+{
+  lib,
+  pkgs,
+  ...
+}: {
+  hm'.home.packages = lib.mkAfter (with pkgs; [
     # Development
     gh
     just
@@ -29,5 +33,5 @@
     # Network
     nmap
     socat
-  ];
+  ]);
 }

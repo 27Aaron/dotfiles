@@ -1,7 +1,7 @@
 {lib, ...}: let
   listModules = dir:
     lib.pipe (builtins.readDir dir) [
-      (lib.filterAttrs (n: _: n != "default.nix"))
+      (lib.filterAttrs (name: _: name != "default.nix"))
       (lib.mapAttrsToList (
         name: type: let
           path = dir + "/${name}";
@@ -18,7 +18,5 @@
       lib.flatten
     ];
 in {
-  default = {
-    imports = listModules ./.;
-  };
+  imports = listModules ./programs;
 }

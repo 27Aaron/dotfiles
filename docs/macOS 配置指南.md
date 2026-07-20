@@ -79,10 +79,10 @@ cd ~/dotfiles
 
 ```bash
 # 重命名主机目录
-mv hosts/MacBook-Pro hosts/$(hostname -s)
+mv hosts/darwin/MacBook-Pro hosts/darwin/$(hostname -s)
 
 # 修改用户名
-sed -i '' "s/userName = \"aaron\"/userName = \"$(whoami)\"/" hosts/default.nix
+sed -i '' "s/userName = \"aaron\"/userName = \"$(whoami)\"/" hosts/darwin/default.nix
 ```
 
 > 获取主机名：`hostname -s`
@@ -91,7 +91,7 @@ sed -i '' "s/userName = \"aaron\"/userName = \"$(whoami)\"/" hosts/default.nix
 ### 迁移前备份（重要）
 
 > ⚠️ **首次 `darwin-rebuild switch` 会清理未声明的 Homebrew 应用。**
-> `modules/homebrew/default.nix` 中 `cleanup = "zap"` 会在构建时卸载所有不在列表中的已安装应用。
+> `modules/darwin/homebrew/default.nix` 中 `cleanup = "zap"` 会在构建时卸载所有不在列表中的已安装应用。
 
 如果当前系统已有 Homebrew 安装的应用，**先执行备份，再配置列表，然后才能首次构建**：
 
@@ -104,7 +104,7 @@ brew bundle list --formula --file="~/Desktop/Brewfile"
 brew bundle list --cask --file="~/Desktop/Brewfile"
 ```
 
-备份完成后，编辑 `modules/homebrew/default.nix`，将已有应用逐条加入 `brews` 或 `casks` 列表。
+备份完成后，编辑 `modules/darwin/homebrew/default.nix`，将已有应用逐条加入 `brews` 或 `casks` 列表。
 
 ### 首次构建
 
@@ -161,15 +161,15 @@ sudo darwin-rebuild switch --flake ".#$(hostname -s)"
 
 常用配置路径：
 
-- 系统配置：`modules/system/default.nix`
-- Homebrew 应用：`modules/homebrew/default.nix`
+- 系统配置：`modules/darwin/system/default.nix`
+- Homebrew 应用：`modules/darwin/homebrew/default.nix`
 - 用户程序配置：`modules/programs/`
 
 ---
 
 ## 软件配置
 
-`modules/programs/` 目录下的配置由 **home-manager** 管理，声明式配置用户级软件。
+`modules/programs/` 下的配置由 **home-manager** 管理，并通过平台提供的 `hm'` alias 声明用户级软件。新增文件会由 `modules/default.nix` 自动递归导入。
 
 ### Git 配置
 
@@ -213,23 +213,23 @@ just switch
 
 ## 系统配置
 
-`modules/system/default.nix` 包含 macOS 系统级配置（由 nix-darwin 托管）。
+`modules/darwin/system/default.nix` 包含 macOS 系统级配置（由 nix-darwin 托管）。
 
 ### 常用配置项
 
 | 配置类别 | 说明                           | 参考来源                     |
 | -------- | ------------------------------ | ---------------------------- |
-| Dock     | 自动隐藏、禁用最近应用、触发角 | `modules/system/default.nix` |
-| Finder   | 显示完整路径、显示所有扩展名   | `modules/system/default.nix` |
-| 键盘     | 键重复速率、自动大写、智能替换 | `modules/system/default.nix` |
+| Dock     | 自动隐藏、禁用最近应用、触发角 | `modules/darwin/system/default.nix` |
+| Finder   | 显示完整路径、显示所有扩展名   | `modules/darwin/system/default.nix` |
+| 键盘     | 键重复速率、自动大写、智能替换 | `modules/darwin/system/default.nix` |
 | 触摸板   | 点击、三指拖动                 | 需手动取消注释相关配置       |
-| 外观     | 深色模式、24小时制时钟         | `modules/system/default.nix` |
+| 外观     | 深色模式、24小时制时钟         | `modules/darwin/system/default.nix` |
 
 ### 自定义系统配置
 
 macOS `defaults` 命令参考：https://macos-defaults.com/
 
-所有支持选项均可通过编辑 `modules/system/default.nix` 中的 `system.defaults` 和 `CustomUserPreferences` 部分声明。
+所有支持选项均可通过编辑 `modules/darwin/system/default.nix` 中的 `system.defaults` 和 `CustomUserPreferences` 部分声明。
 
 重新应用系统配置：
 
@@ -241,7 +241,7 @@ just switch
 
 ## 应用管理
 
-Homebrew 安装的应用通过 Nix 的 homebrew module 统一管理，配置位于 `modules/homebrew/default.nix`。
+Homebrew 安装的应用通过 Nix 的 homebrew module 统一管理，配置位于 `modules/darwin/homebrew/default.nix`。
 
 ### 常用操作
 
@@ -251,7 +251,7 @@ brew list
 brew list --cask
 
 # 添加新应用
-# 1. 编辑 modules/homebrew/default.nix，在 brews 或 casks 列表中添加条目
+# 1. 编辑 modules/darwin/homebrew/default.nix，在 brews 或 casks 列表中添加条目
 # 2. 重新构建
 just switch
 

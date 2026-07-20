@@ -1,17 +1,23 @@
 {
-  description = "Aaron's macOS flake";
+  description = "Aaron's nix-darwin flake";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    nix-darwin.url = "github:nix-darwin/nix-darwin/master";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    sops-nix.url = "github:Mic92/sops-nix";
-    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
@@ -20,14 +26,11 @@
     ...
   }: let
     inherit (nixpkgs) lib;
-    supportedSystems = [
-      "aarch64-darwin"
-      "x86_64-darwin"
-    ];
+    supportedSystems = ["aarch64-darwin"];
     forEachSystem = lib.genAttrs supportedSystems;
   in {
-    darwinModules = import ./modules {inherit lib inputs;};
-    darwinConfigurations = import ./hosts {inherit self inputs lib;};
+    darwinModules.default = import ./modules/darwin;
+    darwinConfigurations = import ./hosts/darwin {inherit self inputs lib;};
 
     # nix code formatter
     formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.alejandra);
