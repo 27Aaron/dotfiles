@@ -39,6 +39,9 @@
       "wechat"
       "telegram"
 
+      # Development
+      "orbstack"
+
       # Editor
       "visual-studio-code"
 
