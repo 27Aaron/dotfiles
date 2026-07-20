@@ -14,7 +14,6 @@
             hostName = host;
           };
         }
-        inputs.disko.nixosModules.disko
         self.nixosModules.default
         ./${host}
       ];

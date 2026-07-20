@@ -7,7 +7,7 @@
 
 ## Disko 简介
 
-Disko 使用 Nix 进行声明式磁盘分区和格式化。磁盘布局写在 `disko.nix` 中，执行一条命令即可完成分区、加密、格式化和挂载。
+Disko 使用 Nix 进行声明式磁盘分区和格式化。磁盘布局写成共享 NixOS 模块，执行一条命令即可完成分区、加密、格式化和挂载。
 
 本文使用的布局为：
 
@@ -36,10 +36,24 @@ ls -l /dev/disk/by-id/
 
 ## 创建 Disko 配置
 
-本仓库的磁盘配置位于 `hosts/nixos/mechrevo/disko.nix`，内容如下。
+公共磁盘布局位于 `modules/nixos/hardware/disko.nix`。每台主机只需要启用模块并指定磁盘路径、swap 大小以及是否启用 LUKS，例如 `hosts/nixos/mechrevo/default.nix`：
 
 > [!IMPORTANT]
 > 执行前必须把 `device` 替换为实际的目标磁盘路径。
+
+```nix
+hardware'.disko = {
+  enable = true;
+  device = "/dev/disk/by-id/nvme-CT1000P3PSSD8_24364AD5D8E0";
+  espSize = "1G";
+  swapSize = "32769M";
+  luks.enable = true;
+};
+```
+
+### 独立 Disko 配置备份
+
+下面保留模块化之前使用的完整 `disko.nix`。需要脱离本仓库单独使用时，可以将其保存为 `disko.nix`，确认磁盘路径后直接交给 Disko 执行。
 
 ```nix
 {...}: {
@@ -160,12 +174,12 @@ ls -l /dev/disk/by-id/
 
 ## 使用 Disko 安装文件系统
 
-再次检查 `hosts/nixos/mechrevo/disko.nix` 中的 `device`，然后执行：
+再次检查主机配置中的 `hardware'.disko.device`，然后从 Flake 的 NixOS 配置执行：
 
 ```bash
 sudo nix --experimental-features "nix-command flakes" \
   run github:nix-community/disko/latest -- \
-  --mode destroy,format,mount ./hosts/nixos/mechrevo/disko.nix
+  --mode destroy,format,mount --flake .#mechrevo
 ```
 
 Disko 会请求确认清空磁盘，并交互式询问 LUKS 密码。
@@ -180,7 +194,7 @@ findmnt -R /mnt
 lsblk -f
 ```
 
-应当能看到 `/mnt`、`/mnt/boot`、`/mnt/nix`、`/mnt/persistent`、`/mnt/snapshots` 和 `/mnt/btr_pool`。
+应当能看到 `/mnt`、`/mnt/boot`、`/mnt/nix`、`/mnt/persistent`、`/mnt/snapshots`、`/mnt/swap` 和 `/mnt/btr_pool`。
 
 ---
 

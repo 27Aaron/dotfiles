@@ -1,10 +1,17 @@
 {pkgs, ...}: {
   imports = [
-    ./disko.nix
     ./hardware.nix
   ];
 
   core'.timeZone = "Asia/Singapore";
+
+  hardware'.disko = {
+    enable = true;
+    device = "/dev/disk/by-id/nvme-CT1000P3PSSD8_24364AD5D8E0";
+    espSize = "1G";
+    swapSize = "32769M";
+    luks.enable = true;
+  };
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
