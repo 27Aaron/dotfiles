@@ -33,6 +33,10 @@
     "/etc/ssh"
 
     # vnStat
-    "/var/lib/vnstat"
+    {
+      directory = "/var/lib/vnstat";
+      user = "vnstatd";
+      group = "vnstatd";
+    }
   ];
 }
