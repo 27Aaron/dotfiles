@@ -5,18 +5,12 @@
 }: {
   environment.systemPackages = with pkgs; [
     alejandra
-    comma
     deadnix
     nixd
-    nix-output-monitor
-    nix-prefetch-github
-    nix-prefetch-git
-    nix-tree
-    nurl
-    nvd
   ];
 
   nix = {
+    # remove nix-channel related tools & configs, we use flakes instead.
     channel.enable = false;
 
     gc = {
@@ -30,10 +24,6 @@
       experimental-features = [
         "nix-command"
         "flakes"
-      ];
-      substituters = ["https://cache.garnix.io"];
-      trusted-public-keys = [
-        "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
       ];
       builders-use-substitutes = true;
     };
