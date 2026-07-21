@@ -27,5 +27,9 @@
 
     # Telegram
     ".local/share/AyuGramDesktop"
+
+    # Visual Studio Code
+    ".config/Code"
+    ".vscode"
   ];
 }
