@@ -7,6 +7,10 @@
     # Atuin
     ".local/share/atuin"
 
+    # Fcitx5
+    ".config/fcitx5"
+    ".local/share/fcitx5"
+
     # Fish
     ".cache/fish"
     ".config/fish"
