@@ -1,5 +1,9 @@
 {
   preservation'.user.directories = [
+    # AI assistants
+    ".codex"
+    ".claude"
+
     # Atuin
     ".local/share/atuin"
 
