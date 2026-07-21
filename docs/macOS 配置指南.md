@@ -1,334 +1,115 @@
 # macOS 配置指南
 
-本文档详细介绍如何在全新 macOS 系统上从零配置开发环境。基于 **nix-darwin** 实现声明式系统管理，Homebrew 应用由 Nix 统一托管。
+本文档介绍如何在全新 macOS 系统上安装 Homebrew 和 Lix，并使用本仓库的 Flake 初始化 nix-darwin。
 
-## 目录
+> [!WARNING]
+> **[unstable] `x86_64-darwin` 平台即将停止支持**
+>
+> 受开发精力和构建资源限制，Nixpkgs 26.05 将是最后一个支持 Intel Mac（`x86_64-darwin`）的版本。随着 [`release: stop building for x86_64-darwin`](https://github.com/NixOS/nixpkgs/pull/493096) 合入，Nixpkgs 26.11 和 unstable 将不再为该平台构建二进制包，也不再支持从源码构建。
+>
+> Intel Mac 用户应暂时固定在 Nixpkgs 26.05，并尽快迁移到 Apple Silicon 或其他受支持的平台。`allowDeprecatedx86_64Darwin` 只能隐藏弃用警告，不能恢复 unstable 的平台支持，也不建议长期自行维护整套软件包构建。
+>
+> Homebrew 预计不早于 2026 年 9 月将 Intel Mac 降为 Tier 3，并在 2027 年 9 月后完全停止支持。按照 Nixpkgs 26.05 发布说明采用的时间线，macOS 26 的安全更新预计也将在 2028 年结束。
 
-- [环境准备](#环境准备)
-  - [安装 Homebrew](#安装-homebrew)
-  - [安装 Nix (Lix)](#安装-nix-lix)
-- [初始化 nix-darwin](#初始化-nix-darwin)
-  - [克隆配置仓库](#克隆配置仓库)
-  - [修改主机配置](#修改主机配置)
-  - [迁移前备份（重要）](#迁移前备份重要)
-  - [首次构建](#首次构建)
-  - [配置 Fish 为默认 Shell (可选)](#配置-fish-为默认-shell-可选)
-- [后续配置](#后续配置)
-- [软件配置](#软件配置)
-- [系统配置](#系统配置)
-- [应用管理](#应用管理)
-- [卸载](#卸载)
-
----
+当前 Darwin 主机配置使用 `aarch64-darwin`，适用于 Apple Silicon Mac，不受上述变更影响。
 
 ## 环境准备
 
 ### 安装 Homebrew
 
-Homebrew 是 macOS 的包管理器，是后续安装的基础依赖。
+nix-darwin 的 Homebrew 模块只负责管理软件，不会安装 Homebrew 本身：
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-安装完成后，按提示将 Homebrew 加入 PATH：
-
-```bash
-(echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zprofile
-eval "$(/opt/homebrew/bin/brew shellenv)"
-```
-
-验证安装：
+安装完成后，按照安装程序输出的提示配置 `brew shellenv`，然后确认命令可用：
 
 ```bash
 brew --version
 ```
 
-### 安装 Nix (Lix)
-
-Lix 是 Nix 的高性能兼容分支，nix-darwin 的基础。
+### 安装 Lix
 
 ```bash
 curl -sSf -L https://install.lix.systems/lix | sh -s -- install
 ```
 
-安装完成后，重新加载 shell 或重启终端使 PATH 生效。
-
-验证安装：
+重新打开终端，然后确认 Lix 已生效：
 
 ```bash
 nix --version
 ```
 
----
+## 准备配置
+
+克隆仓库并进入仓库根目录：
+
+```bash
+git clone https://github.com/27Aaron/Dotfiles.git ~/Dotfiles
+cd ~/Dotfiles
+```
+
+主机目录名必须与 `hostname -s` 的结果一致。仓库默认主机名为 `luna`；如果当前主机名不同，请重命名目录：
+
+```bash
+host_name="$(hostname -s)"
+mv hosts/darwin/luna "hosts/darwin/$host_name"
+```
+
+检查以下配置：
+
+- `vars/default.nix`：用户名、Git 姓名、邮箱、时区和状态版本
+- `hosts/darwin/<主机名>/default.nix`：目标平台
+- `modules/darwin/services/homebrew.nix`：Homebrew 软件清单
+
+> [!CAUTION]
+> 当前配置使用 `homebrew.onActivation.cleanup = "zap"`。首次构建会卸载所有未在配置中声明的 Homebrew 软件，并删除 Cask 的关联文件。
+
+如果系统中已经安装了 Homebrew 软件，请先导出清单：
+
+```bash
+brew bundle dump --describe --force --file="$HOME/Desktop/Brewfile"
+```
+
+根据导出的 Brewfile 更新 `modules/darwin/services/homebrew.nix` 后再继续。
 
 ## 初始化 nix-darwin
 
-### 克隆配置仓库
-
-将 dotfiles 仓库克隆到本地：
+在仓库根目录执行：
 
 ```bash
-git clone --branch main https://github.com/27Aaron/dotfiles.git ~/dotfiles
-cd ~/dotfiles
+sudo nix run nix-darwin/master#darwin-rebuild -- \
+  switch --flake "path:.#$(hostname -s)"
 ```
 
-### 修改主机配置
+首次构建会应用 nix-darwin、Home Manager、Homebrew、系统偏好设置和 Touch ID sudo 配置。完成后重新打开终端。
 
-仓库中默认的 Darwin 主机名为 `luna`。`hosts/default.nix` 会自动发现主机目录；如果需要使用其他主机名，只需重命名对应目录：
+## 后续维护
+
+仓库中的 `justfile` 提供以下命令：
 
 ```bash
-# 示例：将 luna 改为当前主机名
-mv hosts/darwin/luna "hosts/darwin/$(hostname -s)"
+just switch  # 构建并应用当前主机配置
+just check   # 检查格式、未使用声明和 Flake 求值
+just update  # 更新 flake.lock
+just gc      # 清理 7 天前的旧 generation 及无引用 Store 路径
 ```
 
-共享的用户名、Git 姓名和邮箱位于 `vars/default.nix`，请在首次构建前按需修改。
-
-> 获取主机名：`hostname -s`
-> 获取用户名：`whoami`
-
-### 迁移前备份（重要）
-
-> ⚠️ **首次 `darwin-rebuild switch` 会清理未声明的 Homebrew 应用。**
-> `modules/darwin/services/homebrew.nix` 中 `cleanup = "zap"` 会在构建时卸载所有不在列表中的已安装应用。
-
-如果当前系统已有 Homebrew 安装的应用，**先执行备份，再配置列表，然后才能首次构建**：
-
-```bash
-# 1. 导出当前所有应用为 Brewfile（备份）
-brew bundle dump --describe --force --file="~/Desktop/Brewfile"
-
-# 2. 查看已安装的应用列表
-brew bundle list --formula --file="~/Desktop/Brewfile"
-brew bundle list --cask --file="~/Desktop/Brewfile"
-```
-
-备份完成后，编辑 `modules/darwin/services/homebrew.nix`，将已有应用逐条加入 `brews` 或 `casks` 列表。
-
-### 首次构建
-
-nix-darwin 没有独立的安装程序，初始构建需要通过 `nix run` 拉取并执行。**构建完成后，fish 已通过 home-manager 自动配置完毕，无需额外操作**：
-
-```bash
-sudo nix run nix-darwin/master#darwin-rebuild -- switch --flake "path:.#$(hostname -s)"
-```
-
-构建过程会自动完成：
-
-- 安装 nix-darwin 服务
-- 配置 Nix store 路径
-- 安装并配置 Homebrew 应用（通过 homebrew module）
-- 应用系统默认配置（dock、finder、键盘等）
-- 设置 TouchID sudo 认证
-
-**重启终端**使所有配置生效。
-
-### 配置 Fish 为默认 Shell (可选)
-
-home-manager 安装了 fish，但默认 shell 的切换需要手动完成：
-
-```bash
-# 将 fish 添加到系统允许的 shells 列表
-sudo sh -c 'echo /run/current-system/sw/bin/fish >> /etc/shells'
-
-# 设置 fish 为默认 shell
-chsh -s /run/current-system/sw/bin/fish
-```
-
-重新登录或重启终端使配置生效。
-
-验证：
-
-```bash
-echo $SHELL
-# 应输出: /run/current-system/sw/bin/fish
-```
-
----
-
-## 后续配置
-
-首次构建后，通过修改对应配置文件并重新构建来管理配置：
-
-```bash
-# 重新构建生效（推荐方式）
-just switch
-
-# 或手动执行 darwin-rebuild
-sudo darwin-rebuild switch --flake "path:.#$(hostname -s)"
-```
-
-常用配置路径：
-
-- 系统配置：`modules/darwin/system/defaults.nix`
-- Homebrew 应用：`modules/darwin/services/homebrew.nix`
-- 共享用户配置：`home/common/`
-- Darwin 用户配置：`home/darwin/`
-
----
-
-## 软件配置
-
-`home/default.nix` 是 **Home Manager** 的统一入口，会自动发现 `home/common/` 下的共享模块，并根据当前平台加载 `home/darwin/` 或 `home/nixos/` 下的专用模块。新增模块时无需手动修改 `imports`。
-
-### Git 配置
-
-编辑 `vars/default.nix`，修改以下内容为你的信息：
-
-```nix
-{
-  username = "你的用户名";
-  fullName = "你的名字";
-  email = "your.email@example.com";
-  # ... 其他变量
-}
-```
-
-重新构建使配置生效：
-
-```bash
-just switch
-```
-
-### 搜索 Home Manager 选项
-
-第三方 Home Manager 选项搜索：https://home-manager-options.extranix.com/
-
-### nix-darwin 参考文档
-
-- 在线文档：https://nix-darwin.github.io/nix-darwin/manual/index.html
-- 本地查看：`darwin-help`
-- man 手册：`man 5 configuration.nix`
-
----
-
-## 系统配置
-
-`modules/darwin/system/defaults.nix` 包含 macOS 系统级配置（由 nix-darwin 托管）。
-
-### 常用配置项
-
-| 配置类别 | 说明                           | 参考来源                     |
-| -------- | ------------------------------ | ---------------------------- |
-| Dock     | 自动隐藏、禁用最近应用、触发角 | `modules/darwin/system/defaults.nix` |
-| Finder   | 显示完整路径、显示所有扩展名   | `modules/darwin/system/defaults.nix` |
-| 键盘     | 键重复速率、自动大写、智能替换 | `modules/darwin/system/defaults.nix` |
-| 触摸板   | 点击、三指拖动                 | 需手动取消注释相关配置       |
-| 外观     | 深色模式、24小时制时钟         | `modules/darwin/system/defaults.nix` |
-
-### 自定义系统配置
-
-macOS `defaults` 命令参考：https://macos-defaults.com/
-
-所有支持选项均可通过编辑 `modules/darwin/system/defaults.nix` 中的 `system.defaults` 和 `CustomUserPreferences` 部分声明。
-
-重新应用系统配置：
-
-```bash
-just switch
-```
-
----
-
-## 应用管理
-
-Homebrew 安装的应用通过 Nix 的 homebrew module 统一管理，配置位于 `modules/darwin/services/homebrew.nix`。
-
-### 常用操作
-
-```bash
-# 查看当前已安装的 Homebrew 应用
-brew list
-brew list --cask
-
-# 添加新应用
-# 1. 编辑 modules/darwin/services/homebrew.nix，在 brews 或 casks 列表中添加条目
-# 2. 重新构建
-just switch
-
-# 升级所有应用
-brew upgrade
-```
-
-### 配置文件结构说明
-
-```nix
-{
-  homebrew = {
-    enable = true;
-    onActivation = {
-      autoUpdate = true;  # 自动更新 Homebrew
-      upgrade = true;    # 升级过时应用
-      cleanup = "zap";   # 清理未收录应用
-    };
-
-    brews = [
-      # 通过 `brew install` 安装的命令行工具
-      "git"
-      "neovim"
-      "fzf"
-      # ...
-    ];
-
-    casks = [
-      # 通过 `brew install --cask` 安装的 GUI 应用
-      "visual-studio-code"
-      "karabiner-elements"
-      # ...
-    ];
-
-    masApps = {
-      # Mac App Store 应用（需先在 App Store 登录）
-      "Bob" = 1630034110;
-    };
-  };
-}
-```
-
----
-
-## 卸载
-
-### 卸载 nix-darwin
-
-```bash
-# 使用官方卸载脚本
-sudo nix --extra-experimental-features "nix-command flakes" run nix-darwin#darwin-uninstaller
-
-# 或使用本地安装的卸载器
-sudo darwin-uninstaller
-```
-
-### 卸载 Nix
-
-> ⚠️ 卸载 Nix 会移除所有通过 Nix 安装的包和配置，**此操作不可逆**。
-
-```bash
-# 移除 Nix 相关目录和文件
-rm -rf ~/.nix-defender ~/.nix-memos ~/.nix-profile ~/.nix-shell ~/.config/nixpkgs ~/.config/nix
-
-# 移除系统级 Nix 文件
-sudo rm -rf /nix \
-  /Library/LaunchDaemons/org.nixos.nixd.plist \
-  /Library/LaunchDaemons/org.nixos.nix-daemon.plist \
-  /etc/profile/nix.sh \
-  /etc/profile.d/nix.sh
-```
-
-### 卸载 Homebrew
-
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
-```
-
----
-
-## 日常维护
-
-```bash
-# 更新所有依赖并重新构建
-just switch
-
-# 单独升级 Homebrew 应用
-brew upgrade && brew cleanup
-```
+新增的 `.nix` 文件会由入口模块自动发现。常用配置目录如下：
+
+- `home/common/`：跨平台 Home Manager 配置
+- `home/darwin/`：macOS 专用 Home Manager 配置
+- `modules/common/`：跨平台系统模块
+- `modules/darwin/`：nix-darwin 系统模块
+
+## 参考资料
+
+- [Homebrew 安装文档](https://docs.brew.sh/Installation)
+- [Homebrew 支持等级](https://docs.brew.sh/Support-Tiers)
+- [Lix 安装文档](https://lix.systems/install/)
+- [Nixpkgs 26.05 发布说明](https://nixos.org/manual/nixpkgs/unstable/release-notes#x86_64-darwin-26.05)
+- [Nixpkgs 停止构建 `x86_64-darwin`](https://github.com/NixOS/nixpkgs/pull/493096)
+- [nix-darwin 使用说明](https://github.com/nix-darwin/nix-darwin)
+- [nix-darwin 配置选项](https://nix-darwin.github.io/nix-darwin/manual/)
+- [Home Manager 配置选项](https://home-manager-options.extranix.com/)

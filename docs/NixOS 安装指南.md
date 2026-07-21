@@ -1,13 +1,13 @@
 # NixOS 安装指南
 
-本文档介绍如何从 NixOS 安装介质启动，使用 [Disko](https://github.com/nix-community/disko) 完成磁盘分区和格式化，然后使用 Flake 安装系统。
+本文档介绍如何从 NixOS 安装介质启动，使用独立的 Disko 配置创建文件系统，并通过本仓库的 Flake 安装 `elaina`。
 
 > [!CAUTION]
-> Disko 会清空目标磁盘上的所有分区和数据。请先备份数据，并确认选择了正确的磁盘。
+> Disko 会清空目标磁盘上的所有分区和数据。执行前请备份数据，并再次确认目标磁盘。
 
 ## Disko 配置
 
-将其保存为 `disko.nix`，确认磁盘路径后直接交给 Disko 执行。
+将以下内容保存为 `disko.nix`。这是一份可以独立使用的安装配置，同时也作为当前磁盘布局的备份。
 
 ```nix
 {...}: {
@@ -15,16 +15,16 @@
     nodev."/" = {
       fsType = "tmpfs";
       mountOptions = [
-        "defaults"
-        "size=4G"
         "mode=755"
+        "nodev"
+        "nosuid"
+        "relatime"
+        "size=4G"
       ];
     };
 
     disk.main = {
       type = "disk";
-
-      # 替换为实际的磁盘路径。
       device = "/dev/disk/by-id/nvme-CT1000P3PSSD8_24364AD5D8E0";
 
       content = {
@@ -37,11 +37,11 @@
             content = {
               type = "filesystem";
               format = "vfat";
+              mountpoint = "/boot";
               extraArgs = [
                 "-n"
                 "BOOT"
               ];
-              mountpoint = "/boot";
               mountOptions = ["umask=0077"];
             };
           };
@@ -49,17 +49,21 @@
           luks = {
             priority = 2;
             size = "100%";
+            type = "8309";
             content = {
               type = "luks";
               name = "crypted";
               askPassword = true;
               initrdUnlock = true;
-
               settings = {
                 allowDiscards = true;
                 bypassWorkqueues = true;
+                crypttabExtraOpts = [
+                  "same-cpu-crypt"
+                  "submit-from-crypt-cpus"
+                  "token-timeout=10"
+                ];
               };
-
               extraFormatArgs = [
                 "--type"
                 "luks2"
@@ -71,14 +75,15 @@
                 type = "btrfs";
                 extraArgs = [
                   "-f"
+                  "--csum"
+                  "xxhash64"
                   "--label"
                   "NixOS"
                 ];
-
                 mountpoint = "/btr_pool";
                 mountOptions = [
-                  "subvolid=5"
                   "noatime"
+                  "subvolid=5"
                 ];
 
                 subvolumes = {
@@ -86,8 +91,8 @@
                     mountpoint = "/nix";
                     mountOptions = [
                       "compress-force=zstd:1"
-                      "noatime"
                       "discard=async"
+                      "noatime"
                     ];
                   };
 
@@ -95,8 +100,8 @@
                     mountpoint = "/persistent";
                     mountOptions = [
                       "compress-force=zstd:1"
-                      "noatime"
                       "discard=async"
+                      "noatime"
                     ];
                   };
 
@@ -104,8 +109,8 @@
                     mountpoint = "/snapshots";
                     mountOptions = [
                       "compress-force=zstd:1"
-                      "noatime"
                       "discard=async"
+                      "noatime"
                     ];
                   };
 
@@ -124,74 +129,70 @@
 }
 ```
 
----
+安装前确认配置中的 `device` 与目标磁盘一致：
+
+```bash
+lsblk -o NAME,PATH,SIZE,MODEL,SERIAL
+ls -l /dev/disk/by-id/
+```
 
 ## 使用 Disko 安装文件系统
 
-再次检查主机配置中的 `hardware'.disko.device`，然后从 Flake 的 NixOS 配置执行：
-
-以下命令需要在配置仓库根目录执行；`.#elaina` 表示当前目录中的 `elaina` Flake 配置。
+进入 `disko.nix` 所在目录并执行：
 
 ```bash
 sudo nix --experimental-features "nix-command flakes" \
   run github:nix-community/disko/latest -- \
-  --mode destroy,format,mount --flake .#elaina
+  --mode destroy,format,mount ./disko.nix
 ```
 
-Disko 会请求确认清空磁盘，并交互式询问 LUKS 密码。
-
-> [!NOTE]
-> 旧版 Disko 使用 `--mode disko`，当前对应的模式是 `--mode destroy,format,mount`。
-
-验证挂载结果：
+Disko 会要求确认清空磁盘，并交互式询问 LUKS 密码。完成后确认文件系统已经挂载到 `/mnt`：
 
 ```bash
 findmnt -R /mnt
 lsblk -f
 ```
 
-应当能看到 `/mnt`、`/mnt/boot`、`/mnt/nix`、`/mnt/persistent`、`/mnt/snapshots`、`/mnt/swap` 和 `/mnt/btr_pool`。
-
----
-
 ## 生成配置并安装系统
 
-生成硬件配置。文件系统已由 Disko 定义，因此使用 `--no-filesystems`：
+克隆仓库并进入仓库根目录：
+
+```bash
+git clone https://github.com/27Aaron/Dotfiles.git ~/Dotfiles
+cd ~/Dotfiles
+```
+
+生成不包含文件系统定义的硬件配置：
 
 ```bash
 sudo nixos-generate-config --no-filesystems --root /mnt
 ```
 
-安装系统：
+检查 `/mnt/etc/nixos/hardware-configuration.nix`，将仍然需要的硬件探测结果合并到 `hosts/nixos/elaina/hardware.nix`，不要覆盖已有的 Disko 和引导配置。
+
+确认 `vars/default.nix` 中的用户名、密码哈希、SSH 公钥、时区和状态版本正确，然后安装系统：
 
 ```bash
 sudo nixos-install \
   --root /mnt \
   --flake .#elaina \
-  --no-root-password \
-  --show-trace \
-  --verbose
+  --no-root-password
 ```
 
-`--no-root-password` 不会为 root 设置密码。请确保 Flake 中已经配置一个可登录的普通用户。
-
-安装完成后重启：
+安装完成后重启并拔出安装介质：
 
 ```bash
-sync
 sudo reboot
 ```
 
-拔出安装介质。启动时输入 LUKS 密码，然后登录系统。
+启动时输入 LUKS 密码，然后使用 `vars/default.nix` 中配置的账户登录。
 
 > [!IMPORTANT]
-> 根文件系统使用 tmpfs，未声明持久化的数据会在重启后消失。`modules/default.nix` 会自动发现 `modules/nixos/persistent/` 中的目录与文件配置，使用 Preservation 将必要的状态保存到 `/persistent`。
-
----
+> 根文件系统使用 tmpfs。只有 `modules/nixos/persistent/` 中声明的目录和文件会保存在 `/persistent`，其余内容会在重启后消失。
 
 ## 参考资料
 
-- [Disko 项目](https://github.com/nix-community/disko)
+- [Disko](https://github.com/nix-community/disko)
 - [Disko Quickstart](https://github.com/nix-community/disko/blob/master/docs/quickstart.md)
-- [Disko 官方示例](https://github.com/nix-community/disko/tree/master/example)
-- [Preservation 项目](https://github.com/nix-community/preservation)
+- [Disko 示例](https://github.com/nix-community/disko/tree/master/example)
+- [Preservation](https://github.com/nix-community/preservation)
