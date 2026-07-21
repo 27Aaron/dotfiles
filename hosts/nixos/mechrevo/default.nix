@@ -7,17 +7,6 @@
     ./hardware.nix
   ];
 
-  hardware'.disko = {
-    enable = true;
-    device = "/dev/nvme0n1";
-    espSize = "1G";
-    swapSize = "32769M";
-    luks.enable = true;
-  };
-
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
   networking.networkmanager.enable = true;
 
   i18n.defaultLocale = "en_US.UTF-8";
@@ -42,7 +31,7 @@
 
   services.openssh.enable = true;
 
-  networking.firewall.enable = false;
+  security'.firewall.enable = true;
 
   system.stateVersion = myvars.stateVersion;
 }

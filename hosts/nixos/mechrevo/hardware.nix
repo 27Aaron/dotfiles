@@ -15,6 +15,19 @@
   boot.extraModulePackages = [];
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+  };
+
+  hardware'.disko = {
+    enable = true;
+    device = "/dev/nvme0n1";
+    espSize = "1G";
+    swapSize = "32769M";
+    luks.enable = true;
+  };
+
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
