@@ -1,15 +1,13 @@
-{pkgs, ...}: {
+{...}: {
   imports = [
     ./hardware.nix
   ];
 
-  networking.networkmanager.enable = true;
-
-  environment.systemPackages = with pkgs; [
-    vim
-  ];
-
-  services.openssh.enable = true;
+  services' = {
+    networkmanager.enable = true;
+    openssh.enable = true;
+    vnstat.enable = true;
+  };
 
   security'.firewall.enable = true;
 }

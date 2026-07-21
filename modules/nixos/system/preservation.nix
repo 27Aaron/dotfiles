@@ -44,11 +44,6 @@ in {
           user = user;
           group = "users";
         }
-        {
-          directory = "/etc/NetworkManager/system-connections";
-          mode = "0700";
-        }
-        "/var/lib/NetworkManager"
         "/var/lib/bluetooth"
         "/var/lib/fwupd"
         {
@@ -84,10 +79,6 @@ in {
         ".config"
         ".local/share"
         ".local/state"
-        {
-          directory = ".ssh";
-          mode = "0700";
-        }
       ];
     };
   };
