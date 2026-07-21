@@ -3,5 +3,5 @@
     (builtins.filter (path: path != ./default.nix && lib.hasSuffix ".nix" (toString path)))
   ];
 in {
-  imports = [../base] ++ modules;
+  imports = [../common] ++ modules;
 }
