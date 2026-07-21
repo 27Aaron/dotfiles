@@ -7,21 +7,19 @@
   platforms = {
     darwin = {
       builder = inputs.nix-darwin.lib.darwinSystem;
-      homeModule = ../home/darwin;
       systemModule = ../modules/darwin;
       homeManagerModule = inputs.home-manager.darwinModules.home-manager;
     };
 
     nixos = {
       builder = lib.nixosSystem;
-      homeModule = ../home/nixos;
       systemModule = ../modules/nixos;
       homeManagerModule = inputs.home-manager.nixosModules.home-manager;
     };
   };
 
   mkHost = platformName: platform: hostName: _: let
-    specialArgs = {inherit inputs myvars hostName;};
+    specialArgs = {inherit inputs myvars hostName platformName;};
   in
     platform.builder {
       inherit specialArgs;
@@ -35,7 +33,7 @@
             useUserPackages = true;
             backupFileExtension = "hm-bak";
             extraSpecialArgs = specialArgs;
-            users.${myvars.username}.imports = [platform.homeModule];
+            users.${myvars.username}.imports = [../home];
           };
         }
         (./. + "/${platformName}/${hostName}")

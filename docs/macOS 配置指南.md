@@ -169,7 +169,7 @@ sudo darwin-rebuild switch --flake "path:.#$(hostname -s)"
 
 ## 软件配置
 
-`home/common/` 下的配置由 **Home Manager** 管理，Darwin 入口 `home/darwin/default.nix` 会导入公共配置和 macOS 专用配置。`home/common/default.nix` 会自动发现同目录下的 `.nix` 文件和包含 `default.nix` 的子目录，新增公共模块时无需手动修改 `imports`。
+`home/default.nix` 是 **Home Manager** 的统一入口，会自动发现 `home/common/` 下的共享模块，并根据当前平台加载 `home/darwin/` 或 `home/nixos/` 下的专用模块。新增模块时无需手动修改 `imports`。
 
 ### Git 配置
 
