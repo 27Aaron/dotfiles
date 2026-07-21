@@ -41,8 +41,8 @@
   in
     configurations
     // {
-      darwinModules.default = import ./modules/darwin;
-      nixosModules.default = import ./modules/nixos;
+      darwinModules.default = import ./modules "darwin";
+      nixosModules.default = import ./modules "nixos";
 
       formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.alejandra);
     };

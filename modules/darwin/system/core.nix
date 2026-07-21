@@ -7,7 +7,10 @@
 
   time.timeZone = myvars.timeZone;
 
-  system.primaryUser = myvars.username;
+  system = {
+    primaryUser = myvars.username;
+    stateVersion = 6;
+  };
 
   users.users.${myvars.username}.home = "/Users/${myvars.username}";
 

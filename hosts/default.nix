@@ -7,13 +7,11 @@
   platforms = {
     darwin = {
       builder = inputs.nix-darwin.lib.darwinSystem;
-      systemModule = ../modules/darwin;
       homeManagerModule = inputs.home-manager.darwinModules.home-manager;
     };
 
     nixos = {
       builder = lib.nixosSystem;
-      systemModule = ../modules/nixos;
       homeManagerModule = inputs.home-manager.nixosModules.home-manager;
     };
   };
@@ -25,7 +23,7 @@
       inherit specialArgs;
 
       modules = [
-        platform.systemModule
+        (import ../modules platformName)
         platform.homeManagerModule
         {
           home-manager = {
