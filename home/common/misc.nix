@@ -5,6 +5,8 @@
 }: {
   home.packages = lib.mkAfter (with pkgs; [
     # Development
+    claude-code
+    codex
     gh
     just
     lazygit
