@@ -13,7 +13,7 @@ Declarative macOS and NixOS configuration powered by [nix-darwin](https://github
 - `home/nixos/`: NixOS-specific Home Manager entry point
 - `modules/base/`: system-level Nix configuration shared by Darwin and NixOS
 - `modules/darwin/`: macOS-specific system defaults, applications, and integrations
-- `modules/nixos/`: NixOS base configuration and shared features
+- `modules/nixos/`: NixOS configuration grouped by hardware, security, and system domains
 
 ## Getting Started
 

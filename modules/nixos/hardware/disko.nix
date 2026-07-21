@@ -4,7 +4,7 @@
   lib,
   ...
 }: let
-  cfg = config.dotfiles.disko;
+  cfg = config.hardware'.disko;
 
   btrfsSubvolumes =
     {
@@ -44,7 +44,7 @@
 in {
   imports = [inputs.disko.nixosModules.disko];
 
-  options.dotfiles.disko = {
+  options.hardware'.disko = {
     enable = lib.mkEnableOption "Disko disk management";
 
     device = lib.mkOption {

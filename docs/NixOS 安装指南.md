@@ -36,13 +36,13 @@ ls -l /dev/disk/by-id/
 
 ## 创建 Disko 配置
 
-公共磁盘布局位于 `modules/nixos/features/disko-btrfs.nix`，由 `modules/nixos/default.nix` 自动发现。主机只需指定磁盘路径、swap 大小以及是否启用 LUKS，例如 `hosts/nixos/mechrevo/default.nix`：
+公共磁盘布局位于 `modules/nixos/hardware/disko.nix`，由 `modules/nixos/default.nix` 自动发现。主机只需指定磁盘路径、swap 大小以及是否启用 LUKS，例如 `hosts/nixos/mechrevo/default.nix`：
 
 > [!IMPORTANT]
 > 执行前必须把 `device` 替换为实际的目标磁盘路径。
 
 ```nix
-dotfiles.disko = {
+hardware'.disko = {
   enable = true;
   device = "/dev/disk/by-id/nvme-CT1000P3PSSD8_24364AD5D8E0";
   espSize = "1G";
@@ -174,7 +174,7 @@ dotfiles.disko = {
 
 ## 使用 Disko 安装文件系统
 
-再次检查主机配置中的 `dotfiles.disko.device`，然后从 Flake 的 NixOS 配置执行：
+再次检查主机配置中的 `hardware'.disko.device`，然后从 Flake 的 NixOS 配置执行：
 
 ```bash
 sudo nix --experimental-features "nix-command flakes" \
@@ -237,7 +237,7 @@ sudo reboot
 拔出安装介质。启动时输入 LUKS 密码，然后登录系统。
 
 > [!IMPORTANT]
-> 根文件系统使用 tmpfs，未声明持久化的数据会在重启后消失。`modules/nixos/default.nix` 会自动发现 `modules/nixos/features/persistence.nix`，使用 Preservation 将必要的系统状态和用户目录保存到 `/persistent`。
+> 根文件系统使用 tmpfs，未声明持久化的数据会在重启后消失。`modules/nixos/default.nix` 会自动发现 `modules/nixos/system/preservation.nix`，使用 Preservation 将必要的系统状态和用户目录保存到 `/persistent`。
 
 ---
 
