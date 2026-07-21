@@ -24,15 +24,5 @@ in {
     # Add terminfo database of all known terminals to the system profile.
     # https://github.com/NixOS/nixpkgs/blob/nixos-25.05/nixos/modules/config/terminfo.nix
     environment.enableAllTerminfo = lib.mkDefault true;
-
-    preservation' = {
-      os.directories = ["/etc/ssh"];
-      user.directories = [
-        {
-          directory = ".ssh";
-          mode = "0700";
-        }
-      ];
-    };
   };
 }

@@ -15,13 +15,5 @@ in {
     networking.networkmanager.enable = lib.mkDefault true;
 
     users.users.${user}.extraGroups = ["networkmanager"];
-
-    preservation'.os.directories = [
-      {
-        directory = "/etc/NetworkManager/system-connections";
-        mode = "0700";
-      }
-      "/var/lib/NetworkManager"
-    ];
   };
 }

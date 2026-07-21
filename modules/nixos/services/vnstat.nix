@@ -11,7 +11,5 @@ in {
 
   config = lib.mkIf cfg.enable {
     services.vnstat.enable = lib.mkDefault true;
-
-    preservation'.os.directories = ["/var/lib/vnstat"];
   };
 }
