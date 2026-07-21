@@ -26,11 +26,14 @@
     # System Monitor
     btop
     fastfetch
+    htop
+    nload
 
     # Media
     ffmpeg
 
     # Network
+    iperf3
     nmap
     socat
   ]);
