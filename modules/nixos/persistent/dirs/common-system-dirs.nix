@@ -32,6 +32,13 @@
     "/var/lib/systemd"
     "/var/log"
 
+    # Tuigreet
+    {
+      directory = "/var/cache/tuigreet";
+      user = "greeter";
+      group = "greeter";
+    }
+
     # vnStat
     {
       directory = "/var/lib/vnstat";

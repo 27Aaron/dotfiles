@@ -19,6 +19,9 @@
     ".config/fish"
     ".local/share/fish"
 
+    # Niri
+    ".config/niri"
+
     # Nix and Home Manager
     ".cache/nix"
     ".local/share/nix"

@@ -7,6 +7,7 @@
     cursors.enable = true;
     fcitx5.enable = true;
     fonts.enable = true;
+    niri.enable = true;
   };
 
   services' = {
