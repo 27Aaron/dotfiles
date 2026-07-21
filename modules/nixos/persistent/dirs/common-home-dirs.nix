@@ -47,6 +47,14 @@
     # Niri
     ".config/niri"
 
+    # Noctalia
+    ".config/noctalia"
+    {
+      directory = ".local/state/noctalia";
+      mode = "0700";
+    }
+    ".local/share/noctalia"
+
     # Nix and Home Manager
     ".cache/nix"
     ".local/share/nix"
