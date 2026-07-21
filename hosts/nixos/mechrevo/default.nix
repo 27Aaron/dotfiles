@@ -44,5 +44,5 @@
 
   networking.firewall.enable = false;
 
-  system.stateVersion = "26.11";
+  system.stateVersion = myvars.stateVersion;
 }

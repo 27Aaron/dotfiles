@@ -19,7 +19,7 @@ in {
 
   home = {
     username = myvars.username;
-    stateVersion = myvars.homeStateVersion;
+    stateVersion = myvars.stateVersion;
   };
 
   programs = {
