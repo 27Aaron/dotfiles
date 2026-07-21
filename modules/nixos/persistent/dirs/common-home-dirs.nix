@@ -11,6 +11,9 @@
     ".config/fcitx5"
     ".local/share/fcitx5"
 
+    # Firefox
+    ".mozilla"
+
     # Fish
     ".cache/fish"
     ".config/fish"
