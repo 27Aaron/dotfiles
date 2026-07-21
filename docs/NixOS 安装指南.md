@@ -183,7 +183,7 @@ sudo reboot
 拔出安装介质。启动时输入 LUKS 密码，然后登录系统。
 
 > [!IMPORTANT]
-> 根文件系统使用 tmpfs，未声明持久化的数据会在重启后消失。`modules/nixos/default.nix` 会自动发现 `modules/nixos/system/preservation.nix`，使用 Preservation 将必要的系统状态和用户目录保存到 `/persistent`。
+> 根文件系统使用 tmpfs，未声明持久化的数据会在重启后消失。`modules/default.nix` 会自动发现 `modules/nixos/system/preservation.nix`，使用 Preservation 将必要的系统状态和用户目录保存到 `/persistent`。
 
 ---
 

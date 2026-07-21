@@ -90,7 +90,7 @@ mv hosts/darwin/luna "hosts/darwin/$(hostname -s)"
 ### 迁移前备份（重要）
 
 > ⚠️ **首次 `darwin-rebuild switch` 会清理未声明的 Homebrew 应用。**
-> `modules/darwin/homebrew.nix` 中 `cleanup = "zap"` 会在构建时卸载所有不在列表中的已安装应用。
+> `modules/darwin/services/homebrew.nix` 中 `cleanup = "zap"` 会在构建时卸载所有不在列表中的已安装应用。
 
 如果当前系统已有 Homebrew 安装的应用，**先执行备份，再配置列表，然后才能首次构建**：
 
@@ -103,7 +103,7 @@ brew bundle list --formula --file="~/Desktop/Brewfile"
 brew bundle list --cask --file="~/Desktop/Brewfile"
 ```
 
-备份完成后，编辑 `modules/darwin/homebrew.nix`，将已有应用逐条加入 `brews` 或 `casks` 列表。
+备份完成后，编辑 `modules/darwin/services/homebrew.nix`，将已有应用逐条加入 `brews` 或 `casks` 列表。
 
 ### 首次构建
 
@@ -160,8 +160,8 @@ sudo darwin-rebuild switch --flake "path:.#$(hostname -s)"
 
 常用配置路径：
 
-- 系统配置：`modules/darwin/system.nix`
-- Homebrew 应用：`modules/darwin/homebrew.nix`
+- 系统配置：`modules/darwin/system/defaults.nix`
+- Homebrew 应用：`modules/darwin/services/homebrew.nix`
 - 共享用户配置：`home/common/`
 - Darwin 用户配置：`home/darwin/`
 
@@ -204,23 +204,23 @@ just switch
 
 ## 系统配置
 
-`modules/darwin/system.nix` 包含 macOS 系统级配置（由 nix-darwin 托管）。
+`modules/darwin/system/defaults.nix` 包含 macOS 系统级配置（由 nix-darwin 托管）。
 
 ### 常用配置项
 
 | 配置类别 | 说明                           | 参考来源                     |
 | -------- | ------------------------------ | ---------------------------- |
-| Dock     | 自动隐藏、禁用最近应用、触发角 | `modules/darwin/system.nix` |
-| Finder   | 显示完整路径、显示所有扩展名   | `modules/darwin/system.nix` |
-| 键盘     | 键重复速率、自动大写、智能替换 | `modules/darwin/system.nix` |
+| Dock     | 自动隐藏、禁用最近应用、触发角 | `modules/darwin/system/defaults.nix` |
+| Finder   | 显示完整路径、显示所有扩展名   | `modules/darwin/system/defaults.nix` |
+| 键盘     | 键重复速率、自动大写、智能替换 | `modules/darwin/system/defaults.nix` |
 | 触摸板   | 点击、三指拖动                 | 需手动取消注释相关配置       |
-| 外观     | 深色模式、24小时制时钟         | `modules/darwin/system.nix` |
+| 外观     | 深色模式、24小时制时钟         | `modules/darwin/system/defaults.nix` |
 
 ### 自定义系统配置
 
 macOS `defaults` 命令参考：https://macos-defaults.com/
 
-所有支持选项均可通过编辑 `modules/darwin/system.nix` 中的 `system.defaults` 和 `CustomUserPreferences` 部分声明。
+所有支持选项均可通过编辑 `modules/darwin/system/defaults.nix` 中的 `system.defaults` 和 `CustomUserPreferences` 部分声明。
 
 重新应用系统配置：
 
@@ -232,7 +232,7 @@ just switch
 
 ## 应用管理
 
-Homebrew 安装的应用通过 Nix 的 homebrew module 统一管理，配置位于 `modules/darwin/homebrew.nix`。
+Homebrew 安装的应用通过 Nix 的 homebrew module 统一管理，配置位于 `modules/darwin/services/homebrew.nix`。
 
 ### 常用操作
 
@@ -242,7 +242,7 @@ brew list
 brew list --cask
 
 # 添加新应用
-# 1. 编辑 modules/darwin/homebrew.nix，在 brews 或 casks 列表中添加条目
+# 1. 编辑 modules/darwin/services/homebrew.nix，在 brews 或 casks 列表中添加条目
 # 2. 重新构建
 just switch
 
