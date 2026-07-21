@@ -133,7 +133,7 @@
 ```bash
 sudo nix --experimental-features "nix-command flakes" \
   run github:nix-community/disko/latest -- \
-  --mode destroy,format,mount --flake path:.#mechrevo
+  --mode destroy,format,mount --flake path:.#elaina
 ```
 
 Disko 会请求确认清空磁盘，并交互式询问 LUKS 密码。
@@ -165,7 +165,7 @@ sudo nixos-generate-config --no-filesystems --root /mnt
 ```bash
 sudo nixos-install \
   --root /mnt \
-  --flake path:.#mechrevo \
+  --flake path:.#elaina \
   --no-root-password \
   --show-trace \
   --verbose
