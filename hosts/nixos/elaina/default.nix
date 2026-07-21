@@ -3,6 +3,8 @@
     ./hardware.nix
   ];
 
+  desktop'.fonts.enable = true;
+
   services' = {
     networkmanager.enable = true;
     openssh.enable = true;
