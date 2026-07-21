@@ -31,32 +31,19 @@
     inherit (nixpkgs) lib;
 
     myvars = import ./vars;
-    mkDarwinSystem = import ./lib/darwin-system.nix {inherit inputs myvars;};
-    mkNixosSystem = import ./lib/nixos-system.nix {inherit inputs myvars;};
+    configurations = import ./hosts {inherit inputs myvars;};
 
     supportedSystems = [
       "aarch64-darwin"
       "x86_64-linux"
     ];
     forEachSystem = lib.genAttrs supportedSystems;
-  in {
-    darwinConfigurations.luna = mkDarwinSystem {
-      system = "aarch64-darwin";
-      hostName = "luna";
-      systemModules = [./hosts/darwin/luna];
-      homeModules = [./home/darwin];
+  in
+    configurations
+    // {
+      darwinModules.default = import ./modules/darwin;
+      nixosModules.default = import ./modules/nixos;
+
+      formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.alejandra);
     };
-
-    nixosConfigurations.mechrevo = mkNixosSystem {
-      system = "x86_64-linux";
-      hostName = "mechrevo";
-      systemModules = [./hosts/nixos/mechrevo];
-      homeModules = [./home/nixos];
-    };
-
-    darwinModules.default = import ./modules/darwin;
-    nixosModules.default = import ./modules/nixos;
-
-    formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.alejandra);
-  };
 }

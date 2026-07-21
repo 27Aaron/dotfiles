@@ -75,7 +75,7 @@ cd ~/dotfiles
 
 ### 修改主机配置
 
-仓库中默认的 Darwin 主机名为 `luna`。如果需要使用其他主机名，请同时重命名主机目录并修改 `flake.nix` 中的 `darwinConfigurations`：
+仓库中默认的 Darwin 主机名为 `luna`。`hosts/default.nix` 会自动发现主机目录；如果需要使用其他主机名，只需重命名对应目录：
 
 ```bash
 # 示例：将 luna 改为当前主机名

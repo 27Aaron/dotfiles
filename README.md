@@ -4,8 +4,8 @@ Declarative macOS and NixOS configuration powered by [nix-darwin](https://github
 
 ## Layout
 
-- `lib/`: constructors that compose system modules and native Home Manager modules
 - `vars/`: shared, non-secret user metadata
+- `hosts/default.nix`: discovers platform hosts and composes their system and Home Manager modules
 - `hosts/darwin/`: per-machine macOS configuration
 - `hosts/nixos/`: per-machine NixOS configuration
 - `home/common/`: shared Home Manager configuration
@@ -13,7 +13,7 @@ Declarative macOS and NixOS configuration powered by [nix-darwin](https://github
 - `home/nixos/`: NixOS-specific Home Manager entry point
 - `modules/base/`: system-level Nix configuration shared by Darwin and NixOS
 - `modules/darwin/`: macOS-specific system defaults, applications, and integrations
-- `modules/nixos/`: NixOS base configuration and opt-in features
+- `modules/nixos/`: NixOS base configuration and shared features
 
 ## Getting Started
 
