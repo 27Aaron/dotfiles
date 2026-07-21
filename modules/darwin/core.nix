@@ -5,6 +5,8 @@
 }: {
   programs.fish.enable = true;
 
+  time.timeZone = myvars.timeZone;
+
   system.primaryUser = myvars.username;
 
   users.users.${myvars.username}.home = "/Users/${myvars.username}";

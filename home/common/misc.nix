@@ -15,6 +15,7 @@
     fzf
     jq
     ripgrep
+    tree
     wget
 
     # Disk & Cleanup
