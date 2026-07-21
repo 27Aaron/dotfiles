@@ -3,7 +3,10 @@
     ./hardware.nix
   ];
 
-  desktop'.fonts.enable = true;
+  desktop' = {
+    cursors.enable = true;
+    fonts.enable = true;
+  };
 
   services' = {
     networkmanager.enable = true;
