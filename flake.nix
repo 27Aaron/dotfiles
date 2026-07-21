@@ -27,25 +27,36 @@
     };
   };
 
-  outputs = inputs @ {
-    self,
-    nixpkgs,
-    ...
-  }: let
+  outputs = inputs @ {nixpkgs, ...}: let
     inherit (nixpkgs) lib;
+
+    myvars = import ./vars;
+    mkDarwinSystem = import ./lib/darwin-system.nix {inherit inputs myvars;};
+    mkNixosSystem = import ./lib/nixos-system.nix {inherit inputs myvars;};
+
     supportedSystems = [
       "aarch64-darwin"
       "x86_64-linux"
     ];
     forEachSystem = lib.genAttrs supportedSystems;
   in {
+    darwinConfigurations.luna = mkDarwinSystem {
+      system = "aarch64-darwin";
+      hostName = "luna";
+      systemModules = [./hosts/darwin/luna];
+      homeModules = [./home/darwin];
+    };
+
+    nixosConfigurations.mechrevo = mkNixosSystem {
+      system = "x86_64-linux";
+      hostName = "mechrevo";
+      systemModules = [./hosts/nixos/mechrevo];
+      homeModules = [./home/nixos];
+    };
+
     darwinModules.default = import ./modules/darwin;
-    darwinConfigurations = import ./hosts/darwin {inherit self inputs lib;};
-
     nixosModules.default = import ./modules/nixos;
-    nixosConfigurations = import ./hosts/nixos {inherit self inputs lib;};
 
-    # nix code formatter
     formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.alejandra);
   };
 }

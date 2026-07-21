@@ -1,10 +1,9 @@
 {
   imports = [
-    ../.
-    ./core
-    ./core/nix.nix
-    ./homebrew
-    ./home/karabiner.nix
-    ./system
+    ../base
+    ./core.nix
+    ./homebrew.nix
+    ./nix.nix
+    ./system.nix
   ];
 }

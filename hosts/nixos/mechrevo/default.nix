@@ -1,11 +1,15 @@
-{pkgs, ...}: {
+{
+  myvars,
+  pkgs,
+  ...
+}: {
   imports = [
     ./hardware.nix
+    ../../../modules/nixos/features/disko-btrfs.nix
+    ../../../modules/nixos/features/persistence.nix
   ];
 
-  core'.timeZone = "Asia/Singapore";
-
-  hardware'.disko = {
+  dotfiles.disko = {
     enable = true;
     device = "/dev/disk/by-id/nvme-CT1000P3PSSD8_24364AD5D8E0";
     espSize = "1G";
@@ -20,7 +24,7 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
 
-  users.users.aaron = {
+  users.users.${myvars.username} = {
     isNormalUser = true;
     initialHashedPassword = "$y$j9T$ea4hZjnVkMjgcLGzO3SVG1$iCo9h9t.7daEipVBZ6Saiw1Q0q17eRphAEsg7f77DjB";
     extraGroups = [
@@ -28,12 +32,14 @@
       "networkmanager"
     ];
     packages = [pkgs.tree];
-    openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKHjMAQUXfyMv8TG1NfqjmQJG3gqZkh25KAvAMvxVrWS Aaron@MacBook-Pro"];
+    openssh.authorizedKeys.keys = myvars.sshAuthorizedKeys;
   };
 
   environment.systemPackages = with pkgs; [
     vim
     wget
+    just
+    git
   ];
 
   services.openssh.enable = true;
