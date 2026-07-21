@@ -27,5 +27,8 @@ in {
   time.timeZone = myvars.timeZone;
   system.stateVersion = myvars.stateVersion;
 
-  documentation.nixos.enable = false;
+  documentation = {
+    man.cache.enable = false;
+    nixos.enable = false;
+  };
 }
