@@ -5,8 +5,6 @@
 }: {
   imports = [
     ./hardware.nix
-    ../../../modules/nixos/features/disko-btrfs.nix
-    ../../../modules/nixos/features/persistence.nix
   ];
 
   dotfiles.disko = {
