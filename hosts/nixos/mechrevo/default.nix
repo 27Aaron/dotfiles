@@ -7,9 +7,6 @@
 
   environment.systemPackages = with pkgs; [
     vim
-    wget
-    just
-    git
   ];
 
   services.openssh.enable = true;

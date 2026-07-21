@@ -71,8 +71,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    fileSystems."/persistent".neededForBoot = true;
-
     disko.devices = {
       nodev."/" = {
         fsType = "tmpfs";
