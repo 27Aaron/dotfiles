@@ -5,55 +5,9 @@
 > [!CAUTION]
 > Disko 会清空目标磁盘上的所有分区和数据。请先备份数据，并确认选择了正确的磁盘。
 
-## Disko 简介
+## Disko 配置
 
-Disko 使用 Nix 进行声明式磁盘分区和格式化。磁盘布局写成共享 NixOS 模块，执行一条命令即可完成分区、加密、格式化和挂载。
-
-本文使用的布局为：
-
-- 1 GiB EFI 分区，挂载到 `/boot`。
-- 剩余空间使用 LUKS2 加密。
-- 加密分区内使用 Btrfs。
-- `/nix`、`/persistent` 和 `/snapshots` 使用 Btrfs 子卷。
-- 根文件系统 `/` 使用 tmpfs，重启后重置。
-
----
-
-## 安装准备
-
-从 [NixOS 下载页](https://nixos.org/download/) 下载 ISO，制作启动盘，然后以 UEFI 模式启动。
-
-查看磁盘：
-
-```bash
-lsblk -o NAME,PATH,SIZE,MODEL,SERIAL,FSTYPE,MOUNTPOINTS
-ls -l /dev/disk/by-id/
-```
-
-优先使用 `/dev/disk/by-id/` 下的整盘路径，不要选择以 `-part1`、`-part2` 结尾的分区链接。
-
----
-
-## 创建 Disko 配置
-
-公共磁盘布局位于 `modules/nixos/hardware/disko.nix`，由 `modules/nixos/default.nix` 自动发现。主机只需指定磁盘路径、swap 大小以及是否启用 LUKS，例如 `hosts/nixos/mechrevo/default.nix`：
-
-> [!IMPORTANT]
-> 执行前必须把 `device` 替换为实际的目标磁盘路径。
-
-```nix
-hardware'.disko = {
-  enable = true;
-  device = "/dev/disk/by-id/nvme-CT1000P3PSSD8_24364AD5D8E0";
-  espSize = "1G";
-  swapSize = "32769M";
-  luks.enable = true;
-};
-```
-
-### 独立 Disko 配置备份
-
-下面保留模块化之前使用的完整 `disko.nix`。需要脱离本仓库单独使用时，可以将其保存为 `disko.nix`，确认磁盘路径后直接交给 Disko 执行。
+将其保存为 `disko.nix`，确认磁盘路径后直接交给 Disko 执行。
 
 ```nix
 {...}: {
@@ -204,14 +158,6 @@ lsblk -f
 
 ```bash
 sudo nixos-generate-config --no-filesystems --root /mnt
-```
-
-将生成的硬件配置放回主机目录：
-
-```bash
-sudo cp /mnt/etc/nixos/hardware-configuration.nix \
-  ./hosts/nixos/mechrevo/hardware.nix
-git add hosts/nixos/mechrevo/hardware.nix
 ```
 
 安装系统：
