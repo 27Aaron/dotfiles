@@ -36,13 +36,13 @@ ls -l /dev/disk/by-id/
 
 ## 创建 Disko 配置
 
-公共磁盘布局位于 `modules/nixos/hardware/disko.nix`。每台主机只需要启用模块并指定磁盘路径、swap 大小以及是否启用 LUKS，例如 `hosts/nixos/mechrevo/default.nix`：
+公共磁盘布局位于 `modules/nixos/features/disko-btrfs.nix`。主机需要显式导入该 feature，并指定磁盘路径、swap 大小以及是否启用 LUKS，例如 `hosts/nixos/mechrevo/default.nix`：
 
 > [!IMPORTANT]
 > 执行前必须把 `device` 替换为实际的目标磁盘路径。
 
 ```nix
-hardware'.disko = {
+dotfiles.disko = {
   enable = true;
   device = "/dev/disk/by-id/nvme-CT1000P3PSSD8_24364AD5D8E0";
   espSize = "1G";
@@ -174,12 +174,12 @@ hardware'.disko = {
 
 ## 使用 Disko 安装文件系统
 
-再次检查主机配置中的 `hardware'.disko.device`，然后从 Flake 的 NixOS 配置执行：
+再次检查主机配置中的 `dotfiles.disko.device`，然后从 Flake 的 NixOS 配置执行：
 
 ```bash
 sudo nix --experimental-features "nix-command flakes" \
   run github:nix-community/disko/latest -- \
-  --mode destroy,format,mount --flake .#mechrevo
+  --mode destroy,format,mount --flake path:.#mechrevo
 ```
 
 Disko 会请求确认清空磁盘，并交互式询问 LUKS 密码。
@@ -219,7 +219,7 @@ git add hosts/nixos/mechrevo/hardware.nix
 ```bash
 sudo nixos-install \
   --root /mnt \
-  --flake .#mechrevo \
+  --flake path:.#mechrevo \
   --no-root-password \
   --show-trace \
   --verbose
@@ -237,7 +237,7 @@ sudo reboot
 拔出安装介质。启动时输入 LUKS 密码，然后登录系统。
 
 > [!IMPORTANT]
-> 根文件系统使用 tmpfs，未声明持久化的数据会在重启后消失。所有 NixOS 主机都使用 Preservation 将必要的系统状态和用户目录保存到 `/persistent`，配置位于 `modules/nixos/core/preservation.nix`。
+> 根文件系统使用 tmpfs，未声明持久化的数据会在重启后消失。`mechrevo` 显式导入 `modules/nixos/features/persistence.nix`，使用 Preservation 将必要的系统状态和用户目录保存到 `/persistent`。
 
 ---
 
