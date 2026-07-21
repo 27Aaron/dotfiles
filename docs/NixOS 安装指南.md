@@ -130,10 +130,12 @@
 
 再次检查主机配置中的 `hardware'.disko.device`，然后从 Flake 的 NixOS 配置执行：
 
+以下命令需要在配置仓库根目录执行；`.#elaina` 表示当前目录中的 `elaina` Flake 配置。
+
 ```bash
 sudo nix --experimental-features "nix-command flakes" \
   run github:nix-community/disko/latest -- \
-  --mode destroy,format,mount --flake path:.#elaina
+  --mode destroy,format,mount --flake .#elaina
 ```
 
 Disko 会请求确认清空磁盘，并交互式询问 LUKS 密码。
@@ -165,7 +167,7 @@ sudo nixos-generate-config --no-filesystems --root /mnt
 ```bash
 sudo nixos-install \
   --root /mnt \
-  --flake path:.#elaina \
+  --flake .#elaina \
   --no-root-password \
   --show-trace \
   --verbose
