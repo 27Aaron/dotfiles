@@ -8,19 +8,17 @@ default:
 check:
     @alejandra --check .
     @deadnix --fail .
-    @nix flake check --no-build --all-systems
+    @nix flake check path:. --no-build --all-systems
 
 # Build and activate the nix-darwin configuration
 [macos]
 switch:
-    @git add .
-    @sudo darwin-rebuild --flake .#{{ hostname }} switch
+    @sudo darwin-rebuild --flake path:.#{{ hostname }} switch
 
 # Build and activate the NixOS configuration
 [linux]
 switch:
-    @git add .
-    @sudo nixos-rebuild switch --flake .#{{ hostname }}
+    @sudo nixos-rebuild switch --flake path:.#{{ hostname }}
 
 # Update the flake inputs (nixpkgs, nix-darwin, etc.)
 update:
@@ -33,8 +31,8 @@ gc:
 # Install nix-darwin on a fresh macOS system
 [macos]
 install:
-    @sudo nix run nix-darwin/master#darwin-rebuild -- switch --flake .#{{ hostname }}
+    @sudo nix run nix-darwin/master#darwin-rebuild -- switch --flake path:.#{{ hostname }}
 
 # Format all Nix files in the flake
 fmt:
-    @nix fmt .
+    @nix fmt path:.
