@@ -1,7 +1,9 @@
 {myvars, ...}: {
-  imports = [../common];
+  imports = [
+    ../common
+    ./i18n.nix
+    ./xdg-user-dirs.nix
+  ];
 
   home.homeDirectory = "/home/${myvars.username}";
-
-  xdg.enable = true;
 }
