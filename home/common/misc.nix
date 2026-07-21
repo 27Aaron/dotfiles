@@ -5,12 +5,17 @@
 }: {
   home.packages = lib.mkAfter (with pkgs; [
     # Development
-    claude-code
     codex
+    claude-code
     gh
     just
     lazygit
     uv
+
+    # Disk & Cleanup
+    duf
+    dust
+    ncdu
 
     # File & Search
     fd
@@ -20,17 +25,6 @@
     tree
     wget
 
-    # Disk & Cleanup
-    duf
-    dust
-    ncdu
-
-    # System Monitor
-    btop
-    fastfetch
-    htop
-    nload
-
     # Media
     ffmpeg
 
@@ -38,5 +32,11 @@
     iperf3
     nmap
     socat
+
+    # System Monitor
+    btop
+    fastfetch
+    htop
+    nload
   ]);
 }

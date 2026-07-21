@@ -1,12 +1,12 @@
 {
   preservation'.user.directories = [
     {
-      directory = ".ssh";
+      directory = "nix-config";
       mode = "0700";
     }
 
     {
-      directory = "nix-config";
+      directory = ".ssh";
       mode = "0700";
     }
   ];

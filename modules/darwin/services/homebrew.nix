@@ -1,13 +1,13 @@
 {
   homebrew = {
     enable = true;
-    enableZshIntegration = true;
     enableFishIntegration = true;
+    enableZshIntegration = true;
 
     onActivation = {
       autoUpdate = true; # Fetch the newest stable branch of Homebrew's git repo
-      upgrade = true; # Upgrade outdated casks, formulae, and App Store apps
       cleanup = "zap"; # Uninstall unlisted packages and their related files
+      upgrade = true; # Upgrade outdated casks, formulae, and App Store apps
     };
 
     # Applications to install from Mac App Store using mas.
@@ -30,14 +30,14 @@
       "steipete/tap/codexbar"
 
       # Browser
-      "firefox"
       # "brave-browser"
+      "firefox"
       "google-chrome"
 
       # Communication
       "feishu"
-      "wechat"
       "telegram"
+      "wechat"
 
       # Development
       "orbstack"
@@ -64,10 +64,10 @@
       "obsidian"
 
       # Media
-      "obs"
       "iina"
-      "plex"
       "neteasemusic"
+      "obs"
+      "plex"
 
       # Menu Bar
       "jordanbaird-ice@beta"
@@ -76,8 +76,8 @@
       "surge"
 
       # Productivity
-      "raycast"
       "qspace-pro"
+      "raycast"
 
       # Remote Access
       "uuremote"
@@ -89,8 +89,8 @@
       "stats"
 
       # Terminal Emulator
-      "kitty"
       "ghostty"
+      "kitty"
     ];
   };
 }

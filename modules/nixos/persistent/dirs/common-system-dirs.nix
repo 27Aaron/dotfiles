@@ -1,24 +1,8 @@
 {
   preservation'.os.directories = [
-    # System state and logs
-    "/var/lib/systemd"
-    "/var/log"
-
     # Containers
     {
       directory = "/var/lib/machines";
-      mode = "0700";
-    }
-
-    # NixOS
-    {
-      directory = "/var/lib/nixos";
-      inInitrd = true;
-    }
-
-    # Private service state
-    {
-      directory = "/var/lib/private";
       mode = "0700";
     }
 
@@ -29,8 +13,24 @@
     }
     "/var/lib/NetworkManager"
 
+    # NixOS
+    {
+      directory = "/var/lib/nixos";
+      inInitrd = true;
+    }
+
     # OpenSSH
     "/etc/ssh"
+
+    # Private service state
+    {
+      directory = "/var/lib/private";
+      mode = "0700";
+    }
+
+    # System state and logs
+    "/var/lib/systemd"
+    "/var/log"
 
     # vnStat
     {

@@ -12,8 +12,8 @@
         mountpoint = "/nix";
         mountOptions = [
           "compress-force=zstd:1"
-          "noatime"
           "discard=async"
+          "noatime"
         ];
       };
 
@@ -21,8 +21,8 @@
         mountpoint = "/persistent";
         mountOptions = [
           "compress-force=zstd:1"
-          "noatime"
           "discard=async"
+          "noatime"
         ];
       };
 
@@ -30,8 +30,8 @@
         mountpoint = "/snapshots";
         mountOptions = [
           "compress-force=zstd:1"
-          "noatime"
           "discard=async"
+          "noatime"
         ];
       };
     }
@@ -75,10 +75,10 @@ in {
       nodev."/" = {
         fsType = "tmpfs";
         mountOptions = [
+          "mode=755"
           "nodev"
           "nosuid"
           "relatime"
-          "mode=755"
           "size=4G"
         ];
       };
@@ -144,8 +144,8 @@ in {
                       ];
                       mountpoint = "/btr_pool";
                       mountOptions = [
-                        "subvolid=5"
                         "noatime"
+                        "subvolid=5"
                       ];
                       subvolumes = btrfsSubvolumes;
                     };
@@ -167,8 +167,8 @@ in {
                     ];
                     mountpoint = "/btr_pool";
                     mountOptions = [
-                      "subvolid=5"
                       "noatime"
+                      "subvolid=5"
                     ];
                     subvolumes = btrfsSubvolumes;
                   };
