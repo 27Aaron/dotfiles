@@ -14,6 +14,7 @@
   hardware'.amdgpu.enable = true;
 
   services' = {
+    btrbk.enable = true;
     kmscon.enable = true;
     networkmanager.enable = true;
     openssh.enable = true;
