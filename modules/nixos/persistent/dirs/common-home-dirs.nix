@@ -32,6 +32,12 @@
       mode = "0700";
     }
 
+    # Dconf desktop settings
+    {
+      directory = ".config/dconf";
+      mode = "0700";
+    }
+
     # Fcitx5
     ".config/fcitx5"
     ".local/share/fcitx5"
@@ -101,6 +107,14 @@
     ".cache/kitty"
     {
       directory = ".cache/mesa_shader_cache";
+      mode = "0700";
+    }
+    {
+      directory = ".cache/qtshadercache-x86_64-little_endian-lp64";
+      mode = "0700";
+    }
+    {
+      directory = ".cache/quickshell";
       mode = "0700";
     }
     ".cache/starship"

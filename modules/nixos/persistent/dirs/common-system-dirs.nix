@@ -1,5 +1,17 @@
 {
   preservation'.os.directories = [
+    # AccountsService
+    {
+      directory = "/var/lib/AccountsService";
+      mode = "0775";
+    }
+
+    # Bluetooth
+    {
+      directory = "/var/lib/bluetooth";
+      mode = "0700";
+    }
+
     # Containers
     {
       directory = "/var/lib/machines";
@@ -24,9 +36,19 @@
 
     # Printing
     {
+      directory = "/var/cache/cups";
+      group = "lp";
+      mode = "0770";
+    }
+    {
       directory = "/var/lib/cups";
       user = "cups";
       group = "lp";
+    }
+    {
+      directory = "/var/spool/cups";
+      group = "lp";
+      mode = "0710";
     }
 
     # Private service state
@@ -34,6 +56,10 @@
       directory = "/var/lib/private";
       mode = "0700";
     }
+
+    # Power management
+    "/var/lib/power-profiles-daemon"
+    "/var/lib/upower"
 
     # System state and logs
     "/var/lib/lastlog"
