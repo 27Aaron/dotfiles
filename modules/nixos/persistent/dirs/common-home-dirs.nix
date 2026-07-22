@@ -27,6 +27,14 @@
       mode = "0700";
     }
     {
+      directory = ".config/Thunar";
+      mode = "0700";
+    }
+    {
+      directory = ".config/xfce4";
+      mode = "0700";
+    }
+    {
       directory = ".local/share/Trash";
       mode = "0700";
     }

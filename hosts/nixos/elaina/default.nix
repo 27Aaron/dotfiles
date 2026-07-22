@@ -10,6 +10,7 @@
     fcitx5.enable = true;
     fonts.enable = true;
     niri.enable = true;
+    themes.enable = true;
   };
 
   hardware'.amdgpu.enable = true;

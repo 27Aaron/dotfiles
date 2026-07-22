@@ -19,7 +19,6 @@ in {
       gnome-text-editor
 
       # Files and documents
-      nautilus
       file-roller
       papers
       loupe
@@ -29,13 +28,26 @@ in {
       ffmpegthumbnailer
     ];
 
-    programs.seahorse.enable = true;
+    programs = {
+      seahorse.enable = true;
+
+      # Thunar file manager and its Xfconf-backed preferences.
+      xfconf.enable = true;
+      thunar = {
+        enable = true;
+        plugins = with pkgs; [
+          thunar-archive-plugin
+          thunar-volman
+          thunar-media-tags-plugin
+        ];
+      };
+    };
 
     # GVfs provides trash, network locations, MTP, and removable-media
-    # integration. It enables UDisks2 as a dependency, but keep that
-    # dependency explicit here because Nautilus relies on both services.
+    # integration. Tumbler provides thumbnails for Thunar.
     services.gvfs.enable = true;
     services.udisks2.enable = true;
+    services.tumbler.enable = true;
 
     home-manager.users.${myvars.username}.xdg.mimeApps = {
       enable = true;
@@ -44,7 +56,7 @@ in {
       # desktop files. Earlier packages take precedence when MIME types overlap.
       defaultApplicationPackages = with pkgs; [
         file-roller
-        nautilus
+        thunar
         loupe
         papers
         gnome-text-editor
