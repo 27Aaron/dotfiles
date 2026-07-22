@@ -1,5 +1,6 @@
 {
   lib,
+  myvars,
   pkgs,
   ...
 }: {
@@ -11,5 +12,10 @@
       trusted-public-keys = lib.mkAfter ["lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="];
       trusted-users = ["@wheel"];
     };
+  };
+
+  programs.nh = {
+    enable = true;
+    flake = "/home/${myvars.username}/nix-config";
   };
 }

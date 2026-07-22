@@ -18,15 +18,21 @@ switch:
 # Build and activate the NixOS configuration
 [linux]
 switch:
-    @sudo nixos-rebuild switch --flake path:.#{{ hostname }}
+    @nh os switch path:. -H {{ hostname }}
 
 # Update the flake inputs (nixpkgs, nix-darwin, etc.)
 update:
     @nix flake update
 
-# Delete generations and collect unreachable store paths older than 7 days
+# Delete macOS generations and collect unreachable store paths older than 7 days
+[macos]
 gc:
     @sudo nix-collect-garbage --delete-older-than 7d
+
+# Review and clean NixOS generations, GC roots, and unreachable store paths
+[linux]
+gc:
+    @nh clean all --keep 8 --keep-since 14d --ask
 
 # Install nix-darwin on a fresh macOS system
 [macos]
