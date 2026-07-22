@@ -80,6 +80,12 @@
       mode = "0700";
     }
 
+    # Steam
+    {
+      directory = ".local/share/Steam";
+      mode = "0700";
+    }
+
     # Telegram
     ".local/share/AyuGramDesktop"
 

@@ -11,6 +11,8 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    environment.systemPackages = [pkgs.xwayland-satellite];
+
     programs.niri = {
       enable = true;
       package = pkgs.niri;
@@ -19,7 +21,7 @@ in {
     services.greetd = {
       enable = true;
       useTextGreeter = true;
-      settings.default_session.command = "${lib.getExe pkgs.tuigreet} --remember --time --cmd ${lib.getExe' pkgs.niri "niri-session"}";
+      settings.default_session.command = "${lib.getExe pkgs.tuigreet} --remember --remember-session --time --sessions ${config.services.displayManager.sessionData.desktops}/share/wayland-sessions --cmd ${lib.getExe' pkgs.niri "niri-session"}";
     };
   };
 }

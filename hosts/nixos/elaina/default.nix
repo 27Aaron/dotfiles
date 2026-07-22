@@ -9,6 +9,7 @@
     fcitx5.enable = true;
     fonts.enable = true;
     niri.enable = true;
+    steam.enable = true;
   };
 
   services' = {
