@@ -14,6 +14,8 @@
 
   hardware'.amdgpu.enable = true;
 
+  security.rtkit.enable = true;
+
   services' = {
     btrbk.enable = true;
     kmscon.enable = true;
