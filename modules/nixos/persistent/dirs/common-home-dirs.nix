@@ -75,6 +75,10 @@
 
     # GNOME Keyring and NSS certificates
     {
+      directory = ".gnupg";
+      mode = "0700";
+    }
+    {
       directory = ".local/share/keyrings";
       mode = "0700";
     }

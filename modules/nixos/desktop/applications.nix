@@ -13,13 +13,23 @@ in {
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
+      # GNOME utilities
+      gnome-calculator
+      gnome-system-monitor
+      gnome-text-editor
+
+      # Files and documents
       nautilus
       file-roller
       papers
       loupe
+
+      # Media
       mpv
       ffmpegthumbnailer
     ];
+
+    programs.seahorse.enable = true;
 
     # GVfs provides trash, network locations, MTP, and removable-media
     # integration. It enables UDisks2 as a dependency, but keep that
@@ -37,6 +47,7 @@ in {
         nautilus
         loupe
         papers
+        gnome-text-editor
         mpv
       ];
     };
