@@ -9,10 +9,6 @@ in {
   options.hardware'.amdgpu.enable = lib.mkEnableOption "AMD GPU support";
 
   config = lib.mkIf cfg.enable {
-    # Load amdgpu in the initrd so the native driver owns the display from
-    # early boot instead of switching from simpledrm later.
-    boot.initrd.kernelModules = ["amdgpu"];
-
     hardware.graphics = {
       enable = true;
 
