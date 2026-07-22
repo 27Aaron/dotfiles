@@ -17,7 +17,9 @@ in {
 
       packages = with pkgs; [
         dejavu_fonts
+        fira-code
         font-awesome
+        inter
         julia-mono
         lxgw-wenkai
         maple-mono.NF-CN-unhinted

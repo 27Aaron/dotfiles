@@ -17,6 +17,21 @@
       mode = "0700";
     }
 
+    # DankMaterialShell
+    ".config/DankMaterialShell"
+    {
+      directory = ".local/state/DankMaterialShell";
+      mode = "0700";
+    }
+    {
+      directory = ".cache/DankMaterialShell";
+      mode = "0700";
+    }
+    {
+      directory = ".cache/cliphist";
+      mode = "0700";
+    }
+
     # Fcitx5
     ".config/fcitx5"
     ".local/share/fcitx5"
@@ -46,14 +61,6 @@
 
     # Niri
     ".config/niri"
-
-    # Noctalia
-    ".config/noctalia"
-    {
-      directory = ".local/state/noctalia";
-      mode = "0700";
-    }
-    ".local/share/noctalia"
 
     # Nix and Home Manager
     ".cache/nix"

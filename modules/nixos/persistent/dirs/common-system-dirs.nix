@@ -22,6 +22,13 @@
     # OpenSSH
     "/etc/ssh"
 
+    # Printing
+    {
+      directory = "/var/lib/cups";
+      user = "cups";
+      group = "lp";
+    }
+
     # Private service state
     {
       directory = "/var/lib/private";
