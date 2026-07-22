@@ -36,10 +36,12 @@ in {
 
       fontconfig.defaultFonts = {
         serif = [
+          "LXGW WenKai"
           "Source Han Serif SC"
           "Source Han Serif TC"
         ];
         sansSerif = [
+          "LXGW WenKai"
           "Source Han Sans SC"
           "Source Han Sans TC"
         ];
