@@ -11,6 +11,8 @@
     niri.enable = true;
   };
 
+  hardware'.amdgpu.enable = true;
+
   services' = {
     kmscon.enable = true;
     networkmanager.enable = true;
