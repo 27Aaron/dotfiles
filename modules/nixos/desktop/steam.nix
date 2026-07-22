@@ -7,6 +7,22 @@
   ...
 }: let
   cfg = config.desktop'.steam;
+
+  gamingModeGamescope = pkgs.writeShellScriptBin "gamescope" ''
+    exec /run/wrappers/bin/gamescope \
+      --output-width 1920 \
+      --output-height 1200 \
+      --nested-refresh 60 \
+      "$@"
+  '';
+
+  steamSessionSelect = pkgs.writeShellApplication {
+    name = "steamos-session-select";
+    runtimeInputs = [pkgs.systemd];
+    text = ''
+      systemctl --user stop gamescope-session.target
+    '';
+  };
 in {
   imports = [inputs.jovian-nixos.nixosModules.default];
 
@@ -19,20 +35,31 @@ in {
       enable = true;
       protontricks.enable = true;
       extraCompatPackages = [pkgs.proton-ge-bin];
-
-      gamescopeSession = {
-        enable = true;
-        steamArgs = [
-          "-pipewire-dmabuf"
-          "-gamepadui"
-          "-steamdeck"
-          "-steamos3"
-        ];
-      };
+      extraPackages = [
+        pkgs.pulseaudio
+        steamSessionSelect
+      ];
     };
 
-    programs.gamescope.capSysNice = true;
     programs.gamemode.enable = true;
+
+    jovian = {
+      steam = {
+        enable = true;
+        autoStart = false;
+        user = myvars.username;
+      };
+
+      # Keep the Gaming Mode stack without applying unrelated SteamOS defaults.
+      steamos.useSteamOSConfig = false;
+    };
+
+    # The internal panel is 2880x1800@120. Rendering the complete Deck UI at
+    # that mode is unnecessarily expensive; Gamescope scales this 16:10 mode
+    # to the panel while games can still choose their own resolution.
+    environment.etc."jovian/gamescope-session/pre-start".text = ''
+      export PATH=${gamingModeGamescope}/bin:$PATH
+    '';
 
     jovian.decky-loader = {
       enable = true;

@@ -14,7 +14,9 @@ in {
       enable = true;
       systemd = {
         enable = true;
-        target = "graphical-session.target";
+        # Gaming Mode also starts graphical-session.target, but DMS requires
+        # Niri's Wayland socket and otherwise enters a restart loop.
+        target = "niri.service";
       };
     };
 

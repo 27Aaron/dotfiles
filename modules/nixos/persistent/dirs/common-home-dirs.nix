@@ -19,6 +19,8 @@
 
     # DankMaterialShell
     ".config/DankMaterialShell"
+    # Gamescope display modes and generated EDID for Steam Gaming Mode
+    ".config/gamescope"
     {
       directory = ".local/state/DankMaterialShell";
       mode = "0700";
