@@ -20,7 +20,6 @@
   services' = {
     btrbk.enable = true;
     btrfs-scrub.enable = true;
-    kmscon.enable = true;
     networkmanager.enable = true;
     openssh.enable = true;
     printing.enable = true;
