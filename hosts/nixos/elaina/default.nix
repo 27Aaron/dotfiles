@@ -23,6 +23,7 @@
     networkmanager.enable = true;
     openssh.enable = true;
     printing.enable = true;
+    smartd.enable = true;
     vnstat.enable = true;
   };
 

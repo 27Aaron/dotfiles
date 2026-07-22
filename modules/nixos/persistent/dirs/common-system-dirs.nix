@@ -61,6 +61,12 @@
     "/var/lib/power-profiles-daemon"
     "/var/lib/upower"
 
+    # Storage health monitoring
+    {
+      directory = "/var/lib/smartmontools";
+      mode = "0750";
+    }
+
     # System state and logs
     "/var/lib/lastlog"
     "/var/lib/nftables"
