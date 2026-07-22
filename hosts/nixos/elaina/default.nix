@@ -25,6 +25,7 @@
     printing.enable = true;
     smartd.enable = true;
     vnstat.enable = true;
+    zram.enable = true;
   };
 
   security'.firewall.enable = true;
