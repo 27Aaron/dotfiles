@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   modulesPath,
@@ -13,7 +14,9 @@
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-amd"];
   boot.extraModulePackages = [];
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto-zen4;
+
+  nixpkgs.overlays = [inputs.nix-cachyos-kernel.overlays.pinned];
 
   boot.loader = {
     systemd-boot.enable = true;
