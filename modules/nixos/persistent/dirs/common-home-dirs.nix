@@ -17,6 +17,24 @@
       mode = "0700";
     }
 
+    # Desktop file management
+    {
+      directory = ".cache/thumbnails";
+      mode = "0700";
+    }
+    {
+      directory = ".config/gtk-3.0";
+      mode = "0700";
+    }
+    {
+      directory = ".local/share/Trash";
+      mode = "0700";
+    }
+    {
+      directory = ".local/share/gvfs-metadata";
+      mode = "0700";
+    }
+
     # DankMaterialShell
     ".config/DankMaterialShell"
     {

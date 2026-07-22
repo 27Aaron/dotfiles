@@ -4,6 +4,7 @@
   ];
 
   desktop' = {
+    applications.enable = true;
     cursors.enable = true;
     dms.enable = true;
     fcitx5.enable = true;

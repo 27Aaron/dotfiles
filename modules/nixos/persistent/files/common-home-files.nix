@@ -6,9 +6,6 @@
       how = "bindmount";
     }
 
-    # Desktop application associations
-    ".config/mimeapps.list"
-
     # WakaTime
     ".wakatime.cfg"
   ];
