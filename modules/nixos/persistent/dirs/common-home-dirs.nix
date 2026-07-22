@@ -1,5 +1,11 @@
 {
   preservation'.user.directories = [
+    # Keep caches off the tmpfs root to avoid excessive RAM usage.
+    {
+      directory = ".cache";
+      mode = "0700";
+    }
+
     # AI assistants
     ".codex"
     ".claude"
@@ -18,10 +24,6 @@
     }
 
     # Desktop file management
-    {
-      directory = ".cache/thumbnails";
-      mode = "0700";
-    }
     {
       directory = ".config/gtk-3.0";
       mode = "0700";
@@ -49,15 +51,6 @@
       directory = ".local/state/DankMaterialShell";
       mode = "0700";
     }
-    {
-      directory = ".cache/DankMaterialShell";
-      mode = "0700";
-    }
-    {
-      directory = ".cache/cliphist";
-      mode = "0700";
-    }
-
     # Dconf desktop settings
     {
       directory = ".config/dconf";
@@ -71,13 +64,7 @@
     # Firefox
     ".config/mozilla"
     ".mozilla"
-    {
-      directory = ".cache/mozilla";
-      mode = "0700";
-    }
-
     # Fish
-    ".cache/fish"
     ".config/fish"
     ".local/share/fish"
 
@@ -99,7 +86,6 @@
     ".config/niri"
 
     # Nix and Home Manager
-    ".cache/nix"
     ".local/share/nix"
     ".local/state/home-manager"
     ".local/state/nix/profiles"
@@ -126,27 +112,5 @@
 
     # Zoxide
     ".local/share/zoxide"
-
-    # Application caches
-    ".cache/Microsoft"
-    {
-      directory = ".cache/fastfetch";
-      mode = "0744";
-    }
-    ".cache/fontconfig"
-    ".cache/kitty"
-    {
-      directory = ".cache/mesa_shader_cache";
-      mode = "0700";
-    }
-    {
-      directory = ".cache/qtshadercache-x86_64-little_endian-lp64";
-      mode = "0700";
-    }
-    {
-      directory = ".cache/quickshell";
-      mode = "0700";
-    }
-    ".cache/starship"
   ];
 }

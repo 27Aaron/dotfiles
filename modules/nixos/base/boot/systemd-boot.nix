@@ -3,6 +3,6 @@
     enable = lib.mkDefault false;
     editor = lib.mkDefault false;
     consoleMode = lib.mkDefault "max";
-    configurationLimit = lib.mkDefault 5;
+    configurationLimit = lib.mkDefault 8;
   };
 }
