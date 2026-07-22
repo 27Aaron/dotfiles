@@ -19,8 +19,6 @@
 
     # DankMaterialShell
     ".config/DankMaterialShell"
-    # Gamescope display modes and generated EDID for Steam Gaming Mode
-    ".config/gamescope"
     {
       directory = ".local/state/DankMaterialShell";
       mode = "0700";
@@ -79,12 +77,6 @@
     # PulseAudio compatibility cookie
     {
       directory = ".config/pulse";
-      mode = "0700";
-    }
-
-    # Steam
-    {
-      directory = ".local/share/Steam";
       mode = "0700";
     }
 

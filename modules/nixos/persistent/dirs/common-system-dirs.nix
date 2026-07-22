@@ -18,9 +18,6 @@
       mode = "0700";
     }
 
-    # Decky Loader
-    "/var/lib/decky-loader"
-
     # NetworkManager
     {
       directory = "/etc/NetworkManager/system-connections";
