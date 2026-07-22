@@ -23,17 +23,9 @@
       mode = "0700";
     }
 
-    # Desktop file management
+    # GTK 3 settings and desktop file management
     {
       directory = ".config/gtk-3.0";
-      mode = "0700";
-    }
-    {
-      directory = ".config/Thunar";
-      mode = "0700";
-    }
-    {
-      directory = ".config/xfce4";
       mode = "0700";
     }
     {
