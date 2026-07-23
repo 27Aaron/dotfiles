@@ -27,6 +27,7 @@
       # AI Development
       "chatgpt"
       "cc-switch"
+      "grok-build"
       "steipete/tap/codexbar"
 
       # Browser
