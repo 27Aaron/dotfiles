@@ -1,9 +1,17 @@
 {
+  config,
+  lib,
   pkgs,
   vars,
   ...
 }:
 {
+  # Home Manager writes ~/.config/git/config. Remove the legacy global file
+  # so Git does not keep preferring unmanaged settings from ~/.gitconfig.
+  home.activation.removeExistingGitconfig = lib.hm.dag.entryBefore [ "checkLinkTargets" ] ''
+    rm -f ${config.home.homeDirectory}/.gitconfig
+  '';
+
   programs = {
     git = {
       enable = true;
