@@ -1,4 +1,3 @@
-# Darwin entrypoint: attach Home Manager and load the user's Home Manager modules.
 {
   config,
   inputs,
