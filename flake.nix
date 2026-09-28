@@ -36,6 +36,6 @@
       };
       darwinConfigurations = import ./hosts { inherit self inputs lib; };
 
-      formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
+      formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.nixfmt-rs);
     };
 }
