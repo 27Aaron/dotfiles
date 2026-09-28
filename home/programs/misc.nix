@@ -10,6 +10,7 @@
     # 查找与导航
     fd
     fzf
+    ripgrep
 
     # 文本与数据处理
     jq
@@ -20,6 +21,7 @@
     # 网络与下载
     curl
     wget
+    iperf3
 
     # 磁盘与分析
     duf
@@ -28,6 +30,7 @@
 
     # 监控与诊断
     btop
+    nload
     nmap
     socat
     fastfetch
