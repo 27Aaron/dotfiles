@@ -1,0 +1,26 @@
+{ lib, ... }:
+let
+  listModules =
+    dir:
+    lib.pipe (builtins.readDir dir) [
+      (lib.filterAttrs (name: _: name != "default.nix"))
+      (lib.mapAttrsToList (
+        name: type:
+        let
+          path = dir + "/${name}";
+          hasDefault = builtins.pathExists (path + "/default.nix");
+          isNixFile = type == "regular" && lib.hasSuffix ".nix" name;
+        in
+        if type == "directory" then
+          if hasDefault then path else listModules path
+        else
+          lib.optional isNixFile path
+      ))
+      lib.flatten
+    ];
+in
+{
+  default = {
+    imports = listModules ./.;
+  };
+}

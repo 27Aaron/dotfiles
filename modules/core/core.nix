@@ -2,16 +2,14 @@
   lib,
   config,
   inputs,
+  self,
   ...
 }:
 let
   cfg = config.core';
 in
 {
-  imports = [
-    inputs.home-manager.darwinModules.home-manager
-    (lib.mkAliasOptionModule [ "hm'" ] [ "home-manager" "users" cfg.userName ])
-  ];
+  imports = [ inputs.home-manager.darwinModules.home-manager ];
 
   options.core' = {
     userName = lib.mkOption {
@@ -47,6 +45,7 @@ in
       backupFileExtension = "hm-bak";
 
       users.${cfg.userName} = {
+        imports = [ self.homeModules.default ];
         home.stateVersion = cfg.stateVersion;
         home.homeDirectory = lib.mkForce "/Users/${cfg.userName}";
       };
