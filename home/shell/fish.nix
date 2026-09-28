@@ -2,7 +2,7 @@
   programs.fish = {
     enable = true;
     interactiveShellInit = ''
-      # 按字节序排序，让 ls 的结果稳定可预期。
+      # better ls sorting
       set -gx LC_COLLATE "C.UTF-8"
 
       # Disable the greeting message.
