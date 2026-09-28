@@ -19,7 +19,6 @@ in
     };
     timeZone = lib.mkOption {
       type = lib.types.str;
-      default = "Asia/Singapore";
       description = "System timezone";
     };
   };

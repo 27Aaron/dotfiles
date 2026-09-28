@@ -1,4 +1,8 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  vars,
+  ...
+}:
 {
   programs = {
     git = {
@@ -6,8 +10,8 @@
       lfs.enable = true;
       settings = {
         user = {
-          name = "Aaron";
-          email = "niceboy@duck.com";
+          name = vars.fullName;
+          email = vars.email;
         };
 
         fetch.prune = true;

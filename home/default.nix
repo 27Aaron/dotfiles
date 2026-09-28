@@ -2,6 +2,7 @@
   config,
   inputs,
   lib,
+  vars,
   ...
 }:
 let
@@ -33,6 +34,7 @@ in
     useGlobalPkgs = true;
     useUserPackages = true;
     backupFileExtension = "hm-bak";
+    extraSpecialArgs = { inherit vars; };
 
     users.${cfg.userName} = {
       imports = listModules ./.;

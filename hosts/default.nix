@@ -6,14 +6,16 @@
 }:
 let
   inherit (inputs) nix-darwin;
+  vars = import ../vars;
   mkDarwinSystem = host: _: {
     ${host} = nix-darwin.lib.darwinSystem {
-      specialArgs = { inherit self inputs; };
+      specialArgs = { inherit self inputs vars; };
       modules = [
         {
           core' = {
-            userName = "aaron";
+            userName = vars.username;
             hostName = host;
+            timeZone = vars.timeZone;
           };
         }
         self.darwinModules.default
