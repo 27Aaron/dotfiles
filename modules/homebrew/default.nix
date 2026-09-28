@@ -16,9 +16,6 @@ in
     homebrew = {
       enable = true;
 
-      enableFishIntegration = config.programs.fish.enable;
-      enableZshIntegration = config.programs.zsh.enable;
-
       onActivation = {
         upgrade = false;
         autoUpdate = false;

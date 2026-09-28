@@ -32,6 +32,7 @@
     in
     {
       darwinModules = import ./modules { inherit lib inputs; };
+      homeModules = import ./home { inherit lib; };
       darwinConfigurations = import ./hosts { inherit self inputs lib; };
 
       formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.nixfmt-rs);
