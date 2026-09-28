@@ -43,6 +43,7 @@ in
         username = cfg.userName;
         homeDirectory = lib.mkForce "/Users/${cfg.userName}";
         stateVersion = "26.05";
+        language.collate = "C.UTF-8";
       };
 
       # 关闭 Home Manager 的手册生成。
