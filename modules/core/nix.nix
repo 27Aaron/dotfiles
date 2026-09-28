@@ -19,13 +19,13 @@
     enable = true;
     package = pkgs.nix;
 
-    # remove nix-channel related tools & configs, we use flakes instead.
+    # 删除与nix-channel相关的工具和配置
     channel.enable = false;
 
-    # do garbage collection weekly to keep disk usage low
+    # 每周进行垃圾回收
     gc = {
-      automatic = lib.mkDefault true;
-      options = lib.mkDefault "--delete-older-than 7d";
+      automatic = true;
+      options = "--delete-older-than 7d";
     };
 
     optimise.automatic = true;
@@ -36,15 +36,13 @@
         "flakes"
       ];
       substituters = [
-        "https://cache.garnix.io"
+        "https://cache.numtide.com" # llm-agents prebuilds (numtide)
       ];
       trusted-public-keys = [
-        "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+        "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g=" # cache.numtide.com
       ];
-      builders-use-substitutes = true;
     };
   };
 
-  # to install chrome, you need to enable unfree packages
-  nixpkgs.config.allowUnfree = lib.mkForce true;
+  nixpkgs.config.allowUnfree = true;
 }
