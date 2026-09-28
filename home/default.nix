@@ -44,6 +44,7 @@ in
         stateVersion = "26.05";
       };
 
+
       # Keep Home Manager's manual generation disabled.
       programs.man.enable = false;
       manual.manpages.enable = false;
