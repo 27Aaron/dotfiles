@@ -25,8 +25,7 @@ in
   };
 
   config = {
-    # Register Fish as a valid login shell at the system level. The matching
-    # Home Manager module configures Fish itself for the user.
+    # 在系统级别将Fish注册为登录shell
     programs.fish.enable = lib.mkDefault true;
 
     time.timeZone = lib.mkDefault cfg.timeZone;
