@@ -44,8 +44,7 @@ in
         stateVersion = "26.05";
       };
 
-
-      # Keep Home Manager's manual generation disabled.
+      # 关闭 Home Manager 的手册生成。
       programs.man.enable = false;
       manual.manpages.enable = false;
     };
