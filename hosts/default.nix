@@ -17,6 +17,7 @@ let
           };
         }
         self.darwinModules.default
+        self.darwinModules.home
         ./${host}
       ];
     };

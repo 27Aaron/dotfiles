@@ -1,5 +1,13 @@
-{ lib, ... }:
+# Darwin entrypoint: attach Home Manager and load the user's Home Manager modules.
+{
+  config,
+  inputs,
+  lib,
+  ...
+}:
 let
+  cfg = config.core';
+
   listModules =
     dir:
     lib.pipe (builtins.readDir dir) [
@@ -20,7 +28,25 @@ let
     ];
 in
 {
-  default = {
-    imports = listModules ./.;
+  imports = [ inputs.home-manager.darwinModules.home-manager ];
+
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    backupFileExtension = "hm-bak";
+
+    users.${cfg.userName} = {
+      imports = listModules ./.;
+
+      home = {
+        username = cfg.userName;
+        homeDirectory = lib.mkForce "/Users/${cfg.userName}";
+        stateVersion = "26.05";
+      };
+
+      # Keep Home Manager's manual generation disabled.
+      programs.man.enable = false;
+      manual.manpages.enable = false;
+    };
   };
 }
