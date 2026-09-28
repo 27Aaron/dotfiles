@@ -1,18 +1,9 @@
 { lib, pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    comma
     deadnix
     nil
     nixd
-    nix-index
-    nix-output-monitor
-    nix-prefetch-git # get fetchgit hashes
-    nix-prefetch-github
-    nix-tree
-    nixpkgs-review
-    nurl # get fetchgit hashes
-    nvd
   ];
 
   nix = {
