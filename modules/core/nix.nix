@@ -26,12 +26,6 @@
         "nix-command"
         "flakes"
       ];
-      substituters = [
-        "https://cache.numtide.com" # llm-agents prebuilds (numtide)
-      ];
-      trusted-public-keys = [
-        "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g=" # cache.numtide.com
-      ];
     };
   };
 
