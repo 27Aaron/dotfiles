@@ -1,0 +1,29 @@
+# macOS
+.DS_Store
+._*
+
+# Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Nix build and development artifacts
+result
+result-*
+.direnv/
+
+# Local environment and secret files
+.env
+.env.*
+!.env.example
+*.agekey
+*.key
+*.pem
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+*.orig
