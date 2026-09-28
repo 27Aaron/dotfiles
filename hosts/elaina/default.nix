@@ -1,8 +1,8 @@
-# Elaina - MacBook Pro 2018 13-inch (Intel Core i5, 8 GB RAM, 256GB SSD)
+# Elaina - MacBook Air 2025 15-inch (M4, 16 GB RAM, 512 GB SSD)
 { ... }:
 {
   # The system state version.
   system.stateVersion = 6;
   # The platform the configuration will be used on.
-  nixpkgs.hostPlatform = "x86_64-darwin";
+  nixpkgs.hostPlatform = "aarch64-darwin";
 }
