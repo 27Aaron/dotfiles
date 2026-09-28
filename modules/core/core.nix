@@ -1,16 +1,13 @@
 {
   lib,
   config,
-  inputs,
-  self,
+  pkgs,
   ...
 }:
 let
   cfg = config.core';
 in
 {
-  imports = [ inputs.home-manager.darwinModules.home-manager ];
-
   options.core' = {
     userName = lib.mkOption {
       type = lib.types.str;
@@ -25,30 +22,26 @@ in
       default = "Asia/Singapore";
       description = "System timezone";
     };
-    stateVersion = lib.mkOption {
-      type = lib.types.str;
-      default = "26.05";
-      description = "NixOS state version";
-    };
   };
 
   config = {
+    # Register Fish as a valid login shell at the system level. The matching
+    # Home Manager module configures Fish itself for the user.
+    programs.fish.enable = lib.mkDefault true;
+
+    time.timeZone = lib.mkDefault cfg.timeZone;
+
     system.primaryUser = cfg.userName;
 
-    networking.hostName = cfg.hostName;
-    networking.computerName = cfg.hostName;
-    system.defaults.smb.NetBIOSName = cfg.hostName;
-
-    home-manager = {
-      useGlobalPkgs = true;
-      useUserPackages = true;
-      backupFileExtension = "hm-bak";
-
-      users.${cfg.userName} = {
-        imports = [ self.homeModules.default ];
-        home.stateVersion = cfg.stateVersion;
-        home.homeDirectory = lib.mkForce "/Users/${cfg.userName}";
-      };
+    users.users.${cfg.userName} = {
+      home = lib.mkDefault "/Users/${cfg.userName}";
+      shell = lib.mkDefault pkgs.fish;
     };
+
+    networking = {
+      hostName = cfg.hostName;
+      computerName = cfg.hostName;
+    };
+    system.defaults.smb.NetBIOSName = cfg.hostName;
   };
 }

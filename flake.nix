@@ -31,10 +31,11 @@
       forEachSystem = lib.genAttrs lib.systems.flakeExposed;
     in
     {
-      darwinModules = import ./modules { inherit lib inputs; };
-      homeModules = import ./home { inherit lib; };
+      darwinModules = import ./modules { inherit lib inputs; } // {
+        home = ./home;
+      };
       darwinConfigurations = import ./hosts { inherit self inputs lib; };
 
-      formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.nixfmt-rs);
+      formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
     };
 }
