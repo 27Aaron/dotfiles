@@ -31,11 +31,11 @@ in
 
       # `brew install`
       brews = [
-        # 磁盘清理 (Cleanup)
-        "mole"
-
         # 代码统计 (Code Stats)
         "tokei"
+
+        # 磁盘清理 (Cleanup)
+        "mole"
 
         # 媒体处理 (Media)
         "ffmpeg"
@@ -45,33 +45,12 @@ in
       casks = [
         # AI 开发 (AI Development)
         "cc-switch"
-        "codexbar"
-        "zcode"
         "chatgpt"
-
-        # 开发工具 & 终端 (Development)
-        "zed"
-        "termius"
-        "orbstack"
-        # "lm-studio"
-        # "claude-code"
-        "visual-studio-code"
-        # "android-platform-tools"
-
-        # 终端模拟器 (Terminal Emulator)
-        "ghostty"
-        # "kitty"
-
-        # 系统增强 & 效能 (Productivity)
-        "stats"
-        "raycast"
-        "qspace-pro"
-        # "squirrel-app"
-        "monitorcontrol"
-        "macs-fan-control"
-        "input-source-pro"
-        "karabiner-elements"
-        "jordanbaird-ice@beta"
+        "claude-code"
+        "codex"
+        "codexbar"
+        "grok-build"
+        "zcode"
 
         # 电池管理 (Battery)
         # "battery"
@@ -82,14 +61,20 @@ in
         "firefox"
         "google-chrome"
 
-        # 网络与通讯 (Network)
-        "surge"
-        "feishu"
-        "telegram"
-        "wechat"
+        # 开发工具 & 终端 (Development)
+        # "android-platform-tools"
+        # "lm-studio"
+        "orbstack"
+        "termius"
+        "visual-studio-code"
+        "zed"
 
-        # 远程访问 (Remote Access)
-        "uuremote"
+        # 字体 (Fonts)
+        "font-hack-nerd-font"
+        "font-jetbrains-mono-nerd-font"
+        "font-lxgw-wenkai"
+        "font-maple-mono-nf-cn"
+        "font-material-icons"
 
         # 知识库 (Knowledge Base)
         "obsidian"
@@ -100,12 +85,29 @@ in
         "obs"
         "plex"
 
-        # 字体 (Fonts)
-        "font-lxgw-wenkai"
-        "font-material-icons"
-        "font-hack-nerd-font"
-        "font-maple-mono-nf-cn"
-        "font-jetbrains-mono-nerd-font"
+        # 网络与通讯 (Network)
+        "feishu"
+        "surge"
+        "telegram"
+        "wechat"
+
+        # 系统增强 & 效能 (Productivity)
+        "input-source-pro"
+        "jordanbaird-ice@beta"
+        "karabiner-elements"
+        "macs-fan-control"
+        "monitorcontrol"
+        "qspace-pro"
+        "raycast"
+        # "squirrel-app"
+        "stats"
+
+        # 远程访问 (Remote Access)
+        "uuremote"
+
+        # 终端模拟器 (Terminal Emulator)
+        "ghostty"
+        # "kitty"
       ];
     };
   };
