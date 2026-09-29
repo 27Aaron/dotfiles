@@ -46,8 +46,6 @@ in
         # AI 开发 (AI Development)
         "cc-switch"
         "chatgpt"
-        "claude-code"
-        "codex"
         "codexbar"
         "grok-build"
         "zcode"
