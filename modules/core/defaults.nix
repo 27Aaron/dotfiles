@@ -1,6 +1,5 @@
 # macOS 系統偏好設定。
 # https://daiderd.com/nix-darwin/manual/index.html#sec-options
-{ ... }:
 {
   # sudo 使用 Touch ID 驗證。
   security.pam.services.sudo_local.touchIdAuth = true;
