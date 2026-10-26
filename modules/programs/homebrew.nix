@@ -2,6 +2,11 @@
   homebrew = {
     enable = true;
 
+    enableFishIntegration = true;
+    enableZshIntegration = true;
+
+    # 啟用時不連網更新，版本只在手動 brew upgrade 時變動。
+    # zap 會移除清單外的套件，讓清單成為唯一來源。
     onActivation = {
       upgrade = true;
       autoUpdate = true;
