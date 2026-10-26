@@ -4,6 +4,7 @@
     # 開發與編輯
     just
     neovim
+    prettier
 
     # 搜尋與導覽
     fd
