@@ -38,6 +38,8 @@
       "google-chrome"
 
       # 開發工具
+      "deepseek-harness"
+      "magpie"
       "orbstack"
       "termius"
       "visual-studio-code"
@@ -67,6 +69,9 @@
       "surge"
       "telegram"
       "wechat"
+
+      # 輸入法
+      "wetype"
 
       # 系統增強
       "1password"
