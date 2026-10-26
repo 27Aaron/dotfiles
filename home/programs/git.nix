@@ -44,6 +44,8 @@
     lazygit.enable = true;
   };
 
+  home.shellAliases.gs = "git status";
+
   # GitHub CLI，以及清理已合併分支的 git-trim。
   home.packages = [
     pkgs.gh
