@@ -46,7 +46,7 @@ in
         language.collate = "C.UTF-8";
       };
 
-      # 关闭 Home Manager 的手册生成。
+      # 不產生 Home Manager 手冊。
       programs.man.enable = false;
       manual.manpages.enable = false;
     };

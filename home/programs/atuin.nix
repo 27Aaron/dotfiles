@@ -7,15 +7,15 @@
       sync_frequency = 0;
       inline_height = 30;
       history_filter = [
-        # filter commands with leading spaces
+        # 略過以空白開頭的指令
         ''^\s+''
-        # filter ls command with non-absolute paths
+        # 略過非絕對路徑的 ls
         ''^ls($|(\s+((-([a-zA-Z0-9]|-)+)|"(\.|[^/])[^"]*"|'(\.|[^/])[^']*'|(\.|[^/\s-])[^\s]*))*\s*$)''
-        # filter cd command with non-absolute paths
+        # 略過非絕對路徑的 cd
         ''^cd($|\s+('[^/][^']*'|"[^/][^"]*"|[^/\s'"][^\s]*))$''
-        # command contains /nix/store
+        # 略過含 /nix/store 的指令
         "/nix/store/.*"
-        # command contains cookie
+        # 略過含 cookie 的指令
         ''--cookie[=\s]+.+''
       ];
     };

@@ -15,14 +15,13 @@
       remember_window_size = "yes";
       enable_audio_bell = false;
 
-      # tab bar
+      # 分頁列
       tab_bar_edge = "top";
       tab_bar_style = "powerline";
       tab_powerline_style = "slanted";
 
-      # cursor
+      # 游標
       cursor_blink_interval = "0";
-      # detect_urls no
       mouse_hide_wait = "1";
     };
   };

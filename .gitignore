@@ -2,19 +2,20 @@
 .DS_Store
 ._*
 
-# Editors
+# 編輯器
 .idea/
 .vscode/
 *.swp
 *.swo
 *~
 
-# Nix build and development artifacts
+# Nix 建置產物
 result
 result-*
 .direnv/
+.cache/
 
-# Local environment and secret files
+# 本機環境與密鑰
 .env
 .env.*
 !.env.example
@@ -22,7 +23,7 @@ result-*
 *.key
 *.pem
 
-# Logs and temporary files
+# 日誌與暫存檔
 *.log
 *.tmp
 *.bak

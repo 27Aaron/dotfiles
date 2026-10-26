@@ -6,8 +6,7 @@
   ...
 }:
 {
-  # Home Manager writes ~/.config/git/config. Remove the legacy global file
-  # so Git does not keep preferring unmanaged settings from ~/.gitconfig.
+  # 設定改由 ~/.config/git/config 管理，移除舊的 ~/.gitconfig。
   home.activation.removeExistingGitconfig = lib.hm.dag.entryBefore [ "checkLinkTargets" ] ''
     rm -f ${config.home.homeDirectory}/.gitconfig
   '';
@@ -19,7 +18,7 @@
       settings = {
         user = {
           name = vars.fullName;
-          email = vars.email;
+          email = "85681241+27Aaron@users.noreply.github.com";
         };
 
         fetch.prune = true;
@@ -30,7 +29,7 @@
       };
     };
 
-    # A syntax-highlighting pager for git, diff, grep, and blame output
+    # git、diff、grep、blame 的語法高亮分頁器。
     delta = {
       enable = true;
       enableGitIntegration = true;
@@ -41,11 +40,11 @@
       };
     };
 
-    # Git terminal UI.
+    # Git 終端介面。
     lazygit.enable = true;
   };
 
-  # GitHub CLI, plus git-trim for pruning merged/stray branches.
+  # GitHub CLI，以及清理已合併分支的 git-trim。
   home.packages = [
     pkgs.gh
     pkgs.git-trim
