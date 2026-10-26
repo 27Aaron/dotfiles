@@ -24,16 +24,15 @@ in
   };
 
   config = {
-    # 在系统级别将Fish注册为登录shell
-    programs.fish.enable = lib.mkDefault true;
-
     time.timeZone = lib.mkDefault cfg.timeZone;
-
     system.primaryUser = cfg.userName;
+
+    programs.fish.enable = true;
+    environment.shells = [ pkgs.fish ];
 
     users.users.${cfg.userName} = {
       home = lib.mkDefault "/Users/${cfg.userName}";
-      shell = lib.mkDefault pkgs.fish;
+      shell = pkgs.fish;
     };
 
     networking = {
@@ -41,5 +40,8 @@ in
       computerName = cfg.hostName;
     };
     system.defaults.smb.NetBIOSName = cfg.hostName;
+
+    # `%01` 關閉開機音效；`%00` 恢復。
+    system.nvram.variables.StartupMute = "%01";
   };
 }
