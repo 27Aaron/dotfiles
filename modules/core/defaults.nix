@@ -1,108 +1,105 @@
-# macOS system defaults.
-# Options: https://daiderd.com/nix-darwin/manual/index.html#sec-options
-# `defaults` reference: https://github.com/yannbertrand/macos-defaults
+# macOS 系統偏好設定。
+# https://daiderd.com/nix-darwin/manual/index.html#sec-options
+{ ... }:
 {
-  ...
-}:
-{
-  config = {
-    security.pam.services.sudo_local.touchIdAuth = true;
+  # sudo 使用 Touch ID 驗證。
+  security.pam.services.sudo_local.touchIdAuth = true;
 
-    system.defaults = {
-      menuExtraClock.Show24Hour = true; # 使用 24 小时制
-      menuExtraClock.ShowSeconds = true;
+  system.defaults = {
+    # 選單列時鐘。
+    menuExtraClock.Show24Hour = true; # 24 小時制。
+    menuExtraClock.ShowSeconds = true; # 顯示秒。
 
-      # 自定义 Dock
-      dock = {
-        autohide = true; # 自动隐藏 Dock
-        show-recents = false; # 禁用最近应用
+    dock = {
+      autohide = true; # 游標靠近螢幕邊緣才顯示。
+      show-recents = false; # 隱藏最近使用的 App。
+      tilesize = 28; # 圖示大小，16–128，預設 64。
+      magnification = true; # 游標懸停時放大，預設關閉。
+      largesize = 128; # 放大後尺寸，16–128，預設 16。
 
-        # 触发角
-        wvous-tl-corner = 2; # 调度中心
-        wvous-tr-corner = 4; # 桌面
-        wvous-bl-corner = 3; # 应用程序窗口
-        wvous-br-corner = 13; # 启动台
+      # 觸發角。1 關閉；2 Mission Control；3 App 視窗；4 桌面；
+      # 5 啟動螢幕保護程式；6 停用；7 Dashboard；10 顯示器睡眠；
+      # 11 Launchpad；12 通知中心；13 鎖定螢幕；14 快速備忘錄。
+      wvous-tl-corner = 2; # 左上：Mission Control。
+      wvous-tr-corner = 4; # 右上：桌面。
+      wvous-bl-corner = 3; # 左下：App 視窗。
+      wvous-br-corner = 13; # 右下：鎖定螢幕。
+    };
+
+    finder = {
+      _FXShowPosixPathInTitle = true; # 標題列顯示完整路徑。
+      _FXSortFoldersFirst = true; # 資料夾排在檔案前。
+      AppleShowAllExtensions = true; # 顯示所有副檔名。
+      FXDefaultSearchScope = "SCcf"; # 只搜尋目前資料夾。
+      FXEnableExtensionChangeWarning = false; # 變更副檔名不警告。
+      NewWindowTarget = "Home"; # 新視窗開啟使用者主目錄。
+      QuitMenuItem = true; # 允許結束 Finder。
+      ShowPathbar = true; # 顯示路徑列。
+      ShowStatusBar = true; # 顯示項目數與可用空間。
+      ShowMountedServersOnDesktop = true; # 桌面顯示已掛載的伺服器。
+    };
+
+    WindowManager = {
+      EnableStandardClickToShowDesktop = false; # 點擊桌布不顯示桌面。
+    };
+
+    screensaver = {
+      askForPassword = true; # 螢幕保護程式或睡眠後要求密碼。
+      askForPasswordDelay = 0; # 立即要求，無寬限時間。
+    };
+
+    screencapture = {
+      location = "~/Desktop"; # 截圖儲存到桌面。
+      type = "png"; # PNG。
+    };
+
+    NSGlobalDomain = {
+      "com.apple.sound.beep.feedback" = 0; # 調整音量不播放提示音。0 關閉，1 開啟。
+
+      AppleInterfaceStyle = "Dark"; # 深色外觀。刪除此項恢復淺色。
+
+      # 2：Tab 可在所有控制項間移動焦點。
+      AppleKeyboardUIMode = 2;
+
+      # 按住按鍵後開始重複前的延遲，單位 15 ms。15 = 225 ms，為最快。
+      InitialKeyRepeat = 15;
+      # 重複間隔，單位 15 ms。2 = 30 ms 為最快；3 = 45 ms。
+      KeyRepeat = 3;
+
+      NSAutomaticCapitalizationEnabled = false; # 關閉自動大寫。
+      NSAutomaticDashSubstitutionEnabled = false; # 不將連字號換成破折號。
+      NSAutomaticPeriodSubstitutionEnabled = false; # 不將雙空格換成句號。
+      NSAutomaticQuoteSubstitutionEnabled = false; # 不將直引號換成彎引號。
+      NSAutomaticSpellingCorrectionEnabled = false; # 關閉自動拼字校正。
+      NSNavPanelExpandedStateForSaveMode = true; # 展開舊版儲存對話框。
+      NSNavPanelExpandedStateForSaveMode2 = true; # 展開目前的儲存對話框。
+    };
+
+    # 無原生選項，以 defaults 寫入。未列於文件的鍵取自 https://github.com/rgcr/m-cli。
+    CustomUserPreferences = {
+      ".GlobalPreferences" = {
+        # 切換 App 時前往該 App 所在的 Space。
+        AppleSpacesSwitchOnActivate = true;
       };
-
-      finder = {
-        _FXShowPosixPathInTitle = true; # 显示Finder标题中的完整路径
-        _FXSortFoldersFirst = true; # 文件夹排序在文件之前
-        AppleShowAllExtensions = true; # 显示所有文件扩展名
-        FXDefaultSearchScope = "SCcf"; # 搜索时默认仅搜索当前文件夹
-        FXEnableExtensionChangeWarning = false; # 更改文件扩展名时禁用警告
-        NewWindowTarget = "Home"; # 新 Finder 窗口默认显示用户主目录
-        QuitMenuItem = true; # 启用退出菜单项
-        ShowPathbar = true; # 显示路径栏
-        ShowStatusBar = true; # 显示状态栏
-        ShowExternalHardDrivesOnDesktop = true; # 桌面显示外接硬盘
-        ShowHardDrivesOnDesktop = false; # 桌面不显示内置硬盘
-        ShowMountedServersOnDesktop = true; # 桌面显示已挂载的服务器
-        ShowRemovableMediaOnDesktop = true; # 桌面显示可移动介质
-      };
-
-      spaces.spans-displays = false; # 显示器各自拥有独立空间
-
-      WindowManager = {
-        EnableStandardClickToShowDesktop = false; # 点击壁纸不进入桌面
-        StandardHideDesktopIcons = false; # 桌面显示图标
-        HideDesktop = false; # 不隐藏桌面与台前调度中的项目
-        StageManagerHideWidgets = false; # 台前调度不隐藏小组件
-        StandardHideWidgets = false; # 点击壁纸显示桌面时不隐藏小组件
-      };
-
-      screensaver = {
-        askForPassword = true; # 屏保或睡眠后立即要求密码
-        askForPasswordDelay = 0;
-      };
-
-      screencapture = {
-        location = "~/Desktop"; # 截图保存位置
-        type = "png"; # 截图格式
-      };
-
       NSGlobalDomain = {
-        "com.apple.swipescrolldirection" = true; # 启用自然滚动（默认为true）
-        "com.apple.sound.beep.feedback" = 0; # 关闭系统音量变化时的提示音
-
-        # 外观
-        AppleInterfaceStyle = "Dark"; # 深色模式
-
-        AppleKeyboardUIMode = 2; # 配置键盘控制行为
-
-        InitialKeyRepeat = 15; # 正常最小值为15（225毫秒），最大值为120（1800毫秒）
-        KeyRepeat = 3; # 正常最小值为2（30毫秒），最大值为120（1800毫秒）
-
-        NSAutomaticCapitalizationEnabled = false; # 是否启用自动大写
-        NSAutomaticDashSubstitutionEnabled = false; # 是否启用智能减号替换
-        NSAutomaticPeriodSubstitutionEnabled = false; # 是否启用智能句号替换
-        NSAutomaticQuoteSubstitutionEnabled = false; # 是否启用智能引号替换
-        NSAutomaticSpellingCorrectionEnabled = false; # 是否启用自动拼写检查
-        NSNavPanelExpandedStateForSaveMode = true; # 保存文件时的路径选择/文件名输入页
-        NSNavPanelExpandedStateForSaveMode2 = true; # 保存文件时的路径选择/文件名输入页
+        # 網頁檢視的快顯選單加入 Web Inspector。
+        WebKitDeveloperExtras = true;
       };
-
-      # 暂无 nix-darwin 原生选项，通过 defaults 直接写入；已写入条目可用 `defaults read` 查看。
-      # 未文档化选项参考 m-cli 源码：https://github.com/rgcr/m-cli
-      CustomUserPreferences = {
-        ".GlobalPreferences" = {
-          # 切换应用时自动切换到它所在的空间
-          AppleSpacesSwitchOnActivate = true;
-        };
-        NSGlobalDomain = {
-          # 在网页视图中增加显示 Web 检查器的右键菜单项
-          WebKitDeveloperExtras = true;
-        };
-        "com.apple.desktopservices" = {
-          # 避免在网络卷和 USB 卷上生成 .DS_Store 文件
-          DSDontWriteNetworkStores = true;
-          DSDontWriteUSBStores = true;
-        };
-        "com.apple.AdLib" = {
-          allowApplePersonalizedAdvertising = false;
-        };
-        # 插入设备时阻止"照片"自动打开
-        "com.apple.ImageCapture".disableHotPlug = true;
+      "com.apple.desktopservices" = {
+        # 不在這些卷宗建立 .DS_Store。
+        DSDontWriteNetworkStores = true;
+        DSDontWriteUSBStores = true;
       };
+      "com.apple.AdLib" = {
+        # 關閉 Apple 個人化廣告。
+        allowApplePersonalizedAdvertising = false;
+      };
+      "com.apple.timezone.auto" = {
+        # 關閉「使用目前位置自動設定時區」。
+        Active = false;
+      };
+      # 連接相機或手機時不開啟「照片」。
+      "com.apple.ImageCapture".disableHotPlug = true;
     };
   };
 }
