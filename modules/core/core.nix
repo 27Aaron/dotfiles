@@ -1,47 +1,28 @@
 {
   lib,
-  config,
   pkgs,
+  vars,
+  hostName,
   ...
 }:
-let
-  cfg = config.core';
-in
 {
-  options.core' = {
-    userName = lib.mkOption {
-      type = lib.types.str;
-      description = "Login user name";
-    };
-    hostName = lib.mkOption {
-      type = lib.types.str;
-      description = "Network hostname";
-    };
-    timeZone = lib.mkOption {
-      type = lib.types.str;
-      description = "System timezone";
-    };
+  time.timeZone = lib.mkDefault vars.timeZone;
+  system.primaryUser = vars.username;
+
+  programs.fish.enable = true;
+  environment.shells = [ pkgs.fish ];
+
+  users.users.${vars.username} = {
+    home = lib.mkDefault "/Users/${vars.username}";
+    shell = pkgs.fish;
   };
 
-  config = {
-    time.timeZone = lib.mkDefault cfg.timeZone;
-    system.primaryUser = cfg.userName;
-
-    programs.fish.enable = true;
-    environment.shells = [ pkgs.fish ];
-
-    users.users.${cfg.userName} = {
-      home = lib.mkDefault "/Users/${cfg.userName}";
-      shell = pkgs.fish;
-    };
-
-    networking = {
-      hostName = cfg.hostName;
-      computerName = cfg.hostName;
-    };
-    system.defaults.smb.NetBIOSName = cfg.hostName;
-
-    # `%01` 關閉開機音效；`%00` 恢復。
-    system.nvram.variables.StartupMute = "%01";
+  networking = {
+    hostName = hostName;
+    computerName = hostName;
   };
+  system.defaults.smb.NetBIOSName = hostName;
+
+  # `%01` 關閉開機音效；`%00` 恢復。
+  system.nvram.variables.StartupMute = "%01";
 }

@@ -1,13 +1,10 @@
 {
-  config,
   inputs,
   lib,
   vars,
   ...
 }:
 let
-  cfg = config.core';
-
   listModules =
     dir:
     lib.pipe (builtins.readDir dir) [
@@ -36,12 +33,12 @@ in
     backupFileExtension = "hm-bak";
     extraSpecialArgs = { inherit vars; };
 
-    users.${cfg.userName} = {
+    users.${vars.username} = {
       imports = listModules ./.;
 
       home = {
-        username = cfg.userName;
-        homeDirectory = lib.mkForce "/Users/${cfg.userName}";
+        username = vars.username;
+        homeDirectory = lib.mkForce "/Users/${vars.username}";
         stateVersion = "26.05";
         language.collate = "C.UTF-8";
       };

@@ -2,6 +2,7 @@
   self,
   config,
   pkgs,
+  vars,
   ...
 }:
 {
@@ -14,7 +15,7 @@
   # 系統級清理涵蓋系統與使用者世代。Home Manager 只執行 `nh clean user`。
   programs.nh = {
     enable = true;
-    flake = "${config.users.users.${config.core'.userName}.home}/nix-config";
+    flake = "${config.users.users.${vars.username}.home}/nix-config";
 
     clean = {
       enable = true;
@@ -42,7 +43,7 @@
         "flakes"
       ];
       # 本機使用者可使用二進位快取與遠端建置。
-      trusted-users = [ config.core'.userName ];
+      trusted-users = [ vars.username ];
     };
   };
 
