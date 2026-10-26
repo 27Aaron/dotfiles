@@ -25,7 +25,7 @@
       inherit (nixpkgs) lib;
     in
     {
-      darwinModules = import ./modules { inherit lib inputs; } // {
+      darwinModules = import ./modules { inherit lib; } // {
         home = ./home;
       };
       darwinConfigurations = import ./hosts { inherit self inputs lib; };
