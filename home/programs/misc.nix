@@ -32,6 +32,5 @@
     nload
     nmap
     socat
-    fastfetch
   ];
 }
