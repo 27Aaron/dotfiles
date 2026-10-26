@@ -13,6 +13,17 @@
       url = "github:nix-darwin/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # 加密後的密鑰檔，本身不是 flake。
+    secrets = {
+      url = "git+ssh://git@github.com/27Aaron/nix-secrets.git?shallow=1";
+      flake = false;
+    };
   };
 
   outputs =
