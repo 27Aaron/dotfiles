@@ -1,34 +1,32 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    # 开发与编辑
+    # 開發與編輯
     just
-    git
-    git-lfs
     neovim
 
-    # 查找与导航
+    # 搜尋與導覽
     fd
     fzf
     ripgrep
 
-    # 文本与数据处理
+    # 文字與資料處理
     jq
     gawk
     gnused
     gnugrep
 
-    # 网络与下载
+    # 網路與下載
     curl
     wget
     iperf3
 
-    # 磁盘与分析
+    # 磁碟分析
     duf
     ncdu
     dust
 
-    # 监控与诊断
+    # 監控與診斷
     btop
     nload
     nmap
