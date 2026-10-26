@@ -6,15 +6,8 @@
   ...
 }:
 let
-  # Only manage the Karabiner configuration when the cask list installs it.
-  # nix-darwin may expose casks as either strings or attribute sets.
-  enabled = lib.any (
-    c:
-    let
-      name = if builtins.isAttrs c then c.name or "" else c;
-    in
-    name == "karabiner-elements"
-  ) osConfig.homebrew.casks;
+  # cask 求值後為 `{ name = "..."; }`，不能用原始字串比對。
+  enabled = lib.any (c: c.name == "karabiner-elements") osConfig.homebrew.casks;
   generatedConfig = builtins.toFile "karabiner.json" (
     builtins.toJSON {
       profiles = [
@@ -95,7 +88,7 @@ let
 in
 {
   config = lib.mkIf enabled {
-    # Install a writable copy on every activation so the GUI can keep editing it.
+    # 每次啟用寫入可編輯副本，供 GUI 繼續修改。
     home.activation.initializeKarabiner =
       lib.hm.dag.entryBetween [ "linkGeneration" ] [ "writeBoundary" ]
         ''
