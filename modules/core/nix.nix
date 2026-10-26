@@ -18,7 +18,13 @@
 
     clean = {
       enable = true;
-      extraArgs = "--keep-since 7d";
+      # 每週日 03:15。
+      interval = {
+        Weekday = 7;
+        Hour = 3;
+        Minute = 15;
+      };
+      extraArgs = "--keep 8 --keep-since 14d";
     };
   };
 
@@ -35,6 +41,8 @@
         "nix-command"
         "flakes"
       ];
+      # 本機使用者可使用二進位快取與遠端建置。
+      trusted-users = [ config.core'.userName ];
     };
   };
 
